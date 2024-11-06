@@ -1,0 +1,69 @@
+\begin{tikzpicture}[scale=0.9]
+	% Iniold
+	\foreach \x in {0,1,2,3,...,30}
+	{
+		\coordinate (C\x) at ($(0,0cm)+(\x*0.4cm,-0cm)$) {};
+	}
+	\foreach \x in {0,1,2,3,...,15}
+	{
+		\draw ($(C\x)+(0,5pt)$) -- ($(C\x)-(0,5pt)$);
+	}
+	\draw[ultra thick,arrows=<-] ($(C1)-(1,0)$) -- (C1) -- (C15);
+	\draw ($(C1) + (0,10pt)$) -- ($(C1) - (0,10pt)$);
+	\draw ($(C15) + (0,10pt)$) -- ($(C15) - (0,10pt)$);
+	\node at ($(C1)+(0,4ex)$) {55};
+	\node at ($(C15)+(0,4ex)$) {85};
+	
+	% Middle
+	\foreach \x in {1,2,...,33}
+	{
+		\coordinate (A\x) at ($(0,-2.3)+(\x*0.4cm,0)$) {};
+	}
+		\foreach \x in {1,2,...,30}
+	{
+		\draw ($(A\x)+(0,5pt)$) -- ($(A\x)-(0,5pt)$);
+	}
+	\draw[ultra thick] (A1) -- (A30);
+	\draw ($(A1) + (0,10pt)$) -- ($(A1) - (0,10pt)$);
+	\draw ($(A15) + (0,10pt)$) -- ($(A15) - (0,10pt)$);
+	\draw ($(A30) + (0,10pt)$) -- ($(A30) - (0,10pt)$);
+	
+	\node at ($(A1)+(0,4ex)$) {25};
+	\node at ($(A15)+(0,4ex)$) {55};
+	\node at ($(A30)+(0,4ex)$) {85};
+	
+	%Young
+	\foreach \x in {1,2,3,...,33}
+	{
+		\coordinate (B\x) at ($(0,-4.6cm)+(\x*0.4cm,0cm)$) {};
+	}
+	\foreach \x in {15,16,17,...,32}
+	{
+		\draw ($(B\x)+(0,5pt)$) -- ($(B\x)-(0,5pt)$);
+	}
+	\draw[ultra thick,arrows=->] (B15) -- (B32) -- ($(B31)+(1,0)$);
+	\draw ($(B15) + (0,10pt)$) -- ($(B15) - (0,10pt)$);
+	\draw ($(B30) + (0,10pt)$) -- ($(B30) - (0,10pt)$);
+	
+	\node at ($(B15)+(0,4ex)$) {25};
+	\node at ($(B30)+(0,4ex)$) {55};
+
+	%% Labels
+	
+	\draw[arrows=->] ($(C1) - (0,0.5)$) -- ($(A1) + (0,1.2)$);
+	\draw[arrows=->] ($(C15) - (0,0.5)$) -- ($(A15) + (0,1.2)$);
+	\node[align=left]  (kid) at ($(C6)!0.35!(A6)+ (0.1,0)$ ) {Kid Independent};
+	\node[align=left]  (beq) at ($(C18)!0.35!(A18)$) {Bequests};
+	
+	\draw[arrows=->] ($(A3) - (-0.2,0.5)$) -- ($(B18) + (-5.8,1.2cm)$) ;
+	\node[align=left] (newkid) at ($(A6)!0.35!(B6) + (0.3,0)$)  {Kid Born};
+	\draw[arrows=->] ($(A15) - (0,0.5)$) -- ($(B15) + (0,1.2)$);
+	\node[align=left]  (kid) at ($(A20)!0.35!(B20)$) {Kid Independent};
+	\draw[arrows=->] ($(A30) - (0,0.5)$) -- ($(B30) + (0,1.2)$);
+	\node[align=right]  (beq) at ($(A33)!0.35!(B33)$) {Bequests};
+	
+	\draw[arrows=->] ($(B18) - (-0.2,0.5)$) -- ($(B18) + (0.2,-1.cm)$) ;
+	\node[align=left] (newkid) at ($(B18) + (1.35,-0.8)$)  {Kid born};
+	\draw[arrows=->] ($(B30) - (0,0.5)$) -- ($(B30) - (0,1)$);
+	\node[align=right]  (beq2) at ($(B33) + (0.75,-0.8)$) {Kid Independent};		
+	\end{tikzpicture}
