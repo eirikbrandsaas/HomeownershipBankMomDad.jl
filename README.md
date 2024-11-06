@@ -1,6 +1,6 @@
 # HomeownershipBankMomDad
-[![Build Status](https://github.com/eirikbrandsaas/MomDadBank.jl/actions/workflows/CI.yml/badge.svg?branch=master)](https://github.com/eirikbrandsaas/MomDadBank.jl/actions/workflows/CI.yml?query=branch%3Amaster)
-[![codecov](https://codecov.io/gh/eirikbrandsaas/MomDadBank.jl/graph/badge.svg?token=4IVYUDK98Q)](https://codecov.io/gh/eirikbrandsaas/MomDadBank.jl)
+[![Build Status](https://github.com/eirikbrandsaas/HomeownershipBankMomDad.jl/actions/workflows/CI.yml/badge.svg?branch=master)](https://github.com/eirikbrandsaas/HomeownershipBankMomDad.jl/actions/workflows/CI.yml?query=branch%3Amaster)
+[![codecov](https://codecov.io/gh/eirikbrandsaas/HomeownershipBankMomDad.jl/graph/badge.svg?token=4IVYUDK98Q)](https://codecov.io/gh/eirikbrandsaas/HomeownershipBankMomDad.jl)
 
 This repo contains all material for the paper "Illiquid Homeownership and the Bank of Mom and Dad".
 ## Replication Instructions
