@@ -17,7 +17,8 @@ This repo contains all material for the paper "Illiquid Homeownership and the Ba
        4. `pid19.zip` (Parental Identification) and,
        5. `RT13.zip` (2013 Family Roster and Transfers)
     2. Place the *zipped* folders into `data/PSID`
-    3. Change the `[paths]` of the two do files in `RT13/` to `data/PSID/RT13`:
+    3. Unzil the `RT13.zip` (so you have a new folder `data/PSID/RT13/`
+    4. Change the `[paths]` of the two do files in `RT13/` to `data/PSID/RT13`:
        1. In `RT13FAM.do` change `using [path]\RT13FAM.txt, clear ` to `using data/PSID/RT13/RT13FAM.txt, clear`, line 31.
        2. In `RT13PARCHD.do` change `using [path]\RT13PARCHD.txt, clear` to `using data/PSID/RT13/RT13PARCHD.txt, clear`, line 38.
 4. Run Stata code by running `src/Stata/runall.do`
