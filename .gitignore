@@ -1,0 +1,13 @@
+*.tex
+*.eps
+*.odt
+*.txt
+tabfig/*
+docs/*
+!docs/draft.tex
+pres/*
+data/*
+src/Julia/AHK/*
+src/Julia/StaticModel*
+src/Julia/WIP*.jl
+src/Stata/*stswp
