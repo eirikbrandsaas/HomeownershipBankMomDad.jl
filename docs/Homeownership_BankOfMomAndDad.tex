@@ -122,11 +122,12 @@ I use data from 1999 to 2021. In 1999, the PSID started to collect detailed weal
 \textit{Definition of Transfers:} The transfer supplement asked all parent households whether they gave money, gifts, or loans of \$100 or more to their children in 2012. I follow the literature \citep[e.g.,][]{mcgarry2016dynamic} and treat all transfers as gifts. Since this paper focuses on transfers that (a) relate to housing and (b) are quantitatively meaningful, I set transfers below \$500 to \$0. About 25\% of transfers are below this threshold, and ignoring them increases the mean transfer from \$2,921 to \$3,960.
 
 \subsubsection{Descriptive Statistics: Who Receives Transfers?}
-I now discuss descriptive statistics from the PSID sample in 2013 for households aged 25 to 44 with an observed parent household. Table \ref{tab:descrstats} contains the means of variables, by age, wealth, marriage, homeownership, and transfer receipt.
+\textcolor{red}{!! [[rewrite this]] !!}
+I now discuss descriptive statistics from the PSID sample in 2013 for households aged 25 to 45 with an observed parent household. Table \ref{tab:descrstats} contains the means of variables, by age, wealth, homeownership, and transfer receipt.
 
 There are several main takeaways from the subgroup analysis. In 2013, 22\% of young households received a transfer, and transfers averaged \$3,950. Receivers have significantly richer parents, have similar wealth and income as nonreceivers, and are less likely to own. Receivers are more likely to transition from renting to owning, especially in the age groups where households are most likely to buy. The key determinant of transfer receipt seems to be parental wealth.
 
-In panel a), the first two columns compare the whole sample, by transfers receipt in the last calendar year. The mean transfer is relatively high at \$3,960, and 22\% of households received transfers in the last year. The largest difference is parental wealth: transferring parents are 2.5 times as wealthy as nontransferring parents (\$1,029,000 vs. \$410,000). Perhaps surprisingly, receivers are slightly richer than nonreceivers (\$108,000 vs. \$78,500), are more likely to be college-educated and white, and are one year younger. Receivers are slightly less likely to be homeowners (39\% vs. 43\%), reflecting the age difference and the tendency for college attendance to delay homeownership.
+In panel a), the first two columns compare the whole sample, by transfers receipt in the last calendar year. The mean transfer is relatively high at \$3,950, and 22\% of households received transfers in the last year. The largest difference is parental wealth: transferring parents are 2.5 times as wealthy as nontransferring parents (\$1,029,000 vs. \$410,000). Perhaps surprisingly, receivers are slightly richer than nonreceivers (\$108,000 vs. \$78,500), are more likely to be college-educated and white, and are one year younger. Receivers are slightly less likely to be homeowners (39\% vs. 43\%), reflecting the age difference and the tendency for college attendance to delay homeownership.
 
 \begin{table}[htbp]
 	\begin{adjustbox}{center}
@@ -134,20 +135,20 @@ In panel a), the first two columns compare the whole sample, by transfers receip
 		\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 		\begin{threeparttable}
 			\singlespacing
-			\caption{Descriptive Statistics (Means), Households Aged 20-44}\label{tab:descrstats}
-			\begin{tabular}{l@{\hspace{.5\tabcolsep}} r@{\hspace{1.\tabcolsep}}r r@{\hspace{1.\tabcolsep}}r r@{\hspace{1.\tabcolsep}}r r@{\hspace{1.\tabcolsep}}r r@{\hspace{1.\tabcolsep}}r}
+			\caption{Descriptive Statistics (Means), Households Aged 25-45}\label{tab:descrstats}
+			\begin{tabular}{l  r@{\hspace{1.\tabcolsep}}r r@{\hspace{1.\tabcolsep}}r r@{\hspace{1.\tabcolsep}}r r@{\hspace{1.\tabcolsep}}r}
 				\toprule
-				& \multicolumn{2}{c}{All}  & \multicolumn{2}{c}{Single}  & \multicolumn{2}{c}{Married}  & \multicolumn{2}{c}{Renter}   & \multicolumn{2}{c}{Owner}    \\
-				Receiver 		& \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes} & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes} & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes}  & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes}   & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes}   \\  \midrule
+				& \multicolumn{2}{c}{All}  &  \multicolumn{2}{c}{Renter}   & \multicolumn{2}{c}{Owner}    \\
+				Receiver 		& \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes} & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes} & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes}    \\  \midrule
 				\input ../tabfig/descr/descr_trsnf_disc_mean.tex
 				\midrule
-				Age                    & \multicolumn{2}{c}{25-28} & \multicolumn{2}{c}{29-32}  & \multicolumn{2}{c}{33-36}  & \multicolumn{2}{c}{37-40}   & \multicolumn{2}{c}{41-44}   \\
-				Receiver       & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes} & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes} & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes}  & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes}   & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes}   \\ 
+				Age                    & \multicolumn{2}{c}{25-31} & \multicolumn{2}{c}{32-38}  & \multicolumn{2}{c}{39-45}   \\
+				Receiver       & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes} & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes} & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes}    \\ 
 				 \midrule
 				\input ../tabfig/descr/descr_trsnf_age_mean.tex
 				\midrule
-				Wealth Quintile                    & \multicolumn{2}{c}{Quintile 1}  & \multicolumn{2}{c}{Quintile 2}  & \multicolumn{2}{c}{Quintile 3}   & \multicolumn{2}{c}{Quintile 4}  & \multicolumn{2}{c}{Quintile 5}   \\
-				Receiver       & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes} & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes} & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes}  & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes}   & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes}   \\ 
+				Wealth Tertile                    & \multicolumn{2}{c}{Tertile 1}  & \multicolumn{2}{c}{Tertile 2}  & \multicolumn{2}{c}{Tertile 3}    \\
+				Receiver       & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes} & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes} & \multicolumn{1}{c}{No} & \multicolumn{1}{c}{Yes}    \\ 
 		\midrule
 				\input ../tabfig/descr/descr_trsnf_wlt_mean.tex
 		\bottomrule
@@ -159,7 +160,7 @@ In panel a), the first two columns compare the whole sample, by transfers receip
 	\end{adjustbox}
 	\end{table}
 	
-By breaking down the sample by marital status, we see that married or cohabiting households have more wealth, higher income, are slightly older, and have three times the ownership rate of singles. Married households receive more frequent and slightly larger transfers. Next, I break the sample down by ownership. Homeowners have 10 times the wealth of renters and also significantly wealthier parents. Renters and owners receive transfers at about the same rate and size. Receivers are more likely to switch from renting to owning: 21\% of receiving owners rented two years ago, compared to 14\% of nonreceiving owners.
+Next, I break the sample down by ownership. Homeowners have 10 times the wealth of renters and also significantly wealthier parents. Renters and owners receive transfers at about the same rate and size. Receivers are more likely to switch from renting to owning: 21\% of receiving owners rented two years ago, compared to 14\% of nonreceiving owners.
 
 Next, I break the sample into five age groups from 25 to 44. We see that households' wealth, income, and homeownership rates increase with age. Wealthier households are less likely to receive transfers. Notably, among 29-to-32-year-olds, homeownership is more common among transfer recipients (40\%) than nontransfer recipients (32\%). Furthermore, receivers are not only more likely to own, but also to be recent homeowners: 21\% of receiving owners are new homeowners versus 13\% of nonreceiving owners.
 
