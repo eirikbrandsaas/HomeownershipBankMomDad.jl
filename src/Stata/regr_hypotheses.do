@@ -4,7 +4,7 @@ local period $period
 
 cap scalar drop _all
 cap graph drop _all
-use  "`basepath'/data/PSID/panel_winsor", clear
+use  "`basepath'/data/PSID/panel_ind", clear
 
 by id_hd: gen firsthouse = owner[1]
 by id_hd: gen firstage = age[1]
@@ -34,7 +34,7 @@ bys id_hd: egen everbehind = max(behind)
 
 xtset id_hd year
 replace first_own = . if first_own == firstage
-local controls "i.state i.hs i.coll i.white i.year c.age##c.age c.famsize c.age_prnt##c.age_prnt"
+local controls "i.state i.hs i.coll i.white i.married i.year c.age##c.age c.famsize c.age_prnt##c.age_prnt"
 foreach var in cashonhand_prnt wealth income {
 	gen L`var' = ll.`var'
 }
@@ -55,6 +55,7 @@ label var hs "\;High School"
 label var coll "\;College"
 label var white "\;White"
 label var famsize "\;Family Size"
+label var married "\;Married"
 
 esttab using "tabfig/regr/hypoII.tex", replace drop(age* *.age* *state *.year 0.* _cons)  ///
 	stats(N, fmt(%9.0fc)) compress star(+ 0.1 * 0.05 ** 0.01 *** 0.001) se booktabs ///
