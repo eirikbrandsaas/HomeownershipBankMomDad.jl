@@ -3,7 +3,7 @@ macro drop _all
 
 // Instal required packages
 
-cap net install psidtools, from("http://fmwww.bc.edu/RePEc/bocode/p") // PSID tools
+cap net install psidtools, from("http://fmwww.bc.edu/RePEc/bocode/p") // PSID tools (make sure you're using a recent version to use the 2021 files)
 cap net install st0110_1, from("http://www.stata-journal.com/software/sj15-3")  // Freduse (Stata<14)
 cap net install blindschemes, from("http://fmwww.bc.edu/RePEc/bocode/b") // plotplainblind
 cap net install winsor2.pkg, from("http://fmwww.bc.edu/RePEc/bocode/w") // Winsor2
@@ -24,7 +24,6 @@ global baseunit "1000" // Divide by thousand, to get thousands of 2015 dollars"
 // switches/values
 global mingift   = .5 // Value for the minimum size of gifts that are given
 global firstyear = 1999
-global lastyear  = 2017
 global agestep 	 = 6
 global firstage  = 25
 global lastage   = 85
