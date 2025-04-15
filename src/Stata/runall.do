@@ -13,7 +13,7 @@ cap net install grc1leg.pkg, from("http://www.stata.com/users/vwiggins") // grc1
 set varabbrev off
 set more off
 set scheme plotplainblind, permanently
-global basepath "/mcr/res-m1eeb00/Projects/HomeownershipBankMomDad.jl"               // Path to root directory of the git repo.
+global basepath "/mcr/res-m1eeb00/Projects/delete/HomeownershipBankMomDad.jl"               // Path to root directory of the git repo.
 global PSIDpath "$basepath/data/PSID"
 
 global realvars "valhouse wealthwoequit wealth income valstocks homeequity transf2val houseexpend rent expend_healthcare expend_food expend_transport" // List of all variables that should be deflated
