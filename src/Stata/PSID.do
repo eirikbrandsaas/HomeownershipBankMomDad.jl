@@ -40,7 +40,9 @@ psid use || valstocks		[99]ER15007 [01]ER19203 [03]ER22568 [05]ER26549 [07]ER375
 	 || wealth		[99]S417 [01]S517 [03]S617 [05]S717 [07]S817 [09]ER46970 [11]ER52394 [13]ER58211 [15]ER65408 [17]ER71485 [19]ER77511 [21]ER81838 ///
 	 || homeequity 		[99]S420 [01]S520 [03]S620 [05]S720 [07]S820 [09]ER46966 [11]ER52390 [13]ER58207 [15]ER65404 [17]ER71481  [19]ER77507 [21]ER81834 ///
 	 || transf		[99]ER15115 [01]ER19311 [03]ER22706 [05]ER26687 [07]ER37705 [09]ER43696 [11]ER49041 [13]ER54797 [15]ER61908 [17]ER67962 [19]ER73990 [21]ER80112 ///
-	 || transfval		[99]ER15117 [01]ER19313 [03]ER22708 [05]ER26689 [07]ER37707 [09]ER43698 [11]ER49043 [13]ER54799 [15]ER61913 [17]ER67967 [19]ER73995 [21]ER80117 ///
+	 || transfval1		[99]ER15117 [01]ER19313 [03]ER22708 [05]ER26689 [07]ER37707 [09]ER43698 [11]ER49043 [13]ER54799 [15]ER61913 [17]ER67967 [19]ER73995 [21]ER80117 ///
+	 || transfval2 		[99]ER15122 [01]ER19318 [03]ER22713 [05]ER26694 [07]ER37712 [09]ER43703 [11]ER49048 [13]ER54804 [15]ER61921 [17]ER67975 [19]ER74003 [21]ER80125 ///
+	 || transfval3 		[99]ER15127 [01]ER19323 [03]ER22718 [05]ER26699 [07]ER37717 [09]ER43708 [11]ER49053 [13]ER54809 [15]ER61929 [17]ER67983 [19]ER74011 [21]ER80133 /// 
 	 || transfyear		[99]ER15116 [01]ER19312 [03]ER22707 [05]ER26688 [07]ER37706 [09]ER43697 [11]ER49042 [13]ER54798 [15]ER61910 [17]ER67964 [19]ER73992 [21]ER80114 ///
 	 || income		[99]ER16462 [01]ER20456 [03]ER24099 [05]ER28037 [07]ER41027 [09]ER46935 [11]ER52343 [13]ER58152 [15]ER65349 [17]ER71426 [19]ER77448 [21]ER81775 ///
 	 || state 		[99]ER13004 [01]ER17004 [03]ER21003 [05]ER25003 [07]ER36003 [09]ER42003 [11]ER47303 [13]ER53003 [15]ER60003 [17]ER66003 [19]ER72003 [21]ER78003 ///
@@ -147,27 +149,27 @@ replace rooms = . if rooms == 98 & year >= 1994
 
 replace rent = . if rent == 99998 | rent == 99999 
 
-// Transfer/inheritance data is a fucking mess, lots of recoding
+// Transfer/inheritance data is a mess, lots of recoding
 replace transf = . if transf == 8 | transf == 9 // replace DK/NA
 replace transf = 0 if transf == 5
 replace transf = 1 if transf == 1
-// note: Code was changed in 2015
+// note: PSID coding transfer years was changed in 2015. Instead of asking one quesiton they ask one for each gift/transfer/inheritance mention. To be consistent, I (arbitrarily) just use the mention of the year of the first gift each wave as the timing of all gifts. Moreover, they changed the coding (e.g., 9 is DK/missing instead of 9999). 
 
-replace transfyear = . if transfyear == 7 | transfyear == 8 & year == 2015
-replace transfyear = 2015 if transfyear == 1 & year == 2015
-replace transfyear = 2014 if transfyear == 2 & year == 2015
-replace transfyear = 2013 if transfyear == 3 & year == 2015 
+replace transfyear = . if transfyear == 7 | transfyear == 8 | transfyear == 9 &year >= 2015
+replace transfyear = . if transfyear >= 9997 & transfyear <=9999 & year < 2015 // Different error codes
+forv year = 2015(2)2021 { // Convert the post-2015 transfer years to the pre-2015 transfer year format
+	replace transfyear = `year' + 1 - transfyear if transfyear != 0 & year == `year'
+}
+tab transfyear year, missing
+replace transfyear = . if transfyear == 0 // No transfer year when you don't get transfers
 
-replace transfyear = . if transfyear >= 97 & transfyear<=99 // DK/NA
-replace transfyear = 1900 + transfyear if year == 1989 | year == 1984
-
-replace transfyear = . if transfyear < 1979 // In in1984 they dont ask about last 5 years, just at any time...
-replace transf = 0    if transfyear == . & year == 1984
-replace transfval = 0 if transfyear == . & year == 1984
-replace transfyear = . if transfyear >= 9997 & transfyear <=9999
-replace transfyear = . if transfyear >= 9997 // Some years have error codes for 9997-9999, Dont know what they mean
-replace transfval = . if  transfval == 9999997  | transfval == 9999998   | transfval == 9999999   | transfval == 1.0e+09
-
+// Combine the different transfer variables.
+forv vals = 1(1)3 {
+	replace transfval`vals' = . if  transfval`vals' == 9999997  | transfval`vals' == 9999998   | transfval`vals' == 9999999  & year >= 2013 // From 2013 these are the error codes (the ...997 is top coded (neve rused, and the others DK/NA/Refused)
+	replace transfval`vals' = . if  transfval`vals' == 1.0e+09  & year < 2013 // Before 2013, 999,999,999 and 999,999,999 denote DK/NA, but these get rounded to 1.0e+09 in Stata
+}
+gen transfval = transfval1 + transfval2 + transfval3
+drop transfval?
 
 // Remake all variables into 2 year-variables to be consistent across all samples!
 gen transf2 = (transfyear>= year - 2)*transf

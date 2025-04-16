@@ -56,8 +56,8 @@ do src/Stata/PSID_panel.do // Sample selection and cleaning, merging with parent
 
 // Create tables, figures, and moments
 do src/Stata/descr_table.do
-do src/Stata/emp_eventstudy.do 
 do src/Stata/regr_hypotheses.do
+do src/Stata/emp_eventstudy.do 
 do src/Stata/PSID_calibration.do 
 do src/Stata/PSID_moments.do
 
