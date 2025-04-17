@@ -1,5 +1,9 @@
 cap scalar drop _all
 cap graph drop _all
+
+**************
+** clean the data
+***************
 use  "$basepath/data/PSID/panel_ind", clear
 
 by id_hd: gen firsthouse = owner[1]
@@ -23,14 +27,20 @@ replace rcvr_inh = 1 if (rcvr ==1 ) // Include 2013 transfers
 replace transf2 = 1 if (totrcved_fromparent > 10) & year == 2013 & !missing(totrcved_fromparent) // Include 2013 transfers
 
 xtset id_hd year
-foreach var in owner transf2 rcvr rcvr_inh transf2val totrcved_fromparent {
+foreach var in owner transf2 rcvr rcvr_inh transf2val totrcved_fromparent behind everbehind age {
 	gen F`var' = ff.`var'
 }
 
+save "$PSIDpath/regression_sample.dta", replace
+
+
+*************
+** run the regressions
+***************
+use "$PSIDpath/regression_sample.dta", clear
+
 local lag_main "cashonhand_prnt "
 local controls "c.wealth c.income i.hs i.coll i.married i.white c.famsize  i.year i.state c.age##c.age c.age_prnt##c.age_prnt"
-
-save "$PSIDpath/regression_sample_newowners.dta", replace
 
 eststo clear
 eststo r1: reg Fowner `lag_main' i.Frcvr  `controls' if owner == 0 & inrange(age,25,44) & age <= first_own & !missing(Frcvr), vce(cluster famid )
@@ -111,7 +121,7 @@ noi esttab r1 r2 r3 r4 r5 using "tabfig/regr/newowners.tex", replace drop(*age* 
 ** Plot the two transfer distributions
 ***********************
 */
-use "$PSIDpath/regression_sample_newowners.dta", clear
+use "$PSIDpath/regression_sample.dta", clear
 cap graph drop _all
 
 
