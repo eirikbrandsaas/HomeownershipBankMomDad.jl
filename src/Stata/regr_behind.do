@@ -9,7 +9,7 @@ gen FFbehind = FFFF.behind
 gen Fbehind2 = (FFbehind == 1 | Fbehind == 1)
 
 
-local controls "c.wealth c.income i.hs i.coll i.white i.married i.year i.state i.owner c.age##c.age c.famsize c.age_prnt##c.age_prnt"
+local controls "c.wealth c.income i.hs i.coll i.white i.married i.year i.state c.age##c.age c.famsize c.age_prnt##c.age_prnt"
 local lag_main "cashonhand_prnt "
 
 eststo r1: regr Fbehind `lag_main' `controls' if Fage==first_own & first_own != firstage & inrange(age,25,44)
@@ -51,7 +51,7 @@ esttab using "tabfig/regr/hypoII.tex", replace drop(age* *.age* *state *.year 0.
 	 label cells(b(fmt(3) star)  se(par fmt(3)))  /// 
 	 refcat(wealth "\textit{Child}" cashonhand_prnt "\textit{Parent}", nolabel) collabels(none) 
 	 
- esttab using "tabfig/regr/hypoII_short.tex", replace drop(*age* *.*age* *state *.*year 0.* _cons *hs* *coll* *white* *famsize* *married* *owner*)  ///
+ esttab using "tabfig/regr/hypoII_short.tex", replace drop(*age* *.*age* *state *.*year 0.* _cons *hs* *coll* *white* *famsize* *married*)  ///
 	stats(N meanoutcome firsttime, label("N" "Outcome (mean)" "First-Time Buyers Only") fmt(%9.0fc 3 3) ) compress star(+ 0.1 * 0.05 ** 0.01 *** 0.001) se booktabs ///
 	 mtitle("Behind" "Ever Behind" "Behind " "Behind FE") ///
 	 label cells(b(fmt(3) star)  se(par fmt(3))) 

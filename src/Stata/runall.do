@@ -58,6 +58,7 @@ do src/Stata/PSID_panel.do // Sample selection and cleaning, merging with parent
 do src/Stata/descr_table.do
 do src/Stata/regr_newowners.do
 do src/Stata/regr_behind.do
+do src/Stata/regr_maintainownership.do
 do src/Stata/emp_eventstudy.do 
 do src/Stata/PSID_calibration.do 
 do src/Stata/PSID_moments.do

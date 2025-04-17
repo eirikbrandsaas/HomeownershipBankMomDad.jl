@@ -4,6 +4,7 @@ cap graph drop _all
 **************
 ** clean the data
 ***************
+
 use  "$basepath/data/PSID/panel_ind", clear
 
 by id_hd: gen firsthouse = owner[1]

@@ -236,6 +236,36 @@ I also report the results from two specifications where I follow households post
 
 The probability of being behind on mortgages is decreasing in parental wealth, highlighting that parental resources appear to help new homeowners maintain ownership after purchase---in addition to relaxing borrowing constraints.
 
+\subsubsection{Households with Wealthier Parents Are More Likely to Remain Homeowners}
+\textcolor{red}{!! [[rewrite this]] !!}
+Perhaps surprisingly, homeownerhsip is not a `permanent' state, and in fact a growing literature is focusing on the exit from homeownership... (Bond \& Eriksen, ... other papers)\dots
+
+First, I plot the share of homeowners who are homeowners in period $t+\Delta$. The results are striking, among first-time owners (i.e., households whose first observation was as renters and then the first time they were observed as an owner), about 15\% are renting two years later and 20\% are renting after 4 years. For all owners (i.e., the sample includes all households who are observed as owners, in any period), there is a marked decrease though it is more muted, after four years about 10\% of all owners will be renting.
+
+Which variable predict the transition out of ownership? I run similar regresions to the previous sections, for various lead lengths, and plot the coefficient for household net worth and parental wealth. While the coefficient intervals are overlapping, we see a strikin result: at every horizon, a 1\% increase in parental wealth is associated with a larger decrease in the probability of transitioning out of owning. 
+
+\begin{figure}[tb]
+	\captionsetup[subfigure]{aboveskip=-1pt}
+	\caption{Mainting Homeownership}\label{fig:homeowner_exit}
+	\begin{subfigure}{0.33\textwidth}%
+		\caption{Exit Out of Ownership}\label{fig:owner_hazard}%
+		\includegraphics[width=\textwidth]{../tabfig/descr/PSID_ownerexit.pdf}% 
+	\end{subfigure}%
+	\hfill
+	\begin{subfigure}{0.33\textwidth}%
+		\caption{All Owners}\label{fig:coef_allowner}%
+		\includegraphics[width=\textwidth]{../tabfig/descr/PSID_coefowner.pdf}% 
+	\end{subfigure}%
+	\hfill
+	\begin{subfigure}{0.33\textwidth}%
+		\caption{First-Time Owners}\label{fig:coef_ftowner}%
+		\includegraphics[width=\textwidth]{../tabfig/descr/PSID_coefftowner.pdf}% 
+	\end{subfigure}%
+	\hfill
+	
+	\caption*{\footnotesize \textit{Notes:} \textcolor{red}{write this footnote.}}
+\end{figure}
+
 \subsubsection{Households with Wealthier Parents Are Less Likely to Downsize during Unemployment Spells}\label{sec:eventstudy}
 Distressed and forced home sales are costly and frequently driven by unemployment \citep{kermani2021racial,hsu2018unemployment}. If parental wealth provides insurance, households with wealthier parents should be less likely to downsize after income losses. I perform a simple event study on the effect of unemployment on housing consumption to test this hypothesis.
 
