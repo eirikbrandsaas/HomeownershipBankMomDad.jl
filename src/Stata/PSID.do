@@ -106,7 +106,7 @@ keep if spouse == 1 | head == 1 // Keep only heads and spouses of each household
 // Now, we create a dataset of id's between heads and their spouses, and their spouses parents..
 preserve 
 keep if spouse == 1 | head == 1 // Keep only heads of each household
-bys fuid year: drop if _N >= 3 // Drop HH with multiple spouses (Mormons?!)
+bys fuid year: drop if _N >= 3 // Drop HH with multiple spouses
 keep id momid dadid fuid year head 
 reshape wide id momid dadid, i(fuid year) j(head)
 drop fuid
@@ -125,7 +125,7 @@ merge 1:1 id_hd year using "$PSIDpath/temp17_spousedata.dta", nogen keep(3) // O
 rename id_hd id
 
 
-drop if famid >= 7000 & famid <= 9000 // Latino sample
+ drop if famid >= 7000 & famid <= 9000 // Latino sample (No need to drop these since they are not in data after 1995...)
 // drop if famid >= 5000 & famid <= 7000 // SEO sample?
 
 // Replace DK/NA/Refused with missing
@@ -251,3 +251,4 @@ rename (momid_wf dadid_wf) (idmom_wf iddad_wf)
 compress
 order id_hd year id_wf id*_hd id*_wf
 save "$PSIDpath/PSID17_HouseholdPanel.dta", replace
+use "$PSIDpath/PSID17_HouseholdPanel.dta", clear

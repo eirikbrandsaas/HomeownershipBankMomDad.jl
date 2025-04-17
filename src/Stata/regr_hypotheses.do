@@ -33,7 +33,7 @@ replace behind = . if owner!= 1 // Can't be behind if not owner
 bys id_hd: egen everbehind = max(behind)
 
 xtset id_hd year
-replace first_own = . if first_own == firstage
+
 local controls "i.state i.hs i.coll i.white i.married i.year c.age##c.age c.famsize c.age_prnt##c.age_prnt"
 foreach var in cashonhand_prnt wealth income {
 	gen L`var' = ll.`var'
@@ -42,11 +42,11 @@ local lag_main "Lcashonhand_prnt Lwealth Lincome"
 local behindcontrols = "" // No extra controls for these regressions
 keep if age <= 44 & age >=25
 
-eststo: regr valhouse `lag_main' `controls' if age==first_own 
-eststo: regr behind `lag_main' `controls' `behindcontrols' if age==first_own 
-eststo: regr everbehind `lag_main' `controls' `behindcontrols' if age==first_own 
-eststo: xtreg behind  `lag_main' `controls' `behindcontrols' c.age##c.age  if first_own != . & owner==1
-eststo: xtreg behind  `lag_main' `controls' `behindcontrols' c.age##c.age if first_own != . & owner==1 , fe
+eststo: regr valhouse `lag_main' `controls' if age==first_own
+eststo: regr behind `lag_main' `controls' `behindcontrols' if age==first_own  
+eststo: regr everbehind `lag_main' `controls' `behindcontrols' if age==first_own & first_own != firstage
+eststo: xtreg behind  `lag_main' `controls' `behindcontrols' c.age##c.age  if first_own != firstage & owner==1 
+eststo: xtreg behind  `lag_main' `controls' `behindcontrols' c.age##c.age if first_own != firstage & owner==1 , fe
 
 label var Lcashonhand_prnt "\;Wealth(t-2)"
 label var Lwealth "\;Net Worth(t-2)"
