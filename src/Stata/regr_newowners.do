@@ -1,4 +1,3 @@
-
 cap scalar drop _all
 cap graph drop _all
 use  "$basepath/data/PSID/panel_ind", clear
@@ -29,40 +28,36 @@ foreach var in owner transf2 rcvr rcvr_inh transf2val totrcved_fromparent {
 }
 
 local lag_main "cashonhand_prnt "
-local controls "c.wealth c.income i.hs i.coll i.married i.white c.famsize i.year c.age##c.age c.age_prnt##c.age_prnt"
-local FEcontrols "i.state"
-
+local controls "c.wealth c.income i.hs i.coll i.married i.white c.famsize  i.year i.state c.age##c.age c.age_prnt##c.age_prnt"
 
 save "$PSIDpath/regression_sample_newowners.dta", replace
 
-
-
 eststo clear
-eststo r1: reg Fowner `lag_main' i.Frcvr  `controls' `FEcontrols' if owner == 0 & inrange(age,25,44) & age <= first_own & !missing(Frcvr), vce(cluster famid )
+eststo r1: reg Fowner `lag_main' i.Frcvr  `controls' if owner == 0 & inrange(age,25,44) & age <= first_own & !missing(Frcvr), vce(cluster famid )
 summarize Frcvr if e(sample)
 estadd scalar rcvr   = `r(mean)': r1
 summarize Fowner if e(sample)
 estadd scalar Fown   = `r(mean)': r1
 
-eststo r2: reg Fowner `lag_main' i.Frcvr_inh  `controls' `FEcontrols' if owner == 0 & inrange(age,25,44) & age <= first_own & year == 2011 & !missing(Frcvr), vce(cluster famid )
+eststo r2: reg Fowner `lag_main' i.Frcvr_inh  `controls' if owner == 0 & inrange(age,25,44) & age <= first_own & year == 2011 & !missing(Frcvr), vce(cluster famid )
 summarize Frcvr_inh if e(sample)
 estadd scalar rcvr   = `r(mean)'
  summarize Fowner if e(sample)
 estadd scalar Fown = `r(mean)': r2
 
-eststo r3: reg Fowner `lag_main' i.Ftransf2  `controls' `FEcontrols' if owner == 0 & inrange(age,25,44) & age <= first_own & year == 2011 & !missing(Frcvr), vce(cluster famid )
+eststo r3: reg Fowner `lag_main' i.Ftransf2  `controls' if owner == 0 & inrange(age,25,44) & age <= first_own & year == 2011 & !missing(Frcvr), vce(cluster famid )
 summarize Ftransf2 if e(sample)
 estadd scalar rcvr   = `r(mean)'
 summarize Fowner if e(sample)
 estadd scalar Fown = `r(mean)': r3
 
-eststo r4: reg Fowner `lag_main' i.Ftransf2 `controls' `FEcontrols' if owner == 0 & inrange(age,25,44) & age < first_own , vce(cluster famid )
+eststo r4: reg Fowner `lag_main' i.Ftransf2 `controls' if owner == 0 & inrange(age,25,44) & age < first_own , vce(cluster famid )
 summarize Ftransf2 if e(sample)
 estadd scalar rcvr   = `r(mean)'
 summarize Fowner if e(sample)
 estadd scalar Fown = `r(mean)': r4
 
-eststo r5: xtreg Fowner `lag_main' i.Ftransf2 `controls' 	     if owner == 0 & inrange(age,25,44) & age <= first_own , fe vce(cluster famid )
+eststo r5: xtreg Fowner `lag_main' i.Ftransf2 `controls' if owner == 0 & inrange(age,25,44) & age <= first_own , fe vce(cluster famid )
 summarize Ftransf2 if e(sample)
 estadd scalar rcvr   = `r(mean)'
 summarize Fowner if e(sample)
@@ -89,6 +84,13 @@ label var Frcvr "\;Parent Transfer"
 label var Frcvr_inh "\;Any Transfer"
 
 
+noi esttab r1 r2 r3 r4 r5 , replace drop(*age* *.*age* *state *.*year 0.* _cons)  ///
+	stats(N rcvr Fown , label("N" "Receipt Rate" "Rent-to-Own Rate") fmt(%9.0fc 3 3)) compress star(+ 0.1 * 0.05 ** 0.01 *** 0.001) se  ///
+	 mtitle("OLS" "OLS" "OLS" "OLS" "FE") ///
+	 label cells(b(fmt(3) star)  se(par fmt(3)))  order(1.Frcvr 1.Frcvr_inh 1.Ftransf2 ) /// 
+	 varlabels(1.Ftransf2 "\;Any Transfer ($>$10k)" 1.Frcvr "\;Parent Transfer" 1.Frcvr_inh "\;Any Transfer") ///
+	 refcat(1.Frcvr "\textit{Transfer}" cashonhand_prnt "\textit{Other Controls}", nolabel) collabels(none) 
+	 
 noi esttab r1 r2 r3 r4 r5 using "tabfig/regr/newowners_short.tex", replace drop(*age* *.*age* *state *.*year 0.* _cons *hs* *coll* *white* *famsize* *married* *income* *wealth* *cashonhand*)  ///
 	stats(N rcvr Fown controls, label("N" "Receipt Rate" "Rent-to-Own Rate" "Other Controls") fmt(%9.0fc 3 3)) compress star(+ 0.1 * 0.05 ** 0.01 *** 0.001) se booktabs ///
 	 mtitle("OLS" "OLS" "OLS" "OLS" "FE") ///
@@ -96,6 +98,7 @@ noi esttab r1 r2 r3 r4 r5 using "tabfig/regr/newowners_short.tex", replace drop(
 	 varlabels(1.Ftransf2 "\;Any Transfer ($>$10k)" 1.Frcvr "\;Parent Transfer" 1.Frcvr_inh "\;Any Transfer") ///
 	 collabels(none) 
 	 
+
 noi esttab r1 r2 r3 r4 r5 using "tabfig/regr/newowners.tex", replace drop(*age* *.*age* *state *.*year 0.* _cons)  ///
 	stats(N rcvr Fown , label("N" "Receipt Rate" "Rent-to-Own Rate") fmt(%9.0fc 3 3)) compress star(+ 0.1 * 0.05 ** 0.01 *** 0.001) se booktabs ///
 	 mtitle("OLS" "OLS" "OLS" "OLS" "FE") ///
