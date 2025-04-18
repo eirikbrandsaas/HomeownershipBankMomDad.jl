@@ -10,22 +10,31 @@ tempfile leadmeans
 tempname  post
 
 postfile `post' int fv                       /// lead: 0,2,?,16
-                     double m_first          /// mean for age==first_own
-                     double m_owner          /// mean for current owners
+                     double m_first se_first         /// mean for age==first_own
+                     double m_owner se_owner         /// mean for current owners
                      using `leadmeans', replace
 		     
 qui forvalues fv = 0(2)16 {
 	sum F(`fv').owner if age == first_own & first_own != firstage & inrange(age,25,44) [aw = famwgt]
 	local mean_first = `r(mean)'
+	local se_first   = r(sd)/sqrt(r(N))      
 	sum F(`fv').owner if owner == 1 & first_own != firstage & inrange(age,25,44) [aw = famwgt]
 	local mean_owner = `r(mean)'
-	post `post' (`fv') (`mean_first') (`mean_owner')
+	local se_owner   = r(sd)/sqrt(r(N))      
+	post `post' (`fv') (`mean_first') (`se_first') (`mean_owner') (`se_owner')
 }
 postclose `post'      // finish writing
 
 use `leadmeans', clear
-twoway  (line  m_first m_owner  fv, lcolor(black orange) lpattern(solid solid) msymbol(square circle)) , ///
-	 legend(order(1 "First-Time Owners" 2 "All Owners") ring(0) pos(1) cols(1))     ///
+foreach mod in "owner" "first" {
+	gen m_`mod'_l = m_`mod' - 1.68*se_`mod'
+	gen m_`mod'_u = m_`mod' + 1.68*se_`mod'
+
+
+}
+
+twoway  (line  m_first m_first_u m_first_l m_owner m_owner_u m_owner_l  fv, lcolor(black black black orange orange orange ) lpattern(solid dash dash solid dash dash ) msymbol(square circle)) , ///
+	 legend(order(1 "First-Time Owners" 4 "All Owners") ring(0) pos(1) cols(1))     ///
 	graphregion(margin(1 1 0 0))                 /// shrink outer frame
          xlabel(0(4)16) xtitle("Years (leads)") ytitle("Share") name(hazard)
 
@@ -42,20 +51,23 @@ tempfile results
 tempname  post
 
 postfile `post' int fv ///
-        double b_hh seb_hh b_par seb_par ///
+        double all_k allse_k all_p allse_p ///
 	long Nb ///
-	double c_hh sec_hh c_par sec_par ///
+	double first_k firstse_k first_p firstse_p ///
 	long Nc ///
         using `results', replace
 
-forvalues fv = 0(2)16 {
+forvalues fv = 2(2)16 {
     
     
 	local controls "c.wealth c.income i.hs i.coll i.white i.married i.year i.state c.age##c.age c.famsize c.age_prnt##c.age_prnt"
 	local lag_main "cashonhand_prnt "
 
-	qui regr F(`fv').owner `lag_main' `controls' if owner == 1 & inrange(age,25,44)
-    * write fv, coeffs and s.e.'s of B and C
+	qui regr F(`fv').owner `lag_main' `controls' if owner == 1 & inrange(age,25,44) 
+	noi disp `e(N)'
+	qui regr F(`fv').owner `lag_main' `controls' if owner == 1 & inrange(age,25,44) & first_own != firstage
+	noi disp `e(N)'
+
 	tempname bB sebB bparB sebparB NB                // stash the numbers
 	
         scalar   `bB' = _b[wealth]
@@ -72,22 +84,22 @@ forvalues fv = 0(2)16 {
 
 postclose `post'
 
-*------------------------------------------------------------
-* 3.  Bring the new dataset into memory
-*------------------------------------------------------------
+
+// Plot 
+
 use `results', clear
 list, clean
 
-foreach mod in "b" "c" {
-	gen l`mod'_hh = `mod'_hh - 1.68*se`mod'_hh
-	gen u`mod'_hh = `mod'_hh + 1.68*se`mod'_hh
-	gen l`mod'_par = `mod'_par- 1.68*se`mod'_par
-	gen u`mod'_par = `mod'_par + 1.68*se`mod'_par
+foreach mod in "all" "first" {
+	gen `mod'_l_k = `mod'_k - 1.68*`mod'se_k
+	gen `mod'_u_k = `mod'_k + 1.68*`mod'se_k
+	gen `mod'_l_p = `mod'_p- 1.68*`mod'se_p
+	gen `mod'_u_p = `mod'_p + 1.68*`mod'se_p
 
 }
 cap graph drop _all
-twoway  (line b_hh ub_hh  lb_hh fv, lcolor(black black black) lpattern(solid dash  dash) msymbol(square none none)) ///
-		(line b_par ub_par  lb_par fv, lcolor(orange orange orange) lpattern(solid dash dash)  msymbol(circle none none)), ///
+twoway  (line all_k all_u_k  all_l_k fv, lcolor(black black black) lpattern(solid dash  dash) msymbol(square none none)) ///
+		(line all_p all_u_p  all_l_p fv, lcolor(orange orange orange) lpattern(solid dash dash)  msymbol(circle none none)), ///
 		 graphregion(margin(1 1 0 0))                 /// shrink outer frame
 		 legend(order(1 "Household Wealth" 4 "Parent Wealth")    ///
            ring(0) pos(5) cols(1))  xlabel(0(4)16) ylabel(-0.1(0.05)0.1) xtitle("Lead Length") ytitle("Coefficient") name(all)
@@ -96,8 +108,8 @@ graph display, xsize(2) ysize(2) scale(1.8)
 graph export "tabfig/descr/PSID_coefowner.pdf", replace
 
 	
-twoway  (line c_hh uc_hh  lc_hh fv, lcolor(black black black) lpattern(solid dash  dash) msymbol(square none none)) ///
-		(line c_par uc_par  lc_par fv, lcolor(orange orange orange) lpattern(solid dash dash)  msymbol(circle none none)), ///
+twoway  (line first_k first_u_k  first_l_k fv, lcolor(black black black) lpattern(solid dash  dash) msymbol(square none none)) ///
+		(line first_p first_u_p  first_l_p fv, lcolor(orange orange orange) lpattern(solid dash dash)  msymbol(circle none none)), ///
 		 graphregion(margin(1 1 0 0))                 /// shrink outer frame
 		 legend(order(1 "Household Wealth" 4 "Parent Wealth")    ///
            ring(0) pos(5) cols(1)) xlabel(0(4)16)  ylabel(-0.1(0.05)0.1)  xtitle("Lead Length") ytitle("Coefficient") name(ft)
@@ -105,5 +117,14 @@ graph display, xsize(2) ysize(2) scale(1.8)
 graph export "tabfig/descr/PSID_coefftowner.pdf", replace
 
 
-   graph combine all ft, ycommon
+graph combine all ft, ycommon
 
+clear
+
+************
+** combine files to use with julia later possibly
+use `results', clear
+merge 1:1 fv using `leadmeans' 
+sort fv
+
+export delimited _all using "data/PSID/maintain.csv", replace // Creates a file with all the data that you can use in Julia
