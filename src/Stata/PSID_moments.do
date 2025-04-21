@@ -104,10 +104,30 @@ gen consp2consk = cons_prnt/cons
 gen wealthf = wealth + wealth_prnt
 // replace consp2consk = . if consp2consk > 5
 // replace consp2consk = . if cons/cons_prnt > 5
-local meanvars  "owner r2inc wealth h2w wealthatpurchase first_own logincome mortg2inc transfsize transfrate tp2wealthp tp2wealthk tp2inck transferbuyers transferbuyersamnt house2inc mortg LTVatpurchase wealth_rcver wealth_nonrcver transferbuyersL transferbuyersN transferbuyersF transferbuyersLamnt transferbuyersNamnt transferbuyersFamnt wealthp_owner wealthp_renter consp2consk wealthf"
+local meanvars  "owner_age3536_inc1 owner_age3536_inc2 owner_age3536_inc3 owner r2inc wealth h2w wealthatpurchase first_own logincome mortg2inc transfsize transfrate tp2wealthp tp2wealthk tp2inck transferbuyers transferbuyersamnt house2inc mortg LTVatpurchase wealth_rcver wealth_nonrcver transferbuyersL transferbuyersN transferbuyersF transferbuyersLamnt transferbuyersNamnt transferbuyersFamnt wealthp_owner wealthp_renter consp2consk wealthf"
+local percvars "(p10) wealth_age3536_p10 =  wealth35 (p25) wealth_age3536_p25 =  wealth35 (p50) wealth_age3536_p50 =  wealth35 (p75) wealth_age3536_p75 =  wealth35   (p90) wealth_age3536_p90 =  wealth35 "
 
 replace first_own = firstage if firsthouse == 1 & firstage <27 // So that households who enter the sample as homeowners under age 27 also counts towards the age at purchase
 
+
+// Generate some variables that are specific for age 39-40
+local agelo = 35
+local agehi = 36
+foreach var of varlist wealth owner {
+	gen `var'35 = .
+	replace `var'35 = `var' if inrange(age,`agelo',`agehi')
+}
+
+
+// ownership by income tertiles
+gen inc_tertile = .
+local nq = 3
+forv iq = 1/`nq' {
+	local perc = `iq'*100/`nq'-0.000001 // Cant = 1 at the high end so subtract tiny number
+	_pctile income [aw = famwgt] if inrange(age,`agelo',`agehi'), p(`perc')
+	replace inc_tertile = `iq' if missing(inc_tertile) & income<=`r(r1)' & inrange(age,`agelo',`agehi')
+	gen owner_age`agelo'`agehi'_inc`iq' = owner35 if inc_tertile == `iq'
+}
 
 // find overall homeownership rates (not needed for bootstrapped) (used in the end of the file, appended to the main outputs.)
 preserve
@@ -130,7 +150,7 @@ sum owner if black == 1
 local ownerall_black = `r(mean)'
 restore
 
-keep `meanvars' agegr black famwgt age id_hd year
+keep `meanvars' wealth?? agegr black famwgt age id_hd year 
 
 drop if missing(agegr)
 tempfile sample
@@ -151,27 +171,26 @@ forv boot = 0/$Nboot {
 	
 	// All households
 	preserve 
-	collapse (mean) `meanvars' (p50) medwealth = wealth tp2wealthk_med = tp2wealthk tp2wealthp_med = tp2wealthp transfsize_med = transfsize  medwealthp_owner = wealthp_owner medwealthp_renter = wealthp_renter medconsp2consk = consp2consk medwealthf = wealthf (sd) stdwealth = wealth [aw = famwgt] , by(agegr year) // Find the moments within years and agegroups
-	collapse (mean) `meanvars' medwealth* *_med stdwealth medcons*, by(agegr) // Average moments over years
+	collapse (mean) `meanvars' (p50) medwealth = wealth tp2wealthk_med = tp2wealthk tp2wealthp_med = tp2wealthp transfsize_med = transfsize  medwealthp_owner = wealthp_owner medwealthp_renter = wealthp_renter medconsp2consk = consp2consk medwealthf = wealthf (sd) stdwealth = wealth `percvars' [aw = famwgt] , by(agegr year) // Find the moments within years and agegroups
+	collapse (mean) `meanvars' medwealth* *_med stdwealth medcons* wealth_age3536_p??, by(agegr) // Average moments over years
 	gen medwealthpgrad = medwealthp_owner/medwealthp_renter
 	gen wealthpgrad = wealthp_owner/wealthp_renter
+	
 	if `boot' ==0 { // Only do it first-time
 		save `main'
 	}
 	else { // 
 		save `main', replace
-	}
-	
-	
+	}	
 	
 		
-
 	// By race (white/black)
 	restore
+	
 	preserve
 	drop if black == . 
-	collapse (mean) `meanvars' (p50) medwealth = wealth  tp2wealthk_med = tp2wealthk tp2wealthp_med = tp2wealthp transfsize_med = transfsize medwealthp_owner = wealthp_owner medwealthp_renter = wealthp_renter  medconsp2consk = consp2consk medwealthf = wealthf (sd) stdwealth = wealth [aw = famwgt] ,  by(agegr year black)
-	collapse (mean) `meanvars' medwealth* *_med stdwealth medcons*,  by(agegr black)
+	collapse (mean) `meanvars' (p50) medwealth = wealth  tp2wealthk_med = tp2wealthk tp2wealthp_med = tp2wealthp transfsize_med = transfsize medwealthp_owner = wealthp_owner medwealthp_renter = wealthp_renter  medconsp2consk = consp2consk medwealthf = wealthf (sd) stdwealth = wealth `percvars'  [aw = famwgt] ,  by(agegr year black)
+	collapse (mean) `meanvars' medwealth* *_med stdwealth medcons* wealth_age3536_p??,  by(agegr black)
 	gen medwealthpgrad = medwealthp_owner/medwealthp_renter
 	gen wealthpgrad = wealthp_owner/wealthp_renter
 
@@ -192,12 +211,12 @@ forv boot = 0/$Nboot {
 	order agegr race
 
 	sort race agegr
-	reshape wide `meanvars' medwealth* stdwealth *_med wealthpgrad medcons* ,i(race) j(agegr) 
+	reshape wide `meanvars' medwealth* stdwealth *_med wealthpgrad medcons* wealth_age3536_p??,i(race) j(agegr) 
 	rename *1 *young
 	rename *2 *old
 	order _all, alpha
 	order race
-
+	
 	drop transfsizeold transfrateold tp2*old transf*old *grad*old *renterold *ownerold *consp2*old
 
 	// convert transfers to two-year transfer rates

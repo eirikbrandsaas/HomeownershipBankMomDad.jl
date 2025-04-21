@@ -328,6 +328,22 @@ function output_extramoments(Mb::Model,mom_extra::Vector{Symbol},;store=false)
     out_latex = replace(out_latex,"-Inf" => "0.07")
     out_latex = replace(out_latex,"ccc" => "lrr")
 
+    ## Code that prints some distributional moments to show that the model matches these patterns okay
+    wa_label = "Wealth percentiles, Age 35 (10,25,50,75,90)" 
+    wa_dat = string(round.(Int,collect(Mb.moms[Mb.moms.type.=="Data","wealth_age3536_p" .* string.([10, 25, 50, 75, 90]) .* "young"][1,:])))
+    wa_mod = string(round.(Int,collect(Mb.moms[Mb.moms.type.=="Model","wealth_age3536_p" .* string.([10, 25, 50, 75, 90]) .* "young"][1,:])))
+    wa_row  = wa_label * " & " * wa_dat * " & "* wa_mod * "  \\\\ "
+
+    oi_label = "Ownership, by income tertile, Age 35"
+    oi_dat = string(round.(collect(Mb.moms[Mb.moms.type.=="Data","owner_age3536_inc" .* string.([1,2,3]) .* "young"][1,:]);digits=2))
+    oi_mod = string(round.(collect(Mb.moms[Mb.moms.type.=="Model","owner_age3536_inc" .* string.([1,2,3]) .* "young"][1,:]);digits=2))
+    oi_row  = oi_label * " & " * oi_dat * " & "* oi_mod * "  \\\\ "
+
+    out_latex = replace(out_latex,"\\bottomrule" => wa_row * "\n\\bottomrule \\\\")
+    out_latex = replace(out_latex,"\\bottomrule" => oi_row * "\n\\bottomrule \n")
+    out_latex = replace(out_latex,"[" => "")
+    out_latex = replace(out_latex,"]" => "")
+    
     println(out_latex)
     append_info = @sprintf("m%i_d%i",Dates.month(Dates.today()),Dates.day(Dates.today()))
     filename = "tabfig/est/extramoments_"*append_info*".tex"
