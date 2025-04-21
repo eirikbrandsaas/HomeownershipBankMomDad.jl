@@ -10,7 +10,7 @@ function varnames()
     :wealthatpurchaseyoung => "Wealth at Purchase (25-44)",
     :first_ownyoung => "Age First Own (25-44)",
     :LTVatpurchaseyoung => "LTV at Purchase (25-44)",
-    :tp2wealthpyoung => "Transfers / Parental Wealth (55-74)",
+    :tp2wealthpyoung => "Transfers / Parental Wealth (55-74) (\\%)",
     :transferbuyersyoung => "Transfers Around Purchase (25-44)",
     :hand2mouthyoung  => "Hand to Mouth (25-44)",
     :mortg2incyoung => "Mortgage / Income (25-44)",
@@ -36,6 +36,8 @@ function varnames()
     :owneryoung_ppoor => "Owner (25-44), Bottom 33\\%",
     :transfrateyoung_prich => "Transfers (25-44), Parent Top 50\\%",
     :transfrateyoung_ppoor => "Transfers (25-44), Parent Bot 50\\%",
+    :transfraterenteryoung => "Transfers (25-44), Renters",
+    :transfrateowneryoung => "Transfers (25-44), Owners",
     :smm_obj => "SMM Objective Function",
     )
 end
@@ -314,6 +316,11 @@ function output_extramoments(Mb::Model,mom_extra::Vector{Symbol},;store=false)
     
     dfe = Mb.moms[:,[mom_extra;:type]]
 
+    try
+        dfe.tp2wealthpyoung *= 100
+    catch
+    end
+
     out = DataFrame(Moment = names(dfe[!,mom_extra]),
             Data = Matrix(dfe[dfe.type .== "Data",mom_extra])[1,:],
             Model = Matrix(dfe[dfe.type .== "Model",mom_extra])[1,:]
@@ -339,8 +346,8 @@ function output_extramoments(Mb::Model,mom_extra::Vector{Symbol},;store=false)
     oi_mod = string(round.(collect(Mb.moms[Mb.moms.type.=="Model","owner_age3536_inc" .* string.([1,2,3]) .* "young"][1,:]);digits=2))
     oi_row  = oi_label * " & " * oi_dat * " & "* oi_mod * "  \\\\ "
 
-    out_latex = replace(out_latex,"\\bottomrule" => wa_row * "\n\\bottomrule \\\\")
-    out_latex = replace(out_latex,"\\bottomrule" => oi_row * "\n\\bottomrule \n")
+    out_latex = replace(out_latex,"\\bottomrule" => wa_row * "\n\\bottomrule")
+    out_latex = replace(out_latex,"\\bottomrule" => oi_row * "\n\\bottomrule")
     out_latex = replace(out_latex,"[" => "")
     out_latex = replace(out_latex,"]" => "")
     

@@ -8,7 +8,7 @@ include("../HomeownershipBankMomDad.jl")
 ## Set "parameters"
 pars = [:η, :χ, :ho] # Estimated parameters
 targ_moms =  [:owneryoung, :r2incyoung, :wealthatpurchaseyoung,:transfrateyoung]
-nontarg_moms = [:medwealthyoung, :medwealthold, :medwealthpgradyoung, :first_ownyoung, :ownerall, :mortgyoung,:LTVatpurchaseyoung,:transferbuyersyoung,]
+nontarg_moms = [:medwealthyoung, :medwealthold, :medwealthpgradyoung, :first_ownyoung, :ownerall, :mortgyoung,:LTVatpurchaseyoung, :tp2wealthpyoung, :transferbuyersyoung,:transfraterenteryoung,:transfrateowneryoung]
 nstate = 65 # Grid points in state
 nchoice = 145 # Grid points in choice
 Nest = 1500 # How many iterations in each step of the estimation

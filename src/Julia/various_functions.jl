@@ -138,7 +138,7 @@ function find_moments(np::NumPar,mp::ModPar,pan,period::String)
     smom[!,:transfrateyoung_pmiddle] .= mean(dfy.tp[(dfy.middlep .== 1),:] .> 0)
     smom[!,:transfrateyoung_ppoor] .= mean(dfy.tp[(dfy.poorp .== 1),:] .> 0)
 
-    ## Calculate a wealth percentiles and ownership by income groups age 35-36
+    ## Calculate a wealth percentiles, ownership by income groups age 35-36, and transferrate by ownership
     df35 = dfy[dfy.age.==35,:]
     q = quantile(df35.xk, [0.10, 0.25, 0.5, 0.75, 0.90]) # Wealth percentiles
     smom[!,:wealth_age3536_p10young] .= q[1]
@@ -150,6 +150,9 @@ function find_moments(np::NumPar,mp::ModPar,pan,period::String)
     smom[!,:owner_age3536_inc1young] .= mean(df35[df35.ivk.==1,:iok])-1  # subtract 1 since iok =1 if renting and =2 if owning
     smom[!,:owner_age3536_inc2young] .= mean(df35[df35.ivk.==2,:iok])-1 
     smom[!,:owner_age3536_inc3young] .= mean(df35[df35.ivk.==3,:iok])-1 
+    # Transfer rate by ownership
+    smom[!,:transfraterenteryoung] .= mean(dfy[dfy.iok.==1,:tp] .> 0)
+    smom[!,:transfrateowneryoung] .= mean(dfy[dfy.iok.==2,:tp] .> 0)
 
     df_owners = df_owners[!,[:iak, :id, :ownk, :first_own, :tp]]
     df_owners = df_lag(df_owners,:tp,:iak,:id,forward=true)
