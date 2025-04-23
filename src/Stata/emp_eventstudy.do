@@ -20,10 +20,9 @@ gen Dlhousing = lhousing - ll.lhousing
 
 replace Dlhousing = 0 if wtrmove == 0 // Those who don't move have no change in housing consumption (same house!)
 
-keep if age >= 25 & age <= 44
 
 // Find percentile of parental wealth for households in age group
-_pctile wealth_prnt [aw = famwgt], p(75)
+_pctile wealth_prnt [aw = famwgt] if inrange(age,25,44), p(75)
 gen Twealthy_prnt = (wealth_prnt > `r(r1)') 
 replace Twealthy_prnt = . if wealth_prnt == .
 
@@ -41,13 +40,11 @@ gen _keep = (abs(yearrelunemp) <= 4) // Only keep +/- four years of unemployment
 bysort id_hd: egen famchange_unemp= total(cond(yearrelunemp == 0, famchange, .)) // Parental wealth at unemployment
 keep if famchange_unemp <= 2 // Only keep households that don't change family structure
 
-
 // If wealthy at unemployment
 bysort id_hd: egen wealthy_prnt= total(cond(yearrelunemp == 0, Twealthy_prnt, .)) // Parental wealth at unemployment
 drop Twealthy_prnt
 
-
-
+keep if age >= 25 & age <= 44
 
 save "data/PSID/eventstudy.dta", replace // Used to do event study with controls
 
@@ -97,7 +94,7 @@ xtile wealth_xtile = wealth [aw=famwgt], nq(5)
 xtile income_xtile = income [aw=famwgt], nq(5)
 
 winsor2 Dlhousing, replace c(1 99)
-regr Dlhousing i.coll i.hs i.owner i.married i.famchange i.white i.state i.age i.year i.wealth_xtile i.income_xtile i.exp##i.Treat [aw=famwgt] 
+regr Dlhousing i.hs i.coll i.married i.white c.famsize i.famchange i.year i.state c.age##c.age c.age_prnt##c.age_prnt i.wealth_xtile i.income_xtile i.exp##i.Treat [aw=famwgt] 
 
 mat coeff = e(b)
 mat ses =  vecdiag(diag(vecdiag(e(V))))

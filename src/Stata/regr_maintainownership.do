@@ -60,12 +60,10 @@ postfile `post' int fv ///
 forvalues fv = 2(2)16 {
     
     
-	local controls "c.wealth c.income i.hs i.coll i.white i.married i.year i.state c.age##c.age c.famsize c.age_prnt##c.age_prnt"
+ 	local controls "c.wealth c.income i.hs i.coll i.married i.white c.famsize i.famchange i.year i.state c.age##c.age c.age_prnt##c.age_prnt"
 	local lag_main "cashonhand_prnt "
 
-	qui regr F(`fv').owner `lag_main' `controls' if owner == 1 & inrange(age,25,44) 
-	noi disp `e(N)'
-	qui regr F(`fv').owner `lag_main' `controls' if owner == 1 & inrange(age,25,44) & first_own != firstage
+	qui regr F(`fv').owner `lag_main' `controls' if owner == 1 & inrange(age,25,44) & first_own != firstage, vce(cluster famid )
 	noi disp `e(N)'
 
 	tempname bB sebB bparB sebparB NB                // stash the numbers
@@ -76,7 +74,7 @@ forvalues fv = 2(2)16 {
         scalar   `sebparB' = _se[cashonhand_prnt]
 	scalar  `NB' =  `e(N)'
 	
-	qui regr F(`fv').owner `lag_main' `controls' if age == first_own & first_own != firstage & inrange(age,25,44)
+	qui regr F(`fv').owner `lag_main' `controls' if age == first_own & first_own != firstage & inrange(age,25,44), vce(cluster famid )
 	post `post' (`fv')  /// 
 	(scalar(`bB')) (scalar(`sebB')) (scalar(`bparB')) (scalar(`sebparB')) (scalar(`NB')) ///
 	(_b[wealth]) (_se[wealth]) (_b[cashonhand_prnt]) (_se[cashonhand_prnt]) (`e(N)')
@@ -101,7 +99,7 @@ cap graph drop _all
 twoway  (line all_k all_u_k  all_l_k fv, lcolor(black black black) lpattern(solid dash  dash) msymbol(square none none)) ///
 		(line all_p all_u_p  all_l_p fv, lcolor(orange orange orange) lpattern(solid dash dash)  msymbol(circle none none)), ///
 		 graphregion(margin(1 1 0 0))                 /// shrink outer frame
-		 legend(order(1 "Household Wealth" 4 "Parent Wealth")    ///
+		 legend(order(1 "Household Net Worth" 4 "Parent Wealth")    ///
            ring(0) pos(5) cols(1))  xlabel(0(4)16) ylabel(-0.1(0.05)0.1) xtitle("Lead Length") ytitle("Coefficient") name(all)
 	   
 graph display, xsize(2) ysize(2) scale(1.8) 
@@ -111,14 +109,13 @@ graph export "tabfig/descr/PSID_coefowner.pdf", replace
 twoway  (line first_k first_u_k  first_l_k fv, lcolor(black black black) lpattern(solid dash  dash) msymbol(square none none)) ///
 		(line first_p first_u_p  first_l_p fv, lcolor(orange orange orange) lpattern(solid dash dash)  msymbol(circle none none)), ///
 		 graphregion(margin(1 1 0 0))                 /// shrink outer frame
-		 legend(order(1 "Household Wealth" 4 "Parent Wealth")    ///
+		 legend(order(1 "Household Net Worth" 4 "Parent Wealth")    ///
            ring(0) pos(5) cols(1)) xlabel(0(4)16)  ylabel(-0.1(0.05)0.1)  xtitle("Lead Length") ytitle("Coefficient") name(ft)
 graph display, xsize(2) ysize(2) scale(1.8) 
 graph export "tabfig/descr/PSID_coefftowner.pdf", replace
 
 
 graph combine all ft, ycommon
-
 clear
 
 ************
