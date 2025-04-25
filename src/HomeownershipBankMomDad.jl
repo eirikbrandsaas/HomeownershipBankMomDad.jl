@@ -33,5 +33,6 @@ include("Julia/quant_endoprice.jl")
 include("Julia/quant_blackwhite.jl")
 include("Julia/quant_preferadjustment.jl")
 include("Julia/quant_robustness.jl")
+include("Julia/quant_MPC.jl")
 
 include("Julia/postest_plots.jl")

@@ -130,6 +130,9 @@ out = policyeffects(Mb)
 bypwealth_moms = [:owneryoung_prich, :owneryoung_pmiddle,:owneryoung_ppoor]
 output_policy(out,targ_moms,bypwealth_moms;store=store)
 
+## MPC analysis
+create_MPC_table(Mb,Mn,store)
+
 ## Adjustment costs
 Mb,mp,np = findMb2nd(nstate,nchoice)
 Mn = solve_adjustmentcost(Mb)
