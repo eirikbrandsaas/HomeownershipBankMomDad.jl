@@ -17,7 +17,7 @@ function plot_policyfuncs(Mb,Mn;store=false)
     ihk = 2
     _h2size = Dict(1=>L"h_r",2=>L"h_o")
 
-    plot(title="Child's Bond and Housing Choice $(L"b{\prime}_c,h{\prime}_c")",xlabel="Child Wealth $(L"x_c")")
+    plot(title="Child's Bond and Housing Choice $(L"b{\prime}_c,h{\prime}_c")",xlabel="Child Wealth $(L"x_c")",ylabel="Child Bond Choice $(L"b'_c")")
 
     iown = findfirst(x->x==true,Mn.g.gk.disc[:,ibpl,ihp,ivk,iok,is,iak,ihk].==1)
     plot!(np.xk_grd[1:iown],Mn.g.gk.b[1:iown,ibpl,ihp,ivk,iok,is,iak,1] ,label="No Altruism",marker=:circle,color=:black,linewidth=2)

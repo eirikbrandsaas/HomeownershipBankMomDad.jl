@@ -58,9 +58,9 @@ Housing is the largest asset in U.S. household portfolios, and first-time homebu
 \onehalfspacing
 
 \section{Introduction}
-Housing is the largest asset in U.S. households portfolios. While homeownership is seen as central to the ``American Dream'' \citep{goodman2018homeownership}, households face different barriers to ownership. Between 2009 and 2016, around 30\% of American first-time homebuyers received parental assistance for their down payment, with such assistance averaging \$48,000 per receiving household.\footnote{All data from the Survey of Household Economic Decisionmaking and the Panel Study of Income Dynamics (see Section \ref{sec:data}).} This assistance highlights disparities in access, as only those with sufficiently wealthy parents can expect substantial transfers.
+Housing is the largest asset in U.S. households portfolios. While homeownership is seen as central to the ``American Dream'' \citep{goodman2018homeownership}, households face different barriers to ownership. Between 2009 and 2016, around 30\% of American first-time homebuyers received parental assistance for their down payment, with such assistance averaging \$48,000 per receiving household\textcolor{red}{Check numbers}.\footnote{All data from the Survey of Household Economic Decisionmaking and the Panel Study of Income Dynamics (see Section \ref{sec:data}).} This assistance highlights disparities in access, as only those with sufficiently wealthy parents can expect substantial transfers.
 
-This paper quantifies the importance of parental transfers for young adults' homeownership and investigates how policies lowering homeownership barriers interact with parental transfers. Previous empirical studies highlight that parental transfer receipt is associated with an increase in the probability of becoming a homeowner, mainly by relaxing credit constraints \citep[see e.g.,][]{Lee2018,Blickle2019,wold2024housing}. Additionally, parental transfers help households maintain homeownership, a mechanism that has received less attention \citep[see e.g.,][]{bond2021role}. However, while these studies show that transfer receipt increases the probability of renters becoming homeowners, they do not address the overall importance of parental transfers. For example, households may anticipate future transfers and subsequently save less. In this case, even if transfers increase the likelihood of homeownership, all else being equal, they may not affect aggregate homeownership. Furthermore, this is the first paper quantifying the importance of parental transfers as a determinant of homeownership; the existing literature has primarily focused on family formation and credit constraints \citep[see e.g.,][]{Chang2024,Paz-Pardo2019,Mabille2020}.
+This paper quantifies the importance of parental transfers for young adults' homeownership and investigates how policies lowering homeownership barriers interact with parental transfers. A growing literature emphasizes that families matter for economic outcomes \citep{Doepke2016a}. In the context of homeownership, previous empirical studies highlight that parental transfer receipt is associated with an increase in the probability of becoming a homeowner, mainly by relaxing credit constraints \citep[see e.g.,][]{Lee2018,Blickle2019,wold2024housing}. Additionally, parental transfers help households maintain homeownership, a mechanism that has received less attention \citep[see e.g.,][]{bond2021role}. However, while these studies show that transfer receipt increases the probability of renters becoming homeowners, they do not address the overall importance of parental transfers. For example, households may anticipate future transfers and subsequently save less. In this case, even if transfers increase the likelihood of homeownership, all else being equal, they may not affect aggregate homeownership. Furthermore, this is the first paper quantifying the importance of parental transfers as a determinant of homeownership; the existing literature has primarily focused on family formation and credit constraints \citep[see e.g.,][]{Chang2024,Paz-Pardo2019,Mabille2020}.
 
 I first present empirical evidence indicating that parental wealth helps not only in the transition to ownership, but also in maintaining ownership. \textcolor{red}{bring in new empirical results here. Highlight that the results on behind and unemployment are new}. I show that, controlling for a wide set of household and parental characteristics, households with wealthier parents are less likely to fall behind on mortgage payments after becoming homeowners, even though they buy more expensive homes. Finally, using a variation of the event study in \cite{Chetty2007}, I show that while most households downsize their housing during unemployment spells, those with wealthy parents retain their current homes.
 
@@ -86,15 +86,15 @@ My paper first contributes to the literature studying the determinants of homeow
 
 My paper also contributes to the literature on altruistic households interacting without commitment by studying how illiquid housing affects the commitment problem. In these models, children have an incentive to undersave to increase parental transfers (e.g., \citealp{Altonji1997a,Boar2018,Barczyk2014,Chu2020}). Illiquid housing imposes future expenditure commitments \citep{Chetty2007,Shore2010}, which children of wealthy parents strategically exploit to encourage future parental transfers. The paper most closely related to mine is \cite{Barczyk2020a}, who study how the homeownership of retired parents affects the economic behavior of the elderly and their adult children. In their model, the parents' home serves as a commitment device, encouraging wealth bequests from the parent and informal care from the adult offspring. My contribution is to study the complementary problem: how parental transfers affect the homeownership decisions of young adults. Finally, while \cite{kaplan2012moving} studies cohabitation with parents among individuals under the age of 25, my focus is on homeownership decisions for households from age 25 onwards.
 
-Finally, the paper contributes to the literature on parental transfers and life-cycle outcomes by focusing on how parental transfers to young adult households influence their wealth accumulation through homeownership. My results show that households with wealthier parents are willing to buy sooner, take on higher leverage, and hold less liquid precautionary savings. The previous literature has generally focused on parental investment in children's human capital (e.g., \citealp{Lee2019,Daruich2018,gilraine2023public}), transfers from adult children to retired parents (e.g., \citealp{Mommaerts2016, Barczyk2018, Barczyk2020a}), or smoothing income shocks (e.g., \cite{Boar2021ReStud,fagereng2023insuring,andersen2020bailing}) instead of the effect of parental wealth on household portfolio choices.
+Finally, the paper contributes to the literature on parental transfers and economic outcomes by focusing on how parental transfers to young adult households influence their wealth accumulation through homeownership. My results show that households with wealthier parents are willing to buy sooner, take on higher leverage, and hold less liquid precautionary savings. The previous literature has generally focused on parental investment in children's human capital (e.g., \citealp{Lee2019,Daruich2018,gilraine2023public}), transfers from adult children to retired parents (e.g., \citealp{Mommaerts2016, Barczyk2018, Barczyk2020a}), or smoothing income shocks (e.g., \cite{Boar2021ReStud,fagereng2023insuring,andersen2020bailing}) instead of the effect of parental wealth on household portfolio choices.
 
 The paper proceeds as follows. In Section \ref{sec:data}, I describe the data sources and summary statistics, and I document that parental wealth is associated with better housing outcomes. Section \ref{sec:model} describes the quantitative model, and Section \ref{sec:estimation} discusses the structural estimation. Section \ref{sec:quant} performs the main quantitative exercise and robustness tests. Finally, Section \ref{sec:pol} studies how policies intended to increase homeownership also affect the role of parental wealth and housing illiquidity.
 
 \section{Data on Transfers, Family, and Housing}\label{sec:data}
 I first present time trends in parental transfers for down payments, before describing the estimation sample taken from the PSID. Finally, I use the estimation sample to show that parental wealth is positively associated with better housing outcomes, both before and after purchase.
 
-\subsection{Parental Transfers for Owners Over Time}\label{sec:overtime}
-I use the Survey of Household Economics and Decisionmaking (SHED) and American Housing Survey (AHS) datasets to show the time trends in parental housing transfers.
+\subsection{Parental Transfers for Downpayments Over Time}\label{sec:overtime}
+I use the Survey of Household Economics and Decisionmaking (SHED) and American Housing Survey (AHS) datasets to show the time trends in parental housing transfers. A benefit of these surveys is that they ask questions directly relating transfers to downpayments, unlike the PSID. 
 
 
 \begin{figure}
@@ -105,9 +105,9 @@ I use the Survey of Household Economics and Decisionmaking (SHED) and American H
 	 {\begin{footnotesize} \textit{Notes:} The left panel uses data from the SHED with the sample restricted to current owners who report this being their first home. The question was only asked in the 2015 and 2016 waves. The right panel uses data from the AHS with the sample restricted to all owner-occupied units that did not indicate the sale of a previous home as the main source of funding. The question was discontinued after 2019. Note that the left figure has year of purchase on the horizontal axis while the right figure has survey year. Dashed lines denote 95\% confidence intervals.\end{footnotesize}}
 \end{figure}
 
-\textit{SHED:} I use SHED, an annual cross-sectional survey conducted by the Federal Reserve, to observe the share of households who funded the down payment with a loan or gift from family or friends, by year of purchase. The results are plotted in the left panel of Figure \ref{fig:motivation}. The main observation is the large increase in the role of inter-vivos transfers for homeowners since 2001. From 2001 to 2007, only 10\% to 18\% of first-time buyers received transfers, while 20\% to 40\% received transfers after 2009.
+\textit{SHED:} I use SHED, an annual cross-sectional survey conducted by the Federal Reserve, to observe the share of households who funded the down payment with a loan or gift from family or friends, by year of purchase. The sample includes 772 households with non-missing down payment information.The results are plotted in the left panel of Figure \ref{fig:motivation}. The main observation is the large increase in the role of inter-vivos transfers for homeowners since 2001. From 2001 to 2007, only 10\% to 18\% of first-time buyers received transfers, while 20\% to 40\% received transfers after 2009.
 
-\textit{AHS:} I use the AHS, which surveys occupants of housing units, to obtain a time series on whether the down payment was mostly funded by gifts or inheritances (right panel of Figure \ref{fig:motivation}). We observe a flat pattern in the 1990s, followed by a sharp decline from 2005 to 2009, coinciding with the prevalence of mortgages featuring very low down payments (e.g., \cite{Corbae2015}), and a stark increase from 2013 to today. Minor fluctuations in the percentage of homeowners relying on gifts or inheritances reflect significant shifts among new homeowners, who comprise a small fraction of all homeowners. This is because the horizontal axis denotes the survey year, not the year of purchase. 
+\textit{AHS:} I use the AHS, which surveys occupants of housing units, to obtain a time series on whether the down payment was mostly funded by gifts or inheritances (right panel of Figure \ref{fig:motivation}). The sample has 73,479 observations in 2019. We observe a flat pattern in the 1990s, followed by a sharp decline from 2005 to 2009, coinciding with the prevalence of mortgages featuring very low down payments (e.g., \cite{Corbae2015}), and a stark increase from 2013 to today. Minor fluctuations in the percentage of homeowners relying on gifts or inheritances reflect significant shifts among new homeowners, who comprise a small fraction of all homeowners. This is because the horizontal axis denotes the survey year, not the year of purchase. 
 
 
 \subsection{Panel Study of Income Dynamics}\label{sec:PSID}
@@ -119,7 +119,7 @@ I use data from 1999 to 2021. In 1999, the PSID started to collect detailed weal
 
 \textit{Matching Parents with Children:} I use the Parent/Child file from the PSID's 2013 transfer supplement. I can observe each household's reported transfers to and from parents and children. This leads to discrepancies, where the child and parent do not agree on the amount given from the parent to the child. I only use the parent's reported transfer. First, there may be some stigma about receiving transfers, which may induce receiving children to underreport. Second, in the model, parents determine the size of the transfer they give to their child. 
 
-\textit{Definition of Transfers:} The transfer supplement asked all parent households whether they gave money, gifts, or loans of \$100 or more to their children in 2012. I follow the literature \citep[e.g.,][]{mcgarry2016dynamic} and treat all transfers as gifts. Since this paper focuses on transfers that (a) relate to housing and (b) are quantitatively meaningful, I set transfers below \$500 to \$0. About 25\% of transfers are below this threshold, and ignoring them increases the mean transfer from \$2,921 to \$3,960.
+\textit{Definition of Transfers:} The transfer supplement asked all parent households whether they gave money, gifts, or loans of \$100 or more to their children in 2012. I follow the literature \citep[e.g.,][]{mcgarry2016dynamic} and treat all transfers as gifts. Since this paper focuses on transfers that (a) relate to housing and (b) are quantitatively meaningful, I set transfers below \$500 to \$0. About 25\% of transfers are below this threshold, and ignoring them increases the conditional mean transfer from \$2,921 to \$3,960.
 
 In all other waves, there is a general question of gifts and inhertitances from people outside the household. We do not know the source of these transfers (e.g., they could be from friends or an inheritance from grandparents) and hence these do not know the extent to which these captures parental assistance. Yet, they, to some extent, capture the impact of transfer receipt on household decisions, and hence I use these variables in some of the empirical results, following \cite{Lee2018}.
 
@@ -294,7 +294,7 @@ The exercise follows \cite{Chetty2007} closely. The outcome of interest is the c
 Taking stock, we have seen that parental transfers have become more important for young homeowners over the past two decades. About 30\% of young households receive transfers from their parents in a given year, and recipients' parents are wealthier. Recipients are also more likely to transition from renting to owning, also when we condition on a rich set of covariates. Parental wealth is also positively associated with maintaing homeownership. The probability of mainting homeownership is increasing in parental wealth, households with richer parents are less likely to behind on mortgages and less likely to downsize during unemployment sptells. These results suggest that homeowners with wealthy parents find illiquidity of homeownership less problematic.
 
 \subsection{Transfers and Taxes}
-In the United States, transfers and bequests are subject to taxation due to the estate tax. Taxes are paid by the giver, not the recipient. In 2024, an individual can give \$13.61 million before they start owing gift taxes. However, individuals have to file if they give transfers above \$18,000 (in 2024) to any one individual within a calendar year. Thus, the gift tax is irrelevant for the vast majority of households, as it only applies if lifetime transfers---including bequests---exceed \$13.61 million.
+In the United States, transfers and bequests are subject to taxation due to the estate tax. Taxes are paid by the giver, not the recipient. In 2024, an individual can give \$13.61 million before they start owing gift taxes. However, individuals have to file if they give transfers above \$18,000 (in 2024) to any one individual within a calendar year. Thus, the gift tax is irrelevant for the vast majority of households, as it applies only once lifetime transfers---including bequests---exceed \$13.61 million.
 
 
 \section{A Quantitative Model of Parental Transfers and Homeownership}\label{sec:model}
@@ -310,7 +310,7 @@ These two housing frictions---borrowing constraints and illiquidity---are not on
 \subsection{Demographics, Preferences, and Technologies}
 Time is discrete and finite. Each period consists of two years. At the beginning of each period, a constant mass of new households enters and exits the economy. The only economic agents in the model are households.
 
-\textit{Demographics:} Households are economically active from age $a\in \mathcal{A}=\{25,\allowbreak 27,\allowbreak\dots,\allowbreak 83\}$. The life cycle is illustrated in \ref{fig:overview}. A family consists of one adult child $c$ household (age 25 to 53) and a parent $p$ household (age 55 to 83) with an age gap of 30. Thus, children have new children at age 30, but new children are economically inactive until age 25. Each parent-child pair overlaps for 15 periods (30 years), and only two households are economically active in any dynasty at a time. Three events happen simultaneously when a child household becomes 55. First, the household's parent dies (at age 85). Second, the child transitions to become a parent household. Third, the child of the child becomes economically active as a child household.
+\textit{Demographics:} Households enter the economy at age $a=25$ and die at age 83. The life cycle is illustrated in \ref{fig:overview}. A family consists of one adult child $c$ household (age 25 to 53) and a parent $p$ household (age 55 to 83) with an age gap of 30. Thus, children have new children at age 30, but new children are economically inactive until age 25. Each parent-child pair overlaps for 15 periods (30 years), and only two households are economically active in any dynasty at a time. Three events happen simultaneously when a child household becomes 55. First, the household's parent dies (at age 85). Second, the child transitions to become a parent household. Third, the child of the child becomes economically active as a child household.
 
 \begin{figure}\begin{center}
 	\caption{Life Cycle of Three Generations in a Dynasty }\label{fig:overview}
@@ -320,7 +320,7 @@ Time is discrete and finite. Each period consists of two years. At the beginning
 
 \textit{Preferences and Altruism:} Parents and children have time-separable expected utility with a discount factor of $\beta$. Households maximize expected utility, and the per-period utility function for children is
 \begin{equation}
-U_c(c_c,h_c) = u(c_c,h_c) = \frac{\left(c^\xi s(h)^{1-\xi}\right)^{1-\gamma}-1}{1-\gamma},
+U_c(c_c,h_c) = u(c_c,h_c) = \frac{\left(c_c^\xi s(h_c)^{1-\xi}\right)^{1-\gamma}-1}{1-\gamma},
 \end{equation}
 where $c$ is consumption, $h$ is housing, $\gamma$ is the coefficient of relative risk aversion, and $\xi$ measures the relative importance of consumption to housing services. The within-period Cobb-Douglas aggregator imposes a constant desired expenditure share on housing services, roughly consistent with empirical evidence (e.g., \cite{davis2011household}). The function $s(h)$ allows utility to depend on ownership:
 \begin{equation}
@@ -335,11 +335,11 @@ The parent's utility also depends on the altruistic utility derived from the chi
 \begin{equation}
 U_p(c_p,h_p,c_c,h_c) = u(c_p,h_p) + \eta u(c_c,h_c),
 \end{equation}
-where $\eta$ measures the intensity of the parent's altruism towards the child.
+where $\eta$ measures the intensity of the parent's altruism towards the child. As usual with altruism, the parent also derives altruistic utility after death.
 
 \textit{Intergenerational Transfers:} In the last period before death, the parent can leave a bequest, which the child receives in the next period. In all other periods, the parent can give inter-vivos transfers of a nonnegative amount, $t_p$, that the child receives immediately.
 
-\textit{Housing:} Households can obtain housing services by renting or owning. They can rent housing of size $h_r$ or own houses of size $h_o$. The unit price of housing is $p$, and $q$ denotes the rent-to-price ratio. I assume that prices are constant for tractability, but I model aggregate house price risk as in \cite{Corbae2015} in Appendix \ref{sec:robust_pricerisk} and find that the quantitative results are almost unchanged. Homeowners incur proportional maintenance and depreciation costs $\delta$. Illiquidity is captured by proportional adjustment and moving costs on owner-occupied housing, as in \cite{Yang2009}:
+\textit{Housing:} Households can obtain housing services by renting or owning. They can rent housing of size $h_r$ or own houses of size $h_o$, with one size available for each tenure choice for tractability. The unit price of housing is $p$, and $q$ denotes the rent-to-price ratio. I assume that prices are constant for tractability, but I model aggregate house price risk as in \cite{Corbae2015} in Appendix \ref{sec:robust_pricerisk} and find that the quantitative results are almost unchanged. Homeowners incur proportional maintenance and depreciation costs $\delta$. Illiquidity is captured by proportional adjustment and moving costs on owner-occupied housing, as in \cite{Yang2009}:
 \begin{equation}\label{eq:transcost}
 adj(h_{a+1},h_a) = \begin{cases}
 m_b p h_{a+1} & \text{if } h_{a}=h_r\mathbin{\&} h_{a+1}= h_o, \\
@@ -359,11 +359,13 @@ b\ge 0 & \text{if } h_{a+1} = h_r.
 In the U.S., borrowers making low down payments typically pay for private mortgage insurance (PMI) until their home equity surpasses a threshold \citep{goodman2017sixty}. I model this as an extra fee $r^{pmi}$ that households must pay until they reach the $\overline{PMI}$ threshold. Since the mortgage premium is positive, households never hold both a mortgage and savings in the bond, and the interest rate on the net bond $b$ is given by
 \begin{equation}\label{eq:rb}
 r(b) = \begin{cases}
-r & \text{ if } b\ge0, \\
-r +r^m & \text{ if } b<0, \\
-r +r^m +r^{pmi}& \text{ if } b < \overline{PMI}\times p\times h_o.
+r & \text{ if } b \ge 0, \\
+r +r^m & \text{ if } -\overline{PMI}\times p\times h_o < b \le 0, \\
+r +r^m +r^{pmi}& \text{ if } b \le -\overline{PMI}\times p\times h_o.
 \end{cases}
 \end{equation}
+
+\textit{Net Worth:} Let $x$ denote net worth, defined as the sum of the bond position and the value of owner-occupied housing.
 
 \textit{Income Endowment:} Households are endowed with an income process with a deterministic life-cycle profile $l_a$. Children face persistent idiosyncratic age-dependent productivity shocks $y_{i,a}\in\mathcal{Y}_a=\{y_1,\dots,y_{N_y}\}$, which follow a Markov chain, where $\pi_a(y'|y)$ is the probability of switching from state $y$ to $y'$ at age $a$. Parents face no income uncertainty. Consequently, income of household $i$ at age $a$ is given by
 \begin{align}
@@ -372,30 +374,34 @@ w_{i,a} &= l_a \; \forall a\in\{55,57,\dots,83\}. \label{eq:wp}
 \end{align}
 I assume that parents face no income risk for simplicity, consistent with the decrease in income risk with age \citep{Sanchez2020}. Furthermore, this paper focuses on the role of parental transfers for children' housing choices, where parental income risk is not a first-order concern. However, in Appendix \ref{sec:robust_incomerisk}, I show that parental income and health expenditure risks do not meaningfully change my results.
 
-\textit{Initial Conditions of the New Child:} Households' initial wealth and productivity levels are stochastic yet correlated with the parent's wealth and productivity at age 53: $x_{25},y_{25} \sim F(x_{53},y_{53})$. While this paper does not consider parental investment in their child's human capital, such investments are an important factor in intergenerational persistence of economic outcomes \citep{Daruich2018,Lee2019}. The function $F$ allows me to match the intergenerational correlation in initial wealth and income levels, so the transfer motives are not over- or understated. Finally, all households begin as renters.
+\textit{Initial Conditions of the New Child:} When children enter the economy at age $a_c=25$, their initial net worth $x_{25}$ and productivity $y_{25}$ are stochastic but correlated with the parent's wealth $x_{53}$ and productivity $y_{53}$ according to $x_{25}, y_{25} \sim F(x_{53}, y_{53})$. The initial net worth is not funded by parental transfers, though children can receive transfers in the first period. While I abstract from parental investment in human capital—an important driver of intergenerational persistence \citep[see e.g.,][]{Daruich2018,Lee2019}—the function $F$ matches observed correlations in wealth and income, ensuring realistic transfer motives. All households begin as renters.
 
-\textit{Timing:} The child's productivity is realized first. If the dynasty has a newly economically active child, they also realize their initial wealth. Next, the decision problem is separated into two stages. First, the parent chooses consumption $c_p$, housing $h_p$, savings position $b_p$, and nonnegative inter-vivos transfers $t_p$. After observing the parent's choices, the child in the second stage chooses consumption $c_c$, housing $h_c$, and savings $b_c$. The parent acts first to align with U.S. mortgage regulations, which mandate that gifts be deposited before approving mortgages.
+\textit{Timing:} The child's productivity is realized first. If the dynasty has a newly economically active child, they also realize their initial wealth and productivity. The decision problem then proceeds in two stages. First, the parent chooses consumption $c_p$, housing $h_p$, savings position $b_p$, and nonnegative inter-vivos transfers $t_p$. After observing the parent's choices, the child in the second stage chooses consumption $c_c$, housing $h_c$, and savings $b_c$. The parent acts first to align with U.S. mortgage regulations, which mandate that gifts be deposited before approving mortgages.
 
 \subsection{Household Decision Problems}
 I now present the recursive formulation and the decision problems. For clarity, I omit individual subscripts and apply a prime superscript to all $a+1$ variables.
 
-\textit{State Variables:} A parent $p$'s state variables are child's wealth $x_c\in X=[0,\infty)$, parent's wealth $x_p\in X$, child's housing $h_c\in H = \{h_r,h_o\}$, parent's housing $h_p\in H$, child's productivity $y_c\in Y_a=\{y_1,\dots,y_{N_y}\}$, and age $a_c\in A_c\in\{25,27,\dots,53\}$. The parent's state variable vector is $\mathbf{s}_p\equiv\left(x_c,x_p,y_c,h_c,h_p,a_c\right)$. 
+\textit{State Variables and Setup:} Let $\mathbf{g}_p$ and $\mathbf{g}_c$ denote the vectors of the parent's and child's policy functions, respectively.
+
+A parent $p$'s state variables are child's wealth $x_c\in X=[0,\infty)$, parent's wealth $x_p\in X$, child's housing $h_c\in H = \{h_r,h_o\}$, parent's housing $h_p\in H$, child's productivity $y_c\in Y_a=\{y_1,\dots,y_{N_y}\}$, and age $a_c\in A_c\in\{25,27,\dots,53\}$. The parent's state variable vector is $\mathbf{s}_p\equiv\left(x_c,x_p,y_c,h_c,h_p,a_c\right)$. 
 
 The child's state space differs because the parent's choices influence the child's decisions. The child is indifferent to receiving an additional unit of wealth or transfers, focusing only on total wealth (including transfers), $\tilde x_c\equiv x_c+t_p$. Furthermore, the parent's wealth and housing at the beginning of the period is redundant; the child only cares about the parent's bond and housing choices. The child's state variable vector is $\mathbf{s}_c=\left(b_p',h'_p,x_c+t_p,y_c,h_c,a_c\right)$. 
 
+
+
 \textit{Decision Problems:} 
-I now show the decision problems for a dynasty at age $a_c=25$. For simplicity, I assume the child is a renter choosing to become an owner, while the parent remains a renter. Appendix \ref{sec:decextra} describes the decision problems in the final period of the current parent's life.
+I now show the decision problems for a dynasty at age $a_c < 53$. For simplicity, I assume the child is a renter choosing to become an owner, while the parent remains a renter. 
 
 \textit{Child - Second Stage:} The child, conditional on becoming a new owner ($h_c=h_r,h'_c=h_o$), chooses consumption and bonds to maximize expected utility:
 \begin{equation}\label{eq:Vk}
 \begin{split}
- V_c(\mathbf{s}_c)^{own} = \max_{c_c,b'_c,h'_c=h_o} & u(c_c,h'_c) + \beta \E\left[V_{c}(\mathbf{s}_c') \right] \\ 
- \text{s.t.}\quad & 	b'_c = x_c + t_p + w_c - c_c - p h'_c - m_b p h'_c \\
+ V_c(\mathbf{s}_c;\mathbf{g}_p)^{own} = \max_{c_c,b'_c,h'_c=h_o} & u(c_c,h'_c) + \beta \E_{y_c}\left[V_{c}(\mathbf{s}_c';\mathbf{g}_p) \right] \\ 
+ \text{s.t.}\quad & 	b'_c = \tilde x_c + w_c - c_c - p h'_c - m_b p h'_c \\
  & x_c' = b'_c(1+r(b'_c)) + p h'_c(1-\delta) \\
  & b_c' \ge - LTV p h'_c. 
 \end{split}
 \end{equation}
-The first constraint is the budget constraint, which determines the net bond position as available resources (net worth, transfers, and income) minus expenditures (consumption, purchase price, and purchase cost). The second constraint is the law of motion for net worth, which is the sum of the bond position and housing wealth after depreciation. The third constraint is the LTV constraint. We see that a transfer $t_p$ can move the child away from the LTV constraint by increasing the bond position $b_c'$, holding consumption and housing fixed. 
+The first constraint is the budget constraint, which determines the net bond position as available resources (net worth, transfers, and income) minus expenditures (consumption, purchase price, and purchase cost). The second constraint is the law of motion for net worth, which is the sum of the bond position and housing wealth after depreciation. The third constraint is the LTV constraint. We see that a transfer $t_p$ can move the child away from the LTV constraint by increasing the bond position $b_c'$, holding consumption and housing fixed. The expectation is conditional on the child's current productivity. The child's value functions are conditional on the parent's policy functions because the child's choices depend on the parent's choices.
 
 For the other three possible housing choices (remain renting, remain owning, and own to rent), the problem is similar, but with appropriate changes to the budget equation, law of motion, and borrowing constraint. Finally, the child must choose between the two housing options:
 \begin{equation}
@@ -405,14 +411,14 @@ For the other three possible housing choices (remain renting, remain owning, and
 \textit{Parent - First Stage:} The parent, conditional on remaining a renter ($h_p=h'_p=h_r$), chooses consumption, transfers, and bonds to maximize expected utility:
 \begin{equation}\label{eq:Vp}
 \begin{split}
-V_p(\mathbf{s}_p)^{rent} = \max_{c_p,b_p',t_p} & u(c_p,h'_p) + {\eta} u\left (c_c^*({\mathbf{s}_c}),h_c'^*({\mathbf{s}_c})\right ) + \beta \E \left[V_{p}({\mathbf{s}_p'})\right] \\
+V_p(\mathbf{s}_p;\mathbf{g}_c)^{rent} = \max_{c_p,b_p',t_p} & u(c_p,h'_p) + {\eta} u\left (c_c^*({\mathbf{s}_c}),h_c'^*({\mathbf{s}_c})\right ) + \beta \E_{y_c} \left[V_{p}({\mathbf{s}_p';\mathbf{g}_c})\right] \\
 \text{s.t.}\quad & b'_p = x_p + w_p - c_p - t_p - q p h_p'\\
 & x_p' = b'_p(1+r(b'_p)) \\
 & t_p\ge0, \\
 & b_p'\ge 0. \\
 \end{split}
 \end{equation}
-The first constraint is the budget constraint, which determines the net bond position as available resources (net worth and income) minus expenditures (consumption, transfers, and rent). The law of motion of net worth is simply the bond position for renters. The third and fourth constraints impose that transfers be nonnegative and that renters may not borrow, respectively. Finally, the parent chooses whether to rent or own.
+The first constraint is the budget constraint, which determines the net bond position as available resources (net worth and income) minus expenditures (consumption, transfers, and rent). For renters, next-period wealth is simply given by the bond position. The third and fourth constraints impose that transfers be nonnegative and that renters may not borrow, respectively. Finally, the parent chooses whether to rent or own.
 
 \textit{Next-Period States:}
 When making decisions, households consider how their choices will impact future states, as we can see from the next-period state vectors. For example, the parent internalizes that their next-period state includes the child's next-period wealth and housing, which are functions of the child's current choices, which in turn depend on the parent's current choices:
@@ -423,7 +429,11 @@ Similarly, the child knows that their next-period state includes the parent's ne
 \begin{equation}
 	\mathbf{s}_c' = (b_p''^*({\mathbf{s}_p'}),h_p''^*({\mathbf{s}_p'}),x'_c + t_p'^*({\mathbf{s}_p'}),y'_c,h_c',a_c').
 \end{equation}
-	
+
+
+\textit{Decision Problems at Generational Transitions:}
+At age $a_c=53$, the final period of each generation, the decision problem changes (see Appendix \ref{sec:decextra}). Two key adjustments occur: First, the child's continuation value becomes the parent's value function at age 25 for the next generation, $V_p(\mathbf{s}_{p,25})$. Second, since the parent dies, their continuation value is the child's new value as a parent, weighted by altruism, $\eta V_p(\mathbf{s}_{p,25})$.
+
 \subsection{Markov Perfect Equilibrium Definition}
 A stationary equilibrium, which is Markov Perfect, consists of value functions $V_c(\mathbf{s}_c)$ and $V_p(\mathbf{s}_p)$; policy functions of the child $c_c'^*(\mathbf{s}_c)$, $b_c'^*(\mathbf{s}_c)$, $h_c'^*(\mathbf{s}_c)$; and the parent $c_p'^*(\mathbf{s}_p)$, $b_p'^*(\mathbf{s}_p)$, $h_p'^*(\mathbf{s}_p)$, $t_p'^*(\mathbf{s}_p)$; and a distribution of households $\psi(\mathbf{s}_p)$ such that i) in each repetition of the parent-child game, the parent's policy functions are optimal given the child's policy functions; ii) the child's policy functions are optimal given the parent's policy functions; and iii) the measure of households is invariant. I derive the measure $\psi$ of households in Appendix \ref{sec:hhmeasures}.
 
@@ -529,6 +539,8 @@ The initial distribution is set to match the intergenerational correlation in we
 \subsection{Moments and Identification}
 The remaining three parameters $\theta=\{\eta,\chi,h_o\}$ are estimated internally to minimize the distance between four simulated and empirical moments. 
 
+I estimate the altruism parameter $\eta$ because, relative to previous research, the inclusion of housing introduces new transfer motives, requiring re-estimation to match observed intra-family transfers. Similarly, I estimate the homeownership utility $\chi$, since transfers generate new ownership motives. Finally, I estimate the minimum size of owner-occupied housing, $h_0$, a key parameter in models of homeownership, because housing choices interact with transfer behavior.
+
 \textit{Identification and Moment Estimation:}
 I derive all empirical moments from the PSID sample discussed in Section \ref{sec:PSID}. I calculate moments by aggregating over all years, assigning equal weight to each year.
 
@@ -576,11 +588,13 @@ The estimated parameters, reported in Table \ref{tab:esttable}, are consistent w
 \subsubsection{Nontargeted Moments}\label{sec:externalval}
 To validate the model, I show that it also matches nontargeted moments. 
 
-First, with a calibrated discount factor of $\beta=0.92$, the model matches the wealth levels of both young and old households. Second, the model replicates the correlation between parental wealth and children's homeownership. In the PSID, young homeowners' parents are 2.5 times wealthier as young renters' parents. The model predicts a similar, though slightly lower, ratio of about 2. This parental wealth gradient of homeownership captures the correlation between parental wealth and children's homeownership. 
+First, with a calibrated discount factor of $\beta=0.92$, the model matches the wealth levels of both young and old households. It also replicates the correlation between parental wealth and children's homeownership: in the PSID, young homeowners' parents are 2.5 times wealthier than young renters' parents, compared to about 2 times in the model. This parental wealth gradient effectively captures the intergenerational link in homeownership.
 
-Next, the model aligns with other moments related to homeownership and housing decisions. First, it matches the age of first homeownership well, overshooting it slightly. Second, it somewhat overpredicts the aggregate homeownership rate of 65\%, primarily due to an excess of homeowner parents, partly due to their lack of income risk (see Appendix \ref{sec:robust_incomerisk}). Third, households hold slightly smaller mortgages than in the data, as their flexibility allows households to pay down debt quickly and borrow later if necessary. Fourth, the model also matches the LTV ratio for buyers well.\footnote{Note that this is not the LTV at origination but the first time the household is observed as an owner. If a household bought just after the previous survey, the LTV would decrease due to price appreciation, improvements, and mortgage paydown.}
+Second, the model aligns well with other moments related to homeownership. It slightly overshoots the age of first homeownership and overpredicts the aggregate homeownership rate of 65\%, primarily due to an excess of homeowner parents stemming from their lack of income risk (see Appendix \ref{sec:robust_incomerisk}). Mortgages are slightly smaller than in the data, as households repay and re-borrow flexibly. The model also matches the LTV ratio for buyers well.\footnote{The empirical LTV is measured at the first observation of ownership, not necessarily at origination, so it can reflect price appreciation, improvements, and mortgage paydown.}
 
-Finally, I report the share of households that received a transfer in the two years before, during, and after a house purchase. The model matches this number well, indicating that not only are the right households purchasing at the right time, but also that buyers are receiving transfers at the right time.
+Third, the model also matches transfer-related moments well. It predicts average parental transfers of 2.3\% of parental wealth, close to the 2.6\% estimated from the 2013 Transfer Module (excluding outliers below 0\% or above 100\%). It accurately captures the share of households receiving transfers within two years of house purchases, suggesting proper synchronization of housing transactions and transfers. Renters also receive transfers more often than owners in both the model and the data, though the model slightly overstates this gap.
+
+Fourth, the model fits key dimensions of heterogeneity. It matches the wealth distribution between the 10th and 75th percentiles well, although it slightly overpredicts wealth among the poorest households due to the non-negativity constraint. As with many models, it underpredicts wealth at the top. Finally, it reproduces the positive correlation between income and homeownership across income tertiles, though the model slightly overstates this gap.
 
 \begin{table}
 	\center 
@@ -593,7 +607,7 @@ Finally, I report the share of households that received a transfer in the two ye
 \end{table}
 
 \subsubsection{Household-Level Responses to Income Shocks by Parental Wealth}
-As a final external validation, I repeat the exercise in Section \ref{sec:eventstudy} (see Figure \ref{fig:housinggrowthrates}), where we saw that households with wealthy parents do not downsize during unemployment spells. Since the model lacks an explicit unemployment state, households are considered unemployed if their productivity drops to the lowest level for a single period. Otherwise, I replicate the exercise exactly. Figure \ref{fig:housinggrowthrates_model} shows that the model matches both the qualitative and quantitative patterns from the empirical data: Housing consumption falls for households without wealthy parents during ``unemployment,'' while it grows for those with wealthy parents.
+As a final external validation, I repeat the exercise in Section \ref{sec:eventstudy} (see Figure \ref{fig:housinggrowthrates}), where we saw that households with wealthy parents do not downsize during unemployment spells. Since the model lacks an explicit unemployment state, households are considered unemployed if their productivity drops to the lowest level for a single period. Otherwise, I replicate the exercise exactly. Figure \ref{fig:housinggrowthrates_model} shows that the model matches both the qualitative and quantitative patterns from the empirical data relatively well: Housing consumption falls for households without wealthy parents during ``unemployment,'' while it does not decline for those with rich parents. 
 
 \begin{figure}
 	\caption{Event Study: Housing Consumption at Unemployment by Parental Wealth}\label{fig:housinggrowthrates_model}
@@ -658,7 +672,7 @@ I have three main results regarding parental wealth and children's homeownership
 \subsection{Policies and the Importance of Parental Transfers}
 Many countries have policies aimed at increasing homeownership, and housing affordability and delayed homeownership is at the forefront of economic policy and research \citep[see e.g.,][]{Mabille2020}. I now evaluate how five different policy levers influence the role of parental wealth in housing outcomes. For each policy, I change the relevant parameter slightly and solve the model before simulating a new distribution. The idea is not to see what the effect of various policy proposals would be in general equilibrium, but how different policy levers interact with parental transfers. The results are reported in Table \ref{tab:policy}. 
 
-\textit{Relaxing Mortgaging Regulation:} To study how parental transfers interact with downpayment requirements, I tighten the LTV limit by 3 percentage points. The tighter limit decreases homeownership among the young by 5 percentage points (10\%). Homeownership declines more among households with parents in the middle of the wealth distribution, reducing the parental wealth gradient. While initially counterintuitive, these middle-wealth households rely heavily on small transfers to overcome borrowing constraints; poorer households remain constrained, and richer ones are unaffected. Thus, looser borrowing constraints not only boost homeownership overall but also amplify the importance of parental wealth. Consistent with this mechanism, \citet{wold2024housing} find that owners with poorer parents have lower LTV ratios at origination.
+\textit{Relaxing Mortgaging Regulation:} To study how parental transfers interact with down payment requirements, I tighten the LTV limit by 3 percentage points. The tighter limit decreases homeownership among the young by 5 percentage points (10\%). Homeownership declines more among households with parents in the middle of the wealth distribution, reducing the parental wealth gradient. While initially counterintuitive, these middle-wealth households rely heavily on small transfers to overcome borrowing constraints; poorer households remain constrained, and richer ones are unaffected. Thus, looser borrowing constraints not only boost homeownership overall but also amplify the importance of parental wealth. Consistent with this mechanism, \citet{wold2024housing} find that owners with poorer parents have lower LTV ratios at origination.
 
 \textit{Lowering PMI:} To study how parental transfers interact with the PMI, which increases the interest rate on high LTV loans, I relax the PMI limit by 7 percentage points. The relaxed PMI limit increases homeownership by 2 percentage points (4\%). Similar to the LTV regulation, homeownership among households with parents in the middle of the wealth distribution rises more, further widening the parental wealth gradient. This result suggests that relaxing the PMI limit increases not only homeownership for all households, but also the role of parental wealth.
 
@@ -693,7 +707,7 @@ The previous section established that higher sales costs can increase ownership 
 
 I solve the model both with and without sales costs ($m_s=0$). For each household in the stationary distribution with sales costs, I assess whether they would prefer that neither they nor future generations in their dynasty face sales costs. This hypothetical corresponds to a benevolent agent paying the sales costs for current and future generations in that dynasty only. The results are reported in Table \ref{tab:adjcost}.
 
-Without altruism, all households prefer to remove sales costs. I find that while all parents prefer to remove sales costs, roughly one-quarter of children prefer them. The key determinant is parental wealth: Parents of children who prefer sales costs are approximately three times wealthier. Children who prefer sales costs are also more likely to receive transfers (48\% vs. 13\%) and, conditional on receiving transfers, receive three times larger transfers. Notably, households that own their homes are more likely to prefer sales costs on their housing.
+Without altruism, all households prefer to remove sales costs. With altruism (baseline calibration), I find that while all parents prefer to remove sales costs, roughly one-quarter of children prefer them. The key determinant is parental wealth: Parents of children who prefer sales costs are approximately three times wealthier. Children who prefer sales costs are also more likely to receive transfers (48\% vs. 13\%) and, conditional on receiving transfers, receive three times larger transfers. Notably, households that own their homes are more likely to prefer sales costs on their housing.
 
 \begin{table}
 	\center
@@ -771,7 +785,7 @@ Several structural papers have used life-cycle models with overlapping generatio
 \end{table}
 
 
-I aim to bridge the gap between these structural approaches and empirical results by using my model to quantify the contribution of parental transfers to the Black-White homeownership gap. I repeat the main experiment, seperately for Black and White households seperately, following the methodology in \cite{Ashman2020} and \cite{aliprantis2022dynamics} closely. I shift the income level ($l_a$) according to racial differences: In the matched parent-child household, White households have 8\% higher income and Black households 42\% lower than the average. I then solve the model for White households. For Black households, I reduce house size by 25\% to match observed homeownership rates. I then solve the models both with and without altruism. The results are reported in Table \ref{tab:BW_table}. 
+I aim to bridge the gap between these structural approaches and empirical results by using my model to quantify the contribution of parental transfers to the Black-White homeownership gap. I repeat the main experiment, seperately for Black and White households, following the methodology in \cite{Ashman2020} and \cite{aliprantis2022dynamics} closely. I shift the income level ($l_a$) according to racial differences: In the matched parent-child household, White households have 8\% higher income and Black households 42\% lower than the average. I then solve the model for White households. For Black households, I reduce house size by 25\% to match observed homeownership rates. I then solve the models both with and without altruism. The results are reported in Table \ref{tab:BW_table}. 
 
 The observed Black-White homeownership gap is $\frac{0.54 - 0.27}{0.54}=50\%$ and 52\% in the model with altruism. Without altruism, the Black-White homeownership gap decreases to 45\%. Transfers account for 7 percentage points (14\%) of the Black-White gap. Though Black and White households receive transfers at similar rates in the model, transfers are less important for Black households' homeownership, as they are further away from the ownership threshold and receive smaller transfers. My results show that racial differences in parental income, which affect parental wealth and transfers, are significant contributors to racial gaps in housing outcomes. Combined with the previous policy analysis, these results suggest that policies such as tax rebates or down-payment assistance for low-income or first-time buyers may widen the Black-White homeownership gap rather than narrow it. However, the model omits many other factors beyond income, such as discriminatory lending and appraisal bias, that affect the Black-White homeownership gap (e.g., \cite{shapiro2004hidden}).
 
@@ -807,8 +821,8 @@ As depicted in Figure \ref{fig:overview}, several transitions occur between age 
 These transitions mean that the child's decision problem at age 53 is very different from earlier ages (Eq. \ref{eq:Vk}). First, the continuation value is now the parent's value function at age 25 of the new child ($V_{p}({\mathbf{s}'_{p,25}})$). Second, the expectation is over the new child's initial productivity and net worth ($x_{c,25},v_{c,25}\sim F(x_{c,53},y_{c,53}$)), instead of the old child's productivity. Third, the law of motion now includes bequests from the old parent instead of a transfer. Fourth, it is necessary to map next-period variables for the old child into variables for the new parent. The problem, for a child aged 53 who choose to own, becomes:
 \begin{equation*}
 \begin{split}
-V_c(\mathbf{s}_{c,53})^{own} = &\max_{c_{c,53},b'_{c,53},h'_{c,53}=h_o} u(c_{c,53},h'_{c,53}) + \beta \E\left[V_{p}({\mathbf{s}'_{p,25}}) \right] \\
-\text{s.t.}\quad & 	b'_{c,53} = x_{c,53} + w_{c,53} - c_{c,53} - p h'_{c,53} - adj(h_{c,53},h'_{c,53}) \\
+V_c(\mathbf{s}_{c,53;\mathbf{g}_p})^{own} = &\max_{c_{c,53},b'_{c,53},h'_{c,53}=h_o} u(c_{c,53},h'_{c,53}) + \beta \E_{y_c}\left[V_{p}({\mathbf{s}'_{p,25}};\mathbf{g_c}) \right] \\
+\text{s.t.}\quad & 	b'_{c,53} = \tilde x_{c,53} - c_{c,53} - p h'_{c,53}  - m_b p h'_{c,53} \\
 & x'_{p,25} = b'_{c,53}(1+r(b'_{c,53})) + x'_{p,53} \\
 & b'_{c,53} \ge -LTV p h'_{c,53}, \\
 & h_{p,25} = h'_{c,53},
@@ -816,7 +830,18 @@ V_c(\mathbf{s}_{c,53})^{own} = &\max_{c_{c,53},b'_{c,53},h'_{c,53}=h_o} u(c_{c,5
 \end{equation*} 
 where $c,53$ and $p,53$ denote the variables associated with old child and old parent in this period, and $c,25$ and $p,25$ denote the variables associated with the new child and new parent in the next period. The last equation maps the old child's housing choice into the new parent's---the same household one period later---housing state. The same mapping applies to the law of motion (third equation).
 
-The dying parent's decision problem undergoes similar changes. First, the continuation value is now the new parent's value function at age 25 of the new child, weighted by altruism ($\eta V_p(\mathbf{s}'_{p,25})$). The remaining changes (expectation, law of motion, and mapping of next-period variables) are the same as for the child and hence the decision problem is changed in the same way as for the child.
+The dying parent's decision problem undergoes similar changes (Eq. \ref{eq:Vp}). First, the continuation value is now the new parent's value function at age 25 of the new child, weighted by altruism ($\eta V_p(\mathbf{s}'_{p,25})$). The remaining changes---namely the expectation, the law of motion, and the mapping of next-period variables---are the same as for the child, and thus the decision problem is modified in the same way.
+
+\begin{equation*}
+	\begin{split}
+	V_p(\mathbf{s}_{c,53};\mathbf{g}_c)^{own} = &\max_{c_{p,53},b'_{p,53},h'_{p,53}=h_r} u(c_{p,53},h'_{p,53}) + \eta u(c_{c,53},h'_{c,53}) + \beta \eta \E_{y_c}\left[V_{p}({\mathbf{s}'_{p,25}},\mathbf{g}_p) \right] \\
+	\text{s.t.}\quad & b'_{p,25} = x_{p,53} + w_{p,53} - c_{p,53} - t_{p,53} - q p h_{p,53}'\\
+	& x_{p,53}' = b'_{p,53}(1+r(b'_{p,53})) \\
+	& t_{p,53}\ge0, \\
+	& b'_{p,53}\ge 0. \\
+	\end{split}
+\end{equation*} 
+
 
 \subsection{Measures of Households}\label{sec:hhmeasures}
 The state-space of a parent is $S_p = X_c \times X_p \times Y_c \times H_c \times H_p \times A_c$, with $\mathbf{s}_p$ denoting generic elements therein and $\mc{S}_p$ the associated Borel-$\sigma$ algebra. The state space of a child is $S_c= B_p \times H_p \times X_c \times Y_c \times H_c \times A_c$, where $B_p=\mathbb{R}$. For conciseness, I omit further definitions for the child. Let $\psi_p(\mathbf s_p)$ be a probability measure over $(S_p,\mc{S}_p)$ so that $\psi(\mathbf s_p)$ denotes the measure of households with state $\mathbf s_p$ (i.e., after the shock is realized but before choices are made). Finally, $\Psi_p$ denotes the corresponding cumulative distribution function. The mass of households for each age is normalized to 1/15.
@@ -946,7 +971,20 @@ The parent-child interaction forms an infinitely repeated game within a dynasty,
 
 Intuitively, this cyclical behavior can arise from the interaction between the discrete rent-or-own choice and strategic interactions. For example, a renting child may decide to buy given the parent's policy functions at a certain state. In the next iteration, the parent observes this and adjusts savings to discourage the child from buying, prompting the child to reoptimize. The cycle then repeats, with the child buying in one iteration and not buying in the next. When I solve the model without homeownership (reducing it to a standard altruistic consumption-savings model as in \cite{Barczyk2020a} and \cite{Chu2020}), the value function iterations consistently converge to a unique fixed point. Similarly, removing transaction costs, making housing more liquid and no longer a state variable, reduces the likelihood of cyclical fixed points. Denser grids also decreases the likelihood of cyclical behavior. In practice, the largest differences in policy functions within cycles are at the upper edges of the parental wealth grid. Since the upper edge is set so high that no households are close to it, this has little impact on the solution.
 
-\textit{Interpolation Details:} The policy functions for consumption and savings are noncontinuous in both child and parental wealth which makes interpolation unattractive. However, the policy functions, conditional on choosing a specific house quality are smoother, and do not display large jumps in the quantitative model. Therefore, I use the following procedure. I first find the interpolated policies for each housing choice, and then find the probability that the parent/child makes this choice. This probability comes from the interpolated discrete choice function, which is binary ${0,1}$, while the interpolated policy itself (with flat extrapolation) is continuous over the interval $[0,1]$. The probability is between 0 and 1 only when the decision changes in one of the four nodes used in the interpolation. If the interpolated consumption choice of the child $c_c$ leads to a net bond position $b_c$ that violates the borrowing constraint I set $b_c$ equal to the constraint and reduce $c_c$ to make it hold. 
+\textit{Interpolation Details:} Because the policy functions for consumption and savings are discontinuous in both child and parental wealth (due to discrete housing choices and altruistic transfers), direct interpolation is unattractive. However, conditional on discrete housing choices, the policy functions are smoother. I therefore use the following procedure:
+\begin{enumerate}
+	\item Linearly interpolate the parent's housing choice ($h'_p$)---which equals 0 if renting and 1 if owning---over child ($x_c$) and parent wealth ($x_p$), with flat extrapolation. The interpolant takes values on $[0,1]$.
+	\begin{enumerate}
+		\item Find the interpolated housing choice. If it equals 0 or 1, proceed.
+		\item If not, it takes a value on $(0,1)$. This happens only when the housing choice is not the same at all the four nearest nodes used to calculate the interpolation weights. Randomly assign the parent a housing choice.
+	\end{enumerate}
+	\item Linearly interpolate the parent's bond ($b'_p$) and transfer ($t'_p$) policies, conditional on the realized rent/own choice. (e.g., using the problem in eq.~\ref{eq:Vp} if renting.)
+	\item Recover parental consumption from the budget constraint. If the bond choice violates the borrowing limit, set the bond choice at the constraint and adjust consumption accordingly. This gives us the four parental choices $(h'_p,t_p,b'_p,c_p)$.
+	
+	\item Linearly interpolate the child's housing choice ($h'_k$) over child cash-on-hand ($\tilde x_c$) and parent savings ($b'_p$), conditional on the parent's housing choice from the first step. Resolve the housing choice as for the parent.
+	\item Linearly interpolate the child's bond choice ($b'_k$) over child cash-on-hand and parent savings, conditional on both the child's and parent's housing choices.
+	\item Recover child consumption from the budget constraint, and ensure that the borrowing constraint is satisfied, as for the parent. This gives us the three child choices $(h'_k,b'_k,c_k)$. 
+\end{enumerate}
 
 
 \textit{Simulation of Households:} 
