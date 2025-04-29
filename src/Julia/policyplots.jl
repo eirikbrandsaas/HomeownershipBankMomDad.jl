@@ -17,7 +17,7 @@ function plot_policyfuncs(Mb,Mn;store=false)
     ihk = 2
     _h2size = Dict(1=>L"h_r",2=>L"h_o")
 
-    plot(title="Child's Bond and Housing Choice $(L"b{\prime}_c,h{\prime}_c")",xlabel="Child Wealth $(L"x_c")",ylabel="Child Bond Choice $(L"b'_c")")
+    plot(xlabel="Child Cash-on-Hand $(L"\tilde x_c")",ylabel="Child Bond Choice $(L"b'_c")")
 
     iown = findfirst(x->x==true,Mn.g.gk.disc[:,ibpl,ihp,ivk,iok,is,iak,ihk].==1)
     plot!(np.xk_grd[1:iown],Mn.g.gk.b[1:iown,ibpl,ihp,ivk,iok,is,iak,1] ,label="No Altruism",marker=:circle,color=:black,linewidth=2)
@@ -40,7 +40,7 @@ function plot_policyfuncs(Mb,Mn;store=false)
     if store == true
         Plots.pdf(p2,"tabfig/model/pol_bond")
         open("tabfig/model/pol_bond_state.tex", "w") do file
-            write(file, "$(L"h'_p")=$(_h2size[ihp]), $(L"y_c")=$(round(np.v_grd[iak,ivk];digits=1)), $(L"h_c")=$(_h2size[ihk]), and $(L"a_c")=$(round(Int,np.age_grd[iak])). The poor and rich parent have $(L"b_p")=$(round(Int,bpl)) and $(L"b_p")=$(round(Int,bph))" )
+            write(file, "$(L"h'_p")=$(_h2size[ihp]), $(L"y_c")=$(round(np.v_grd[iak,ivk];digits=1)), $(L"h_c")=$(_h2size[ihk]), and $(L"a_c")=$(round(Int,np.age_grd[iak])). The non-rich and rich parent have $(L"b'_p")=$(round(Int,bpl)) and $(L"b'_p")=$(round(Int,bph))" )
         end
 
     

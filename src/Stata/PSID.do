@@ -134,11 +134,12 @@ replace state =. if state == 99
 replace marstat =. if marstat == 8 | marstat == 9
 replace race = . if race==9 | race ==0 // Should'nt be any zeros, but there are a few so call them missing
 
-replace valhouse = . if valhouse ==  9999998  | valhouse ==  9999999 // DK/Refused
-replace valhouse = . if valhouse ==  9999997 			// topcoded
-replace valhouse = . if valhouse ==  999999 & year == 1989 // topcoded in 1989
+replace valhouse = . if (valhouse ==  9999998  | valhouse ==  9999999 ) & year <= 2019 // DK/Refused
+replace valhouse = . if (valhouse ==  9999997) & year <= 2019	// topcoded
+replace valhouse = . if (valhouse ==  99999998  | valhouse ==  99999999 ) & year >= 2021 // DK/Refused
+replace valhouse = . if (valhouse ==  99999997) & year >= 2021	// topcoded
+
 replace age = . if age==999 | age == 0
-replace income = . if income == 9999999 & year == 1994 // Belongs to the latino sample
 replace healthhead = . if healthhead == 8 | healthhead == 9 // replace DK/NA
 replace emplstat = . if emplstat == 0 | emplstat == 22 | emplstat == 98 | emplstat == 99
 
