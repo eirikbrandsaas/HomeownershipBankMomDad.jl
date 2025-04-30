@@ -42,7 +42,7 @@ estadd local firsttime = "N":r2
 estadd local firsttime = "N":r3
 estadd local firsttime = "N":r4
 
-label var cashonhand_prnt "\;Par. Wealth"
+label var cashonhand_prnt "\;Parental Wealth"
 label var wealth "\;Net Worth "
 label var income "\;Income "
 label var hs "\;High School"
@@ -57,7 +57,7 @@ esttab using "tabfig/regr/hypoII.tex", replace drop(age* *.age* *state *.year 0.
 	 mtitle("OLS" "OLS" "OLS" "OLS" "FE") ///
 	 label cells(b(fmt(3) star)  se(par fmt(3)))  collabels(none) 	 
 	 
- esttab using "tabfig/regr/hypoII_short.tex", replace drop(*age* *income*  *.*age* *state *.*year 0.* _cons *hs* *coll* *white* *famsize* *married*  *famchange*)  ///
+ esttab using "tabfig/regr/hypoII_short.tex", replace drop(*age* *income* *wealth* *.*age* *state *.*year 0.* _cons *hs* *coll* *white* *famsize* *married*  *famchange*)  ///
 	stats(N meanoutcome firsttime controls, label("N" "Outcome (mean)" "First-Time Buyers Only" "Other Controls") fmt(%9.0fc 3 3 3) ) compress star(+ 0.1 * 0.05 ** 0.01 *** 0.001) se booktabs ///
 	 mtitle("OLS" "OLS" "OLS" "OLS" "FE") ///
 	 label cells(b(fmt(3) star)  se(par fmt(3))) collabels(none)
