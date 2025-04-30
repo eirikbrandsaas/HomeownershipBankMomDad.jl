@@ -60,7 +60,8 @@ pChetty = ChettyEventStudy(Mb,0.75,store=store)
 #######################
 ## Contribution of Altruism to Homeownership
 Mn = altrcontrhousing(Mb.mp,Mb.np);
-output_noalt(Mb,Mn,targ_moms,nontarg_moms;store=store)
+nontarg_moms_notransf = [x for x in nontarg_moms if x ∉ [:tp2wealthpyoung, :transferbuyersyoung,:transfraterenteryoung,:transfrateowneryoung]] # No reason to report transfer moments in this table
+output_noalt(Mb,Mn,targ_moms,nontarg_moms_notransf;store=store)
 
 ## Policy function plts
 plot_policyfuncs(Mb,Mn,store=store)

@@ -50,7 +50,7 @@ function output_noalt(Mb::Model,Mn::Model,targ_moms::Vector{Symbol},nontarg_moms
     append_info = @sprintf("m%i_d%i",Dates.month(Dates.today()),Dates.day(Dates.today()))
     filename = "tabfig/postest/quant_pres_"*append_info*".tex"
     filename2 = "tabfig/postest/quant_mostrecent.tex"
-    display(df_latex)
+    println(df_latex)
     write(filename, df_latex)
     if store == true
         write(filename2, df_latex)

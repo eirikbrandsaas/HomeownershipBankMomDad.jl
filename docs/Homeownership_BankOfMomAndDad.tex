@@ -122,7 +122,7 @@ I use data from 1999 to 2021. In 1999, the PSID started to collect detailed weal
 
 In all other waves, there is a general question of gifts and inhertitances from people outside the household. We do not know the source of these transfers (e.g., they could be from friends or an inheritance from grandparents) and hence these do not know the extent to which these captures parental assistance. Yet, they, to some extent, capture the impact of transfer receipt on household decisions, and hence I use these variables in some of the empirical results, following \cite{Lee2018}.
 
-Finally, why focus on inter-vivos transfers when most intra-family wealth transfers occur through bequests \citep[see e.g.,][]{feiveson2019lifecycle}? First, parental bequests are typically received after age 45, too late to affect young adults' transition into homeownership. Second, some bequests are given early and recorded as inter-vivos transfers. Third, inter-vivos transfers are often targeted to children's immediate liquidity needs, such as financing a home purchase, whereas bequests are often passive outcomes of unspent wealth. Thus, inter-vivos transfers are more relevant for understanding early-life economic outcomes.
+Finally, why focus on inter-vivos transfers when most intra-family wealth transfers occur through bequests \citep[see e.g.,][]{feiveson2019lifecycle}? First, parental bequests are typically received after age 45, too late to affect young adults' transition into homeownership. Second, some bequests are given early and recorded as inter-vivos transfers. Third, inter-vivos transfers are often targeted to children's immediate liquidity needs, such as financing a home purchase, whereas bequests are often passive outcomes of unspent wealth. Fourth, while bequests dominate in aggregate terms, they are highly concentrated among wealthy households, whereas inter-vivos transfers are the main form of transfer for most parents \citep{yang2023financial}. Thus, inter-vivos transfers are more relevant for understanding early-life economic outcomes. 
 
 
 \subsubsection{Descriptive Statistics: Who Receives Transfers?}
@@ -374,11 +374,11 @@ r +r^m +r^{pmi}& \text{ if } b \le -\overline{PMI}\times p\times h_o.
 w_{i,a} &= l_ay_{i,a} \; \forall a\in\{25,27,\dots,53\}, \label{eq:wk} \\
 w_{i,a} &= l_a \; \forall a\in\{55,57,\dots,83\}. \label{eq:wp}
 \end{align}
-I assume that parents face no income risk for simplicity, consistent with the decrease in income risk with age \citep{Sanchez2020}. Furthermore, this paper focuses on the role of parental transfers for children' housing choices, where parental income risk is not a first-order concern. However, in Appendix \ref{sec:robust_incomerisk}, I show that parental income and health expenditure risks do not meaningfully change my results.
+I assume that parents face no income risk for simplicity, consistent with the decrease in income risk with age \citep{Sanchez2020} and the fact that much of retirement income---such as Social Security and defined benefit pensions---is relatively certain. Furthermore, this paper focuses on the role of parental transfers for children' housing choices, where parental income risk is not a first-order concern. However, in Appendix \ref{sec:robust_incomerisk}, I show that parental income and health expenditure risks do not meaningfully change my results.
 
 \textit{Initial Conditions of the New Child:} When children enter the economy at age $a_c=25$, their initial net worth $x_{25}$ and productivity $y_{25}$ are stochastic but correlated with the parent's wealth $x_{53}$ and productivity $y_{53}$ according to $x_{25}, y_{25} \sim F(x_{53}, y_{53})$. The initial net worth is not funded by parental transfers, though children can receive transfers in the first period. While I abstract from parental investment in human capital—an important driver of intergenerational persistence \citep[see e.g.,][]{Daruich2018,Lee2019}—the function $F$ matches observed correlations in wealth and income, ensuring realistic transfer motives. All households begin as renters.
 
-\textit{Timing:} The child's productivity is realized first. If the dynasty has a newly economically active child, they also realize their initial wealth and productivity. The decision problem then proceeds in two stages. First, the parent chooses consumption $c_p$, housing $h_p$, savings position $b_p$, and nonnegative inter-vivos transfers $t_p$. After observing the parent's choices, the child in the second stage chooses consumption $c_c$, housing $h_c$, and savings $b_c$. The parent acts first to align with U.S. mortgage regulations, which mandate that gifts be deposited before approving mortgages.
+\textit{Timing:} The child's productivity is realized first. If the dynasty has a newly economically active child, they also realize their initial wealth and productivity. The decision problem then proceeds in two stages. First, the parent chooses consumption $c_p$, housing $h_p$, savings position $b_p$, and nonnegative inter-vivos transfers $t_p$. After observing the parent's choices, the child in the second stage chooses consumption $c_c$, housing $h_c$, and savings $b_c$. The parent acts first, so that transfers can alleviate LTV constraints and to comply with U.S. mortgage regulations, which require gifts to be deposited before loan approval.
 
 \subsection{Household Decision Problems}
 I now present the recursive formulation and the decision problems. For clarity, I omit individual subscripts and apply a prime superscript to all $a+1$ variables.
@@ -387,7 +387,8 @@ I now present the recursive formulation and the decision problems. For clarity, 
 
 A parent $p$'s state variables are child's wealth $x_c\in X=[0,\infty)$, parent's wealth $x_p\in X$, child's housing $h_c\in H = \{h_r,h_o\}$, parent's housing $h_p\in H$, child's productivity $y_c\in Y_a=\{y_1,\dots,y_{N_y}\}$, and age $a_c\in A_c\in\{25,27,\dots,53\}$. The parent's state variable vector is $\mathbf{s}_p\equiv\left(x_c,x_p,y_c,h_c,h_p,a_c\right)$. 
 
-The child's state space differs because the parent's choices influence the child's decisions. The child is indifferent to receiving an additional unit of wealth or transfers, focusing only on total wealth (including transfers), $\tilde x_c\equiv x_c+t_p$. Furthermore, the parent's wealth and housing at the beginning of the period is redundant; the child only cares about the parent's bond and housing choices. The child's state variable vector is $\mathbf{s}_c=\left(b_p',h'_p,x_c+t_p,y_c,h_c,a_c\right)$. 
+The child's state space differs because the parent's choices influence the child's decisions. The child is indifferent to receiving an additional unit of wealth or transfers, focusing only on total wealth (including transfers), $\tilde x_c\equiv x_c+t_p$. Furthermore, the parent's current wealth and housing are redundant; the child cares only about the parent's bond and housing choices, since future transfers depend on the parent’s next-period resources.  The child's state variable vector is $\mathbf{s}_c=\left(b_p',h'_p,x_c+t_p,y_c,h_c,a_c\right)$. 
+
 
 
 
@@ -403,7 +404,7 @@ I now show the decision problems for a dynasty at age $a_c < 53$. For simplicity
  & b_c' \ge - LTV p h'_c. 
 \end{split}
 \end{equation}
-The first constraint is the budget constraint, which determines the net bond position as available resources (net worth, transfers, and income) minus expenditures (consumption, purchase price, and purchase cost). The second constraint is the law of motion for net worth, which is the sum of the bond position and housing wealth after depreciation. The third constraint is the LTV constraint. We see that a transfer $t_p$ can move the child away from the LTV constraint by increasing the bond position $b_c'$, holding consumption and housing fixed. The expectation is conditional on the child's current productivity. The child's value functions are conditional on the parent's policy functions because the child's choices depend on the parent's choices.
+The first constraint is the budget constraint, which determines the net bond position as available resources (net worth, transfers, and income) minus expenditures (consumption, purchase price, and purchase cost). The second constraint is the law of motion for net worth, which is the sum of the bond position and housing wealth after maintenace costs. The third constraint is the LTV constraint. We see that a transfer $t_p$ can move the child away from the LTV constraint by increasing the bond position $b_c'$, holding consumption and housing fixed. The expectation is conditional on the child's current productivity. The child's value functions are conditional on the parent's policy functions because the child's choices depend on the parent's choices.
 
 For the other three possible housing choices (remain renting, remain owning, and own to rent), the problem is similar, but with appropriate changes to the budget equation, law of motion, and borrowing constraint. Finally, the child must choose between the two housing options:
 \begin{equation}
@@ -600,14 +601,15 @@ Third, the model also matches transfer-related moments well. It predicts average
 Fourth, the model fits key dimensions of heterogeneity. It matches the wealth distribution between the 10th and 75th percentiles well, although it slightly overpredicts wealth among the poorest households due to the non-negativity constraint. As with many models, it underpredicts wealth at the top. Finally, it reproduces the positive correlation between income and homeownership across income tertiles, though the model slightly overstates this gap.
 
 \begin{table}
-	\center 
+	\begin{adjustbox}{center}
 	\begin{threeparttable}
 	\caption{Non-Targeted Moments}\label{tab:nontargeted}
 	\input{../tabfig/est/extramoments_mostrecent.tex}
 	\footnotesize 
 	\textit{Notes:} Wealth is measured in 1000s of 2016 US dollars.
-\end{threeparttable}
-\end{table}
+	\end{threeparttable}
+\end{adjustbox}
+	\end{table}
 
 \subsubsection{Household-Level Responses to Income Shocks by Parental Wealth}
 As a final external validation, I repeat the exercise in Section \ref{sec:eventstudy} (see Figure \ref{fig:housinggrowthrates}), where we saw that households with wealthy parents do not downsize during unemployment spells. Since the model lacks an explicit unemployment state, households are considered unemployed if their productivity drops to the lowest level for a single period. Otherwise, I replicate the exercise exactly. Figure \ref{fig:housinggrowthrates_model} shows that the model matches both the qualitative and quantitative patterns from the empirical data relatively well: Housing consumption falls for households without wealthy parents during ``unemployment,'' while it does not decline for those with rich parents. 
@@ -625,14 +627,14 @@ Taking stock, this section shows that the model can match targeted moments regar
 
 
 \section{Homeownership Rates Without Transfers?}\label{sec:quant}
-How important are parental transfers for homeownership? I simulate the model without altruism ($\eta=0$), holding all other parameters constant---the standard model without parent-child interactions. In the main exercise, I assume a perfectly elastic housing supply, meaning that changes in homeownership have no effect on rental or house prices. In Section \ref{sec:endoprice}, I show that the results remain robust even with endogenous housing supply and varying elasticities.
+How important are parental transfers for homeownership? I simulate the model without altruism ($\eta=0$), holding all other parameters constant---the standard model without parent-child interactions.\footnote{Alternatively, I could remove transfers entirely without removing altruism. Since utility is additively separable, the child's choices do not affect the parent's decisions when transfers are absent, aside from a small increase in parental savings due to the intergenerational correlation between wealth and productivity. As this yields nearly identical results, I report only the simpler case of no altruism.} In the main exercise, I assume a perfectly elastic housing supply, meaning that changes in homeownership have no effect on rental or house prices. In Section \ref{sec:endoprice}, I show that the results remain robust even with endogenous housing supply and varying elasticities.
 
 \subsection{The Effect of Parental Transfers on Homeownership}
 Table \ref{tab:modelfitnoa} reports how the moments change without altruism and transfers. Homeownership rates decline by 14 percentage points from 49\%, a decrease of 29\% for households aged 25 to 44. This is a large decrease, since households endogenously choose to save more without transfers. By comparison, homeownership only decreased by about 8 percentage points during the financial crisis.
 
-The reduction in homeownership cannot be attributed to an inability to afford buying: Without altruism, median wealth of the young increases (increasing homeownership, in isolation) to the average wealth level at purchase with altruism. The main driver is that the ownership threshold shifts out in wealth without altruism, as we saw in the policy functions (Section \ref{sec:policyfuncs}). Without transfers then, the average wealth at purchase increases by about \$12,500 (about 33\%), the age of first ownership is delayed by about 2.5 years, and the LTV at purchase falls by 13 percentage points. Although homeownership of young households declines sharply, the overall homeownership rate of all households (ages 25 to 74) only falls by 6 percentage points (8\%). Hence, the main aggregate effect of parental transfers is that they induce earlier homeownership. Finally, without altruism, the parental wealth gradient in homeownership decreases from 1.94 to 1.14, with the remaining effect driven by persistent productivity through initial conditions $F()$.
+The reduction in homeownership cannot be attributed to an inability to afford buying: Without altruism, median wealth of the young increases (increasing homeownership, in isolation) to the average wealth level at purchase with altruism. The main driver is that the ownership threshold shifts out in wealth without altruism, as we saw in the policy functions (Section \ref{sec:policyfuncs}). Without transfers then, the average wealth at purchase increases by about \$12,500 (about 33\%), the age of first ownership is delayed by about 2.5 years, and the LTV at purchase falls by 13 percentage points. Although homeownership of young households declines sharply, the overall homeownership rate of all households (ages 25 to 74) only falls by 6 percentage points (8\%). Hence, the main aggregate effect of parental transfers is that they induce earlier homeownership. Finally, without altruism, the parental wealth gradient in homeownership decreases from 1.94 to 1.14, with the remaining effect driven by the integenerational correlation in initial wealth and persistent labor productivity.
 
-\begin{table}
+\begin{table}[tb]
 	\center 
 	\begin{threeparttable}
 		\caption{Homeownership Decreases while Wealth Increases Without Altruism}\label{tab:modelfitnoa}
@@ -641,6 +643,26 @@ The reduction in homeownership cannot be attributed to an inability to afford bu
 		\textit{Notes:} Wealth is measured in 1000s of 2016 US dollars.
 	\end{threeparttable}
 \end{table}
+
+\subsubsection{Black-White Homeownership Gap}\label{sec:bwgap}
+One natural application of this framework is to quantify how much of the Black-White homeownership gap---young White households are nearly twice as likely to own homes as young Black households---is driven by differences in parental wealth. While existing structural models of racial inequality focus primarily on income and bequests, they typically omit housing and inter-vivos transfers. In contrast, many empirical studies focus on racial difference in housing outcomes.\footnote{For example, \citet{Ashman2020} and \citet{aliprantis2022dynamics} use overlapping-generations models to study the racial wealth gap, attributing most of it to income differences. Though the latter include pooled bequests, they do not model strategic behavior or direct transfers from parents to children. Many empirical studies highlight the role of parental wealth in racial housing gaps: \citet{charles2002transition} find that it explains 25\% of the mortgage application gap,  \citet{bond2021role} attribute 28\% of the gap in maintaining homeownership to parental wealth, and \cite{kermani2021racial} find a large gap in realized housing returns due to distressed sales.}
+
+\begin{table}
+	\center
+\begin{threeparttable}[tb]
+				\singlespacing
+		%			\footnotesize
+		\caption{Black-White Homeownership Rate}\label{tab:BW_table}
+		\input{../tabfig/postest/BW_mostrecent.tex}
+		\footnotesize
+		\textit{Notes:} Wealth is measured in 1000s of 2016 US dollars. See main text for details.
+	\end{threeparttable}
+\end{table}
+
+
+I aim to bridge the gap between these structural approaches and empirical results by using my model to quantify the contribution of parental transfers to the Black-White homeownership gap. I repeat the main experiment, seperately for Black and White households, following the methodology in \cite{Ashman2020} and \cite{aliprantis2022dynamics} closely. I shift the income level ($l_a$) according to racial differences: In the matched parent-child household, White households have 8\% higher income and Black households 42\% lower than the average. I then solve the model for White households. For Black households, I reduce house size by 25\% to match observed homeownership rates. I then solve the models both with and without altruism. The results are reported in Table \ref{tab:BW_table}. 
+
+The observed Black-White homeownership gap is $\frac{0.54 - 0.27}{0.54} = 50\%$, compared to 52\% in the model with altruism. Removing altruism reduces the gap to 45\%, implying that parental transfers account for 7 percentage points---or 14\%---of the gap. While Black and White households receive transfers at similar rates in the model, transfers are less influential for Black households, who are further from the ownership threshold and receive smaller amounts. These results highlight the importance of racial differences in parental income, which shape both wealth accumulation and transfer capacity. 
 
 \subsection{Endogenous House Prices}\label{sec:endoprice}
 I previously assumed that the supply of homes would fully adjust without affecting prices or rents, reflecting perfectly elastic supply. I now show that the results are similar even when housing supply is endogenous and under different elasticities.
@@ -669,8 +691,8 @@ where $\alpha_1$ is the aggregate elasticity of supply to prices. I use a closed
 
 Table \ref{tab:quant_endogenprices} reports the results. Allowing house prices to adjust does not meaningfully decrease the contribution of transfers to homeownership or other aggregate outcomes. This is due to the small difference in homeownership rates (ages 25 to 74) with and without altruism. Prices decline by just 7\% even with a supply elasticity as low as 1. Thus, transfers account for between 10 and 13 percentage points of the homeownership rate, depending on the supply elasticity.
 
-\section{Policy, Illiquidity, and Racial Gaps}\label{sec:pol}
-I have three main results regarding parental wealth and children's homeownership: (1) its relationship with housing-related policies, (2) how housing illiquidity amplifies its impact, and (3) its role in exacerbating the Black-White homeownership gap.
+\section{Policy Levers, Illiquidity, and MPCs}\label{sec:pol}
+I have three main results regarding parental transfers and children's homeownership: (1) how they interact with housing-related policies, (2) how housing illiquidity amplifies their impact, and (3) how they affect marginal propensities to consume (MPCs).
 
 \subsection{Policies and the Importance of Parental Transfers}
 Many countries have policies aimed at increasing homeownership, and housing affordability and delayed homeownership is at the forefront of economic policy and research \citep[see e.g.,][]{Mabille2020}. I now evaluate how five different policy levers influence the role of parental wealth in housing outcomes. For each policy, I change the relevant parameter slightly and solve the model before simulating a new distribution. The idea is not to see what the effect of various policy proposals would be in general equilibrium, but how different policy levers interact with parental transfers. The results are reported in Table \ref{tab:policy}. 
@@ -703,7 +725,7 @@ ratio
 	\end{threeparttable}}
 \end{table}
 
-These experiments highlight two main findings. First, common policies intended to raise homeownership rates can either strengthen or weaken the role of parental wealth. Relaxing credit constraints increases both homeownership and reliance on parental wealth, as homeownership becomes more attractive to households with wealthier parents. Second, and in contrast, increasing housing liquidity---by lowering purchase or sales costs---reduces the importance of parental wealth. Greater liquidity weakens the role of housing as a commitment device, and can even lower homeownership among children of wealthy parents.
+These experiments highlight three main findings. First, common policies intended to raise homeownership rates can either strengthen or weaken the role of parental wealth. Relaxing credit constraints increases both homeownership and reliance on parental wealth, as homeownership becomes more attractive to households with wealthier parents. Moreover, in light of the earlier results on the Black–White homeownership gap (Section \ref{sec:bwgap}), broad-based down payment subsidies or tax rebates may unintentionally widen this gap. Second, and in contrast, increasing housing liquidity---by lowering sales costs---reduces the importance of parental wealth. Greater liquidity weakens the role of housing as a commitment device, and can even lower homeownership among children of wealthy parents. 
 
 \subsection{Illiquidity Preference}\label{sec:adjcost}
 The previous section established that higher sales costs can increase ownership among households with wealthy parents. Here, I present a more surprising result: Households with wealthy parents prefer illiquidity.
@@ -725,7 +747,8 @@ Without altruism, all households prefer to remove sales costs. With altruism (ba
 	\end{flushleft}\end{footnotesize}}		
 \end{table}
 
-To explore why some households prefer illiquidity, I break the sample down by liquidity preference and age in Figure \ref{fig:prefliq}. Figure \ref{fig:pref} plots the share of children who would prefer to keep housing illiquid. Illiquidity preference decreases with age as reliance on parental transfers decreases, and roughly 50\% of the youngest households prefer illiquidity. The next figures plot average homeownership, parental wealth, and child wealth by liquidity preference. To use illiquid housing to extract transfers, households must be homeowners, so households who prefer illiquidity have higher homeownership (Figure \ref{fig:pref_own}). To extract transfers, parents must have wealth, so households who prefer illiquidity have wealthier parents (Figure \ref{fig:pref_wealthp}). Finally, Figure \ref{fig:pref_wealthk} plots the child's wealth, and we see that households who prefer illiquidity are initially wealthier, but this relationship flips at age 33. The relationship flips because households only benefit from having their housing subject to sales costs if they are homeowners, which requires some wealth. To continue benefiting, they must remain liquidity-constrained (i.e., homeowners with limited wealth) to induce transfers.
+To explore why some households prefer illiquidity, Figure~\ref{fig:prefliq} breaks the sample by liquidity preference and age. Figure~\ref{fig:pref} shows that illiquidity preference declines with age, consistent with reduced reliance on parental transfers; around 50\% of the youngest households prefer illiquidity. The next panels plot homeownership, parental wealth, and child wealth by liquidity preference. Since illiquidity can only be used to extract transfers when the household owns a home and the parent is wealthy, those who prefer it have higher homeownership rates and wealthier parents. Figure~\ref{fig:pref_wealthk} shows that illiquidity-preferring households are initially wealthier, but this reverses around age 33. This flip reflects a tension: to use housing as a commitment device, households must be wealthy enough to own, yet poor enough to remain liquidity-constrained and elicit transfers.
+
 \begin{figure}[tb]
 	\captionsetup[subfigure]{aboveskip=-1pt}
 	\caption{Liquidity Preference over Age}\label{fig:prefliq}
@@ -750,9 +773,9 @@ To explore why some households prefer illiquidity, I break the sample down by li
 	\caption*{\footnotesize \textit{Notes:} These figures break down the sample of households by whether they prefer illiquidity.}
 \end{figure}
 
-To summarize, this section shows that altruism not only reduces the downside of illiquidity, but even generates illiquidity preference. This is similar to models of behavioral biases, where households use the illiquidity of housing as a commitment device \cite{attanasio2024temptation}. In both settings, households use illiquidity to keep their marginal utility of wealth high in future periods. With altruism, this is done to induce future transfers. With time inconsistency, this is done to ensure that households will save in the future.
+In summary, altruism not only reduces the downside of illiquidity but can generate a preference for it. As in models of behavioral biases, households use housing illiquidity as a commitment device to keep marginal utility high in the future. With altruism, this induces transfers; with time inconsistency, it promotes saving \citep{attanasio2024temptation}. 
 
-\subsubsection{MPCs}
+\subsection{MPCs}
 If altruism makes illiquid assets more attractive, a natural question is how altruism affects MPCs, as liquidity constraints are an important driver of MPCs \citep[see e.g.,][]{aguiar2024hand,Kaplan2014,fagereng2021mpc}. We begin by computing counterfactual MPCs for households in the stationary distribution, assuming no altruistic transfers. The average MPC of young households is 0.35. The MPC of liquidity constrained households (0.44) is about three times that of unconstrained households (0.16). While these MPCs are lower than empirical estimates---typically ranging from 0.5 to 0.9---they are relatively standard in models not designed to generate high MPCs. 
 
 Introducing altruistic transfers generates two offsetting effects. First, future transfers increase MPCs by decreasing precautionary savings motives. This effect is small, and only increases the average MPC by about 3 percentage points. The increase is almost entirely driven by unconstrained households. Second, current transfers provide partial insurance and decrease MPCs. This effect is large, reducing the MPC by 11 percentage points. The decrease is almost entirely driven by liquidity constrained households. Finally, altruism---including current and future transers---reduces the MPC from 0.35 to 0.25. Altruistic transfers lower the MPC of liquidity constrained households but increases it for unconstrained households---the ratio of MPC for liquidity constrained to unconstrained decreases from 3 to 2.
@@ -768,36 +791,14 @@ Introducing altruistic transfers generates two offsetting effects. First, future
 		\textit{Notes:} Sample includes all households aged 25-44 in the stationary distribution. Following \cite{Kaplan2014}, households are liquidity constrained if they have negative liquid wealth $(b_k)$ exceeding 16.5\% of annual earnings. The MPC is calculated from a \$5,000 positive shock.\end{flushleft}\end{footnotesize}}			
 \end{table}
 
-\textcolor{red}{rewrite this paragraph}All told, these results have several implications for the MPC literature. Most model-implied MPCs are inflated by ignoring informal intra-family transfers. Second, one common strategy for raising model-implied MPCs is to introduce some households with low desired wealth holdings, for example through impatience \cite{aguiar2024hand}. However, this behavior is observationally similar to that of households receiving altruistic transfers from wealthy parents. Another typical method is to introduce an illiquid asset with a large return premium \cite{kaplan2022marginal}. However, as my results show, households with wealthier parents are not only more likely to be homeowners, but also have much lower MPCs than expected due to parental transfers.
-
-\subsection{Black-White Homeownership Gap}
-One natural application of this framework is to ask how much of the black-white homeownership gap---young White households are nearly twice as likely to own homes as young Black households---is due to different in parental wealth.
-
-Several structural papers have used life-cycle models with overlapping generations to study differences in economic outcomes by race. \cite{Ashman2020} find that the Black-White income gap accounts for most of the 90\% wealth gap. Similarly, \cite{aliprantis2022dynamics} find that closing the income gap is the most effective mechanism to reduce the wealth gap. While these papers account for racial differences in inheritances, they do not include endogenous inter-vivos transfers and ignore housing.\footnote{\cite{aliprantis2022dynamics} include a form of inter-vivos transfer receipt: Households leave pooled bequests at death, primarily to middle-aged households. There are no strategic considerations, since the bequests are stochastically distributed and parents do not transfer directly to their children.} While the structural papers have omitted housing, many empirical papers have looked at racial differences in housing outcomes. For example, \cite{charles2002transition} find that differences in parental wealth account for 25\% of the Black-White mortgage application gap, and \cite{bond2021role} find that parental wealth accounts for 28\% of the gap in maintaining homeownership.
-
-\begin{table}
-	\center
-\begin{threeparttable}[tb]
-				\singlespacing
-		%			\footnotesize
-		\caption{Black-White Homeownership Rate}\label{tab:BW_table}
-		\input{../tabfig/postest/BW_mostrecent.tex}
-		\footnotesize
-		\textit{Notes:} Wealth is measured in 1000s of 2016 US dollars. See main text for details.
-	\end{threeparttable}
-\end{table}
-
-
-I aim to bridge the gap between these structural approaches and empirical results by using my model to quantify the contribution of parental transfers to the Black-White homeownership gap. I repeat the main experiment, seperately for Black and White households, following the methodology in \cite{Ashman2020} and \cite{aliprantis2022dynamics} closely. I shift the income level ($l_a$) according to racial differences: In the matched parent-child household, White households have 8\% higher income and Black households 42\% lower than the average. I then solve the model for White households. For Black households, I reduce house size by 25\% to match observed homeownership rates. I then solve the models both with and without altruism. The results are reported in Table \ref{tab:BW_table}. 
-
-The observed Black-White homeownership gap is $\frac{0.54 - 0.27}{0.54}=50\%$ and 52\% in the model with altruism. Without altruism, the Black-White homeownership gap decreases to 45\%. Transfers account for 7 percentage points (14\%) of the Black-White gap. Though Black and White households receive transfers at similar rates in the model, transfers are less important for Black households' homeownership, as they are further away from the ownership threshold and receive smaller transfers. My results show that racial differences in parental income, which affect parental wealth and transfers, are significant contributors to racial gaps in housing outcomes. Combined with the previous policy analysis, these results suggest that policies such as tax rebates or down-payment assistance for low-income or first-time buyers may widen the Black-White homeownership gap rather than narrow it. However, the model omits many other factors beyond income, such as discriminatory lending and appraisal bias, that affect the Black-White homeownership gap (e.g., \cite{shapiro2004hidden}).
+These results have several implications for the MPC literature. First, model-implied MPCs may be overstated when informal intra-family transfers are omitted, particularly for households with wealthy parents. Second, a common strategy to match high MPCs is to introduce households with low target wealth—e.g., through impatience \citep{aguiar2024hand}—but such behavior is observationally similar to that of households expecting altruistic support. Third, models that generate high MPCs by introducing illiquid assets with large return premia \citep{kaplan2022marginal} may overlook the fact that homeowners with wealthy parents have access to informal insurance, which lowers their effective MPC. 
 
 \section{Conclusion}
 In this paper, I demonstrate that parental transfers play a large role in households' homeownership decisions. I build and estimate a dynamic life-cycle model of homeownership where altruistic parents may transfer to their adult children in every period. I use the model to quantify the importance of parental transfers for young adults' homeownership and to understand how policies that lower barriers to homeownership interact with these transfers.
 
 Using a counterfactual experiment without altruism (a standard life-cycle model), I find that transfers account for 14 percentage points (29\%) of the homeownership rate. I show that policies that lower entry barriers to homeownership amplify the importance of parental wealth on housing outcomes, while those that lower the downsides of illiquid homeownership reduce the importance of parental wealth. Finally, I study the role of housing illiquidity and parental transfers. My paper thus contributes to a better understanding of the determinants of homeownership and to the growing literature on the role of family economics in shaping macroeconomic outcomes (e.g., \cite{Doepke2016a,Daruich2018}).
 
-The second contribution of the paper is to include an illiquid asset in the altruism framework. With altruistic parents, transfers generally flow to borrowing-constrained households, since they have a large marginal utility of wealth \citep{Barczyk2020,Chu2020}. With a single asset, this framework implies that households who receive transfers are poor. In the data, around 20\% of all households are ``wealthy hand-to-mouth'' and have positive wealth but no liquid wealth \citep{Kaplan2014a,Attanasio2018}. My paper bridges these two strands of the literature. First, I show that some households with wealthy parents choose to be liquidity-constrained to receive larger transfers. Second, I show that the lack of commitment generates preferences for illiquidity, even when households are rational and without behavioral biases \citep[see e.g.,][]{attanasio2024temptation}. 
+Another contribution of the paper is to include an illiquid asset in the altruism framework. With altruistic parents, transfers generally flow to borrowing-constrained households, since they have a large marginal utility of wealth \citep{Barczyk2020,Chu2020}. With a single asset, this framework implies that households who receive transfers are poor. In the data, around 20\% of all households are ``wealthy hand-to-mouth'' and have positive wealth but no liquid wealth \citep{Kaplan2014a,Attanasio2018}. My paper bridges these two strands of the literature. First, I show that some households with wealthy parents choose to be liquidity-constrained to receive larger transfers. While it is difficult to test this prediction, my empirical results are consistent with this behavior: parental wealth improves housing outcomes after purchase, including ownership retention, lower delinquency, and less downsizing in unemployment. Second, I show that the lack of commitment generates preferences for illiquidity, even when households are rational and without behavioral biases \citep[see e.g.,][]{attanasio2024temptation}. 
 
 I made several simplifying assumptions to keep the model tractable. Adding richer housing dynamics and equilibrium effects would allow one to study other interesting questions, such as the extent to which transfers contribute to house price growth. My model omits a feedback loop, in which transfers raise demand and, thus, house prices, boosting the wealth of homeowning parents and, thus, higher transfers, and so on. Another potential extension could examine whether illiquidity may reduce the commitment problem in the family. Additionally, my preferences-for-illiquidity results have implications for the literature on high-MPC households \citep[see e.g.,][]{kaplan2022marginal}. In particular, we are likely overestimating the average MPC of liquidity-constrained households with wealthy parents, since these households use parental transfers to smooth shocks. For example, following a negative shock, consumption may fall less due to transfers, while for positive shocks, consumption may rise less as parents reduce transfers.
 
