@@ -167,44 +167,6 @@ Next, I break the sample down by ownership. Homeowners are both wealthier and ha
 
 Next, I break the sample into three age groups from 25 to 44. We see that households' wealth, income, and homeownership rates increase with age. Notably, among 29-to-32-year-olds, homeownership is more common among transfer recipients (40\%) than nontransfer recipients (32\%). Furthermore, receivers are not only more likely to own, but also to be recent homeowners: 21\% of receiving owners are new homeowners versus 13\% of nonreceiving owners. 
 
-\subsection{Parental Resources and Housing Outcomes in the Data}\label{sec:dataregr}
-
-I now utilize microdata from the PSID to examine the empirical association between transfer receipt and parental financial resources on housing outcomes. The sample is limited to households aged 25 to 44 to focus on the housing choices of young adults. I use the sum of parental net worth and income (denoted as wealth) to measure parents' financial resources in all specifications for two reasons. First, this is consistent with models of altruism, as the one used later in the paper. Second, since parents' wealth and income are highly correlated and I have few observations---fewer than 1,000 for many specifications---the standard errors are large when both are included.
-
-\subsubsection{Transfers and the Rent-to-Own Transition}
-
-While a growing literature documents that parental transfers increase the probability that renters become homeowners (e.g.\ \citealp{wold2024housing}; \citealp{Blickle2019}; \citealp{benetton2022dynastic}), I replicate this result to highlight the importance of transfers for housing outcomes. I estimate
-\begin{equation}	\label{eq:transferrent}
-	\Pr\left(Own_{i,t+2}=1 \mid Own_{i,t}=0\right)
-	= \alpha + \beta\,Transfer_{i,t+2}
-	  + \gamma' X_{i,t} + \varepsilon_{i,t},
-\end{equation}
-where \(Own_{i,t}=0\) denotes a renter at time \(t\), \(Transfer_{i,t}=1\) if the household received a transfer between survey waves, and \(X_{i,t}\) includes log parental wealth, log household income and log household net worth, log household size, age, parental age, and dummies for  education, marital status, race, household composition changes, and state and year fixed effects. The sample is limited to renting households aged 25 to 44 who have never been observed as homeowners. Table \ref{tab:newowners_short} reports the estimated coefficient on transfer ($\beta$), with the full coefficient table relegated to Appendix Table \ref{tab:newowners}. These regressions are similar to those in \cite{Lee2018}, who also use the PSID.  It is important to note that transfer receipt is not exogenous---many transfers may be made precisely because the renter is buying a home.
-
-I use two definitions of transfer receipt. The narrow definition includes parental gifts over \$500 in 2012, limiting the sample to renters in 2011. The broad definition includes any gift or inheritance over \$10,000 reported in any wave, or a large parental gift in 2012. This allows for household fixed effects and a larger sample, but captures only large transfers and includes some non-parental ones.
-
-
-
-In a univariate regression, receiving a parental transfer is associated with a 2.9 percentage point higher probability of becoming a homeowner in 2013 among renters in 2011. With a full set of controls parental transfers are associated with a 1.2 percentage point higher probability of becoming a homeowner. This represents a substantial increase relative to the baseline rent-to-own transition rate of about 14\%, though the effect is not statistically significant. 
-
-
-To increase statistical power, I now use the broader transfer definition, which includes all large transfers. This expands the sample size tenfold but reduces the transfer receipt rate to around 3\%, while the median transfer size rises from \$1,500 to \$24,200. The broader sample also allows me to follow renters over time and include household fixed effects. In a univariate regression, transfer receipt is associated with a 21.9 percentage point increase in the probability of becoming a homeowner. Even with a full set of controls, the effect remains large and statistically significant: 13.5 percentage points in the OLS specification ($p<0.001$) and 7.9 percentage points with household fixed effects ($p<0.1$). These magnitudes are substantial compared to the baseline rent-to-own transition rate of 18\%.
-
-\begin{table}[tb]
-	\centering
-	\begin{threeparttable}
-		\caption{The Transition to Ownership}
-		\label{tab:newowners_short}
-		\small 
-				\input{../tabfig/regr/newowners_short.tex}
-
-		
-	\end{threeparttable}
-	{\begin{footnotesize}\begin{flushleft}\vspace{-0.1in}%
-		\textit{Notes:} Standard errors in parentheses, clusted at the household level. \textsuperscript{+}$p<0.10$, \textsuperscript{*}$p<0.05$, \textsuperscript{**}$p<0.01$, \textsuperscript{***}$p<0.001$.
-	\end{flushleft}\end{footnotesize}}		
-\end{table}
-
 \subsubsection{Transfer Sizes}
 For additional detail on the transfer variables, I plot kernel density estimates in Figure \ref{fig:PSID_transfer_to_renters}, for renters in $t$, separated by whether they own or rent in $t+2$, for the two transfer definitions. There are two takeaways. First, households who transition to ownership receive larger transfers on average, under both transfer measures. Second, the transfers in the transfer supplement are much smaller than than those in the gift/inheritance question. Indeed, the median parental transfer is about \$1k, the mean about \$3k, and the 95th percentile is at \$10k, compared to the median gift/inheritance of \$25k, mean of \$60k, and a 95th percentile of about \$130k.
 
@@ -217,6 +179,13 @@ For additional detail on the transfer variables, I plot kernel density estimates
 \end{figure}
 
 While the PSID allows us to observe transfers and changes in housing tenure over time, it has several limitations. First, the transfer supplement captures transfers only in 2012, while the PSID is collected biennially, leading to undercounts of both transfer rates and amounts. Second, in the gift/inheritance question, the source of the transfer is unknown. Third, it is unclear whether intra-family loans are consistently reported or repaid.
+
+\subsection{Parental Resources and Housing Outcomes in the Data}\label{sec:dataregr}
+
+I now utilize microdata from the PSID to examine the empirical association between parental financial resources on housing outcomes. The sample is limited to households aged 25 to 44 to focus on the housing choices of young adults. I use the sum of parental net worth and income (denoted as wealth) to measure parents' financial resources in all specifications for two reasons. First, this is consistent with models of altruism, as the one used later in the paper. Second, since parents' wealth and income are highly correlated and I have few observations---fewer than 1,000 for many specifications---the standard errors are large when both are included.
+
+\subsubsection{Transfers and the Transition into Homeownership}
+Since many papers have already estimated the relationship between parental transfers and transitions into homeownership (e.g.\ \citealp{wold2024housing}; \citealp{Blickle2019}; \citealp{benetton2022dynastic}; \citealp{Lee2018}), I replicate these regressions to highlight the association between transfer receipt and rent-to-own transitions, but relegate the full results to Appendix~\ref{app:rent_to_own}. Receiving a parental transfer above \$500 is associated with a 1.2 percentage point increase in the probability of becoming a homeowner (not statistically significant), after controlling for household characteristics. Receiving large transfers above \$10,000 is associated with a 7.9 percentage point increase in the probability of becoming a homeowner ($p<0.1$), even after including household fixed effects. These are sizable effects relative to the baseline rent-to-own transition probability of about 18\% during the sample period.
 
 
 \subsubsection{Households with Wealthier Parents Retain Ownership}
@@ -251,7 +220,7 @@ To understand which variables predicts retainment of ownership, I estimate
 	= \beta\ln(NetWorth_{i,t}) + \zeta\ln(ParWealth_{i,t})
 	  + \gamma' X_{i,t} + \varepsilon_{i,t},
 \end{equation}
-where $Own_{i,t+\Delta}=1$ denotes an owner at time $t+\Delta$, $\beta$ and $\zeta$ measures the effect of log household net worth and parental wealth, respectively  and $X_{i,t}$ is a vector of control variables. The only changes relative to Eq. \ref{eq:transferrent} is that the outcome variable conditions on current ownership and measures future ownership, that there are no controls for transfer receipt, and that I have taken the two variables of interest out of the vector of control variables. The sample is limited to households aged 25 to 44. These regressions are motivated by \cite{bond2021role}, who estimate similar equations in the PSID and the Health and Retirement Study. Figures \ref{fig:coef_allowner} and \ref{fig:coef_ftowner} plots the two coefficients of interest over different time horizons.
+where $Own_{i,t+\Delta}=1$ denote ownership at time $t+\Delta$, $\beta$ and $\zeta$ measure the effects of log household net worth and parental wealth, respectively. The vector of control variables  $X_{i,t}$ consists of log household income, log household size, age, parental age, and dummies for  education, marital status, race, household composition changes, and state and year fixed effects.  The sample is limited to households aged 25 to 44. These regressions are motivated by \cite{bond2021role}, who estimate similar equations in the PSID and the Health and Retirement Study. Figures \ref{fig:coef_allowner} and \ref{fig:coef_ftowner} plot the two coefficients of interest over different time horizons.
 
 Two results stand out. First, parental wealth is at least as predictive as household net worth at all horizons, although the difference is never statistically significant. Second, the effect of current parental wealth grows with the time horizon. For instance, a 10\% increase in parental wealth raises the probability of retaining ownership after eight years by 0.45 percentage points among first-time owners. I return to these results later as part of the model validation.
 
@@ -260,31 +229,31 @@ Two results stand out. First, parental wealth is at least as predictive as house
 One potential roadblock to maintaining ownership is mortgage delinquency, as missed payments can lead to distressed or forced sales. I show that households with wealthier parents are less likely to fall behind on their mortgages, despite purchasing more expensive homes. The PSID has collected mortgage delinquency data since 2009; about 2\% of owners aged 25 to 44 report being behind.
 
 To examine what predicts mortgage delinquency, I estimate: 
-\begin{equation*}
+\begin{equation}\label{eq:regbehind}
 \Pr(Behind_{i,t+2}) = \beta\ln(NetWorth_{i,t}) + \zeta\ln(ParWealth_{i,t}) + \gamma' X_{i,t} + \varepsilon_{i,t},
-\end{equation*}
-using the same control variables as in the previous regression. Table~\ref{tab:hypo} reports the estimated coefficients on household net worth ($\beta$); full results appear in Appendix Table~\ref{tab:hypo_long}.  
+\end{equation}
+using the same control variables as in the previous regression. Table~\ref{tab:hypo} reports the estimated coefficients on parental wealth ($\zeta$); full results appear in Appendix Table~\ref{tab:hypo_long}.  
 
 I first limit the sample to first-time buyers to focus on distress among new owners. In a univariate regression, a 10\% increase in parental wealth is associated with a 0.07 percentage point decrease in the probability of being behind on mortgages two years later ($p<0.1$) With the full set of controls, the effect increases slightly, though it is no longer statistically significant. These magnitudes are economically meaningful since 1.6\% of first-time owners are behind on their mortgage.In Columns 3 to 5, I expand the analysis to include all owners who are currently not behind, increasing the sample sizes and allowing us to include household fixed effects. In these specifications, a 10\% increase in parental wealth is associated with a 0.09 percentage point decrease in delinquency risk in the univariate OLS regression ($p<0.001$), a 0.02 percentage point decrease in the multivariate OLS regression (not significant), and a 0.07 percentage point decrease in the fixed effects regression ($p<0.1$).
 
 \begin{table}
 	\centering
 	\begin{threeparttable}
-		\caption{Housing Choices and Parental Wealth}
+		\caption{Parental Wealth and Future Mortgage Delinquencies}
 		\label{tab:hypo}
 		\small 
 				\input{../tabfig/regr/hypoII_short.tex}
 	
 	\end{threeparttable}
 	{\begin{footnotesize}\begin{flushleft}
-		\textit{Notes:} Standard errors in parentheses, clustered at the household level. \textsuperscript{+}$p<0.10$, \textsuperscript{*}$p<0.05$, \textsuperscript{**}$p<0.01$, \textsuperscript{***}$p<0.001$.
+		\textit{Notes:} The estimated association between parental wealth and the probability of behind on mortgage payments in the next period from regressions using specification \ref{eq:regbehind}. See Appendix Table~\ref{tab:hypo_long} for all results. Standard errors in parentheses, clustered at the household level. \textsuperscript{+}$p<0.10$, \textsuperscript{*}$p<0.05$, \textsuperscript{**}$p<0.01$, \textsuperscript{***}$p<0.001$.
 		\end{flushleft}\end{footnotesize}}	
 \end{table}
 
 Overall, the probability of falling behind on mortgage payments declines with parental wealth, even after controlling for a wide range of household characteristics. This highlights a novel channel through which parental resources help new homeowners retain ownership after purchase.
 
 
-\subsubsection{Households with Wealthier Parents Are Less Likely to Downsize during Unemployment Spells}\label{sec:eventstudy}
+\subsubsection{Owners with Wealthy Parents Don't Downsize in Unemployment}\label{sec:eventstudy}
 Distressed and forced home sales are costly and often triggered by unemployment \citep{kermani2021racial,hsu2018unemployment}. To test whether parental wealth mitigates this risk, I perform a simple event study of how unemployment affects the likelihood of downsizing.
 
 The exercise follows \cite{Chetty2007} closely. The outcome of interest is the change in log housing consumption, which is set to zero for households who do not move. For movers, housing consumption is defined as yearly rent while renting and as imputed rent for owners, set to 5\% of the market value \citep{Davis2008}. The sample is limited to household heads who experience only one unemployement spell between ages 25 and 44. I divide the sample by whether a household's parents were in the top parental wealth quartile at the time of unemployment and compare the two groups' housing consumption growth at unemployment. The results are displayed in Figure \ref{fig:housinggrowthrates}. Among households with non-wealthy parents, housing consumption falls by about 5\% during unemployment ($p<0.05$). In contrast, households with wealthy parents see a slight increase (not significant)in housing consumption during unemployment.\footnote{In Appendix \ref{app:eventstudy_details}, I also report the results of a formal event study using the same set of controls as in the previous regressions.}  I return to these results later as part of the model validation.
@@ -297,7 +266,7 @@ The exercise follows \cite{Chetty2007} closely. The outcome of interest is the c
 \end{figure}
 
 \subsection{Taking Stock of the Data}
-Taking stock, we have seen that parental transfers have become more important for young homeowners over the past two decades. About 30\% of young households receive transfers from their parents in a given year, and recipients' parents are wealthier. Recipients are also more likely to transition from renting to owning, also when we condition on a rich set of covariates. Parental wealth is also positively associated with maintaing homeownership. The probability of mainting homeownership is increasing in parental wealth, households with richer parents are less likely to behind on mortgages and less likely to downsize during unemployment sptells. These results suggest that homeowners with wealthy parents find illiquidity of homeownership less problematic.
+Taking stock, we have seen that parental transfers have become more important for young homeowners over the past two decades. About 20\% of young households receive transfers from their parents in a given year, and recipients have wealthier parents. Recipients are more likely to transition from renting to owning, even after conditioning on a rich set of covariates. Parental wealth is also positively associated with maintaining homeownership. Households with richer parents are less likely to fall behind on mortgages and less likely to downsize during unemployment spells. These results suggest that homeowners with wealthy parents find illiquidity of homeownership less problematic.
 
 \subsection{Transfers and Taxes}
 In the United States, transfers and bequests are subject to taxation due to the estate tax. Taxes are paid by the giver, not the recipient. In 2024, an individual can give \$13.61 million before they start owing gift taxes. However, individuals have to file if they give transfers above \$18,000 (in 2024) to any one individual within a calendar year. Thus, the gift tax is irrelevant for the vast majority of households, as it applies only once lifetime transfers---including bequests---exceed \$13.61 million.
@@ -820,6 +789,40 @@ I made several simplifying assumptions to keep the model tractable. Adding riche
 \setcounter{table}{0}
 \renewcommand{\thetable}{A\arabic{table}}
 
+\section{Transfers and the Rent-to-Own Transition}\label{app:rent_to_own}
+A large literature documents that parental transfers increase the probability that renters become homeowners (e.g., \citealp{wold2024housing}; \citealp{Blickle2019}; \citealp{benetton2022dynastic}; \citealp{Guiso2002}; \citealp{Engelhardt1998}), I replicate this result to highlight the importance of transfers for housing outcomes. 
+
+I estimate
+\begin{equation}	\label{eq:transferrent}
+	\Pr\left(Own_{i,t+2}=1 \mid Own_{i,t}=0\right)
+	= \alpha + \beta\,Transfer_{i,t+2}
+	  + \gamma' X_{i,t} + \varepsilon_{i,t},
+\end{equation}
+where \(Own_{i,t}=0\) denotes a renter at time \(t\), \(Transfer_{i,t}=1\) if the household received a transfer between survey waves, and \(X_{i,t}\) includes log parental wealth, log household income and log household net worth, log household size, age, parental age, and dummies for  education, marital status, race, household composition changes, and state and year fixed effects. The sample is limited to renting households aged 25 to 44 who have never been observed as homeowners. Table \ref{tab:newowners} reports the estimated coefficients. These regressions are similar to those in \cite{Lee2018}, who also use the PSID.  It is important to note that transfer receipt is not exogenous---many transfers may be made precisely because the renter is buying a home.
+
+I use two definitions of transfer receipt. The narrow definition includes parental gifts over \$500 in 2012, limiting the sample to renters in 2011. The broad definition includes any gift or inheritance over \$10,000 reported in any wave, or a large parental gift in 2012. This allows for household fixed effects and a larger sample, but captures only large transfers and includes some non-parental ones.
+
+
+In a univariate regression, receiving a parental transfer is associated with a 2.9 percentage point higher probability of becoming a homeowner in 2013 among renters in 2011. With a full set of controls parental transfers are associated with a 1.2 percentage point higher probability of becoming a homeowner. This represents a substantial increase relative to the baseline rent-to-own transition rate of about 14\%, though the effect is not statistically significant. 
+
+
+To increase statistical power, I now use the broader transfer definition, which includes all large transfers. This expands the sample size tenfold but reduces the transfer receipt rate to around 3\%, while the median transfer size rises from \$1,500 to \$24,200. The broader sample also allows me to follow renters over time and include household fixed effects. In a univariate regression, transfer receipt is associated with a 21.9 percentage point increase in the probability of becoming a homeowner. Even with a full set of controls, the effect remains large and statistically significant: 13.5 percentage points in the OLS specification ($p<0.001$) and 7.9 percentage points with household fixed effects ($p<0.1$). These magnitudes are substantial compared to the baseline rent-to-own transition rate of 18\%.
+
+\begin{table}
+	\center
+	\begin{threeparttable}
+		\caption{The Transition to Ownership}
+		\label{tab:newowners}
+		\small 
+				\input{../tabfig/regr/newowners.tex}
+
+		{\begin{footnotesize}\begin{flushleft}
+		\textit{Notes:} Standard errors in parentheses, clustered at the household level. \textsuperscript{+}$p<0.10$, \textsuperscript{*}$p<0.05$, \textsuperscript{**}$p<0.01$, \textsuperscript{***}$p<0.001$.
+		\end{flushleft}\end{footnotesize}}		
+	\end{threeparttable}
+\end{table}
+
+
 \section{Quantitative Model Details} 
 
 \subsection{Decision Problems at Age 53 and 83}\label{sec:decextra}
@@ -1056,19 +1059,7 @@ I use the same estimation samples and variable definitions. I then run linear re
 \end{table}
 
 
-\begin{table}
-	\center
-	\begin{threeparttable}
-		\caption{The Transition to Ownership}
-		\label{tab:newowners}
-		\small 
-				\input{../tabfig/regr/newowners.tex}
 
-		{\begin{footnotesize}\begin{flushleft}
-		\textit{Notes:} Standard errors in parentheses, clustered at the household level. \textsuperscript{+}$p<0.10$, \textsuperscript{*}$p<0.05$, \textsuperscript{**}$p<0.01$, \textsuperscript{***}$p<0.001$.
-		\end{flushleft}\end{footnotesize}}		
-	\end{threeparttable}
-\end{table}
 
 \begin{figure}\caption{Calibrated Income Process}\label{fig:calincome}
 	\begin{subfigure}{0.49\textwidth}\caption{Deterministic Income Profile $l_a$}\label{fig:y_a}
