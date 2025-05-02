@@ -20,14 +20,12 @@ store = true # true to store results to .pdf/.tex
 #######################
 ## Structural Estimation
 #######################
-
+par_lims = par_lims_ini()
 for shrinkstep = 0:Nshrinks # Shrink the search space iteralatively
-    if shrinkstep == 0 # Initialize search space
-        par_lims = par_lims_ini()
-    else # Shrink search space, based on the last Nest iterations
+    if shrinkstep > 0 # shrink search space
         ilo = 1 + Nest*(shrinkstep-1)
         ihi = Nest*shrinkstep
-        par_lims = shrink_searchspace(ilo,ihi,nstate,nchoice,par_lims);
+        global par_lims = shrink_searchspace(ilo,ihi,nstate,nchoice,par_lims);
     end
     GlobalSearch(par_lims, nstate,nchoice,targ_moms;nsim = (Nest*(shrinkstep+1)),start=(1+Nest*(shrinkstep)))
 end
