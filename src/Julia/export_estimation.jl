@@ -232,6 +232,7 @@ function PlotGlobalEstimation(dat,est,pars,targ_moms;store=false)
     ### Plots the effect of each parameter
     for (ipar,par) in enumerate(pars)
         ptmp = deepcopy(plot(p2[ipar,:]...,plots_obj[ipar],titlefontsize=9,layout=(2,3),size=(800,300).*0.8))
+        display(ptmp)
         if store == true
             Plots.pdf(ptmp,"tabfig/est/identification/"*_parnames_s[pars[ipar]])
         end

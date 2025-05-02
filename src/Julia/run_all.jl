@@ -32,7 +32,7 @@ end
 
 ## Plot estimation
 df_boot, globest,dat = LoadEstimation(nstate,nchoice,targ_moms,pars);
-PlotGlobalEstimation(dat,globest,pars,targ_moms;store=true)
+PlotGlobalEstimation(dat,globest,pars,targ_moms;store=store)
 
 #######################
 ## Model fit etc
