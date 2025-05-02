@@ -143,7 +143,7 @@ cap graph drop _all
 
 
 
-sum Ftransf2val if  Ftransf2val>0 &  owner == 0 & inrange(age,25,44) & age < first_own [aw = famwgt], det
+sum Ftransf2val if  Ftransf2val>0 &  owner == 0 & inrange(age,25,44)  [aw = famwgt], det
 local limhi = `r(p95)'
 
 forv val =  0/1 {
@@ -153,8 +153,8 @@ forv val =  0/1 {
 }
 
 twoway ///
-    (kdensity Ftransf2val if Ftransf2val<`limhi' & Ftransf2val>0 &  owner == 0 & Fowner == 0 & inrange(age,25,44) & age < first_own [aw = famwgt], lcolor(black) lpattern(solid)) ///
-    (kdensity Ftransf2val if Ftransf2val<`limhi' & Ftransf2val>0 &  owner == 0 & Fowner == 1 & inrange(age,25,44) & age < first_own [aw = famwgt] , lcolor(orange) lpattern(solid)) ///
+    (kdensity Ftransf2val if Ftransf2val<`limhi' & Ftransf2val>0 &  owner == 0 & Fowner == 0 & inrange(age,25,44) [aw = famwgt], lcolor(black) lpattern(solid)) ///
+    (kdensity Ftransf2val if Ftransf2val<`limhi' & Ftransf2val>0 &  owner == 0 & Fowner == 1 & inrange(age,25,44)  [aw = famwgt] , lcolor(orange) lpattern(solid)) ///
             , legend(label(1 "Rent -> Rent") label(2 "Rent -> Own") label(3 "Own -> Own") label(4 "Own -> Rent")) ///
 	    xline(`mean0_inh', lcol(black) lpattern(longdash)) ///
 	    xline(`med0_inh', lcol(black) lpattern(shortdash)) ///
@@ -167,16 +167,16 @@ twoway ///
     graph display, xsize(6) ysize(3.5) scale(1.8) 
 graph export "tabfig/descr/PSID_transfers_renters_inheritance.pdf", replace
 
-sum Ftotrcved_fromparent if  Ftotrcved_fromparent > 0 & inrange(age,25,44) & owner == 0 & age < first_own [aw = famwgt], det
-local limhi = `r(p95)'
+sum Ftotrcved_fromparent if  Ftotrcved_fromparent > 0 & inrange(age,25,44) & owner == 0  [aw = famwgt], det
+local limhi = `r(p99)'
 forv val =  0/1 {
 	sum Ftotrcved_fromparent if Ftotrcved_fromparent > 0 &  inrange(age,25,44) & owner == 0 & Fowner == `val' & age < first_own [aw = famwgt], det
 	local mean`val'_trf = `r(mean)'
 	local med`val'_trf = `r(p50)'
 }
 twoway ///
-    (kdensity Ftotrcved_fromparent if Ftotrcved_fromparent < `limhi' & Ftotrcved_fromparent > 0 & inrange(age,25,44) & owner == 0 & Fowner == 0 & age < first_own [aw = famwgt], lcolor(black) lpattern(solid)) ///
-    (kdensity Ftotrcved_fromparent if Ftotrcved_fromparent < `limhi' & Ftotrcved_fromparent > 0 & inrange(age,25,44) & owner == 0 & Fowner == 1 & age < first_own [aw = famwgt], lcolor(orange) lpattern(solid)) ///
+    (kdensity Ftotrcved_fromparent if Ftotrcved_fromparent < `limhi' & Ftotrcved_fromparent > 0 & inrange(age,25,44) & owner == 0 & Fowner == 0  [aw = famwgt], lcolor(black) lpattern(solid)) ///
+    (kdensity Ftotrcved_fromparent if Ftotrcved_fromparent < `limhi' & Ftotrcved_fromparent > 0 & inrange(age,25,44) & owner == 0 & Fowner == 1  [aw = famwgt], lcolor(orange) lpattern(solid)) ///
             , legend(label(1 "Rent -> Rent") label(2 "Rent -> Own")) ///
 	    xline(`mean0_trf', lcol(black) lpattern(longdash)) ///
 	    xline(`med0_trf', lcol(black) lpattern(shortdash)) ///
