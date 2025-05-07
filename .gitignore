@@ -5,7 +5,7 @@
 tabfig/*
 docs/*
 !docs/draft.tex
-pres/*
+slides/*
 data/*
 src/Julia/AHK/*
 src/Julia/StaticModel*

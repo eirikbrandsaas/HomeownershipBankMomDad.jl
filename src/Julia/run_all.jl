@@ -53,6 +53,7 @@ end
 output_esttable(df_boot,pars,targ_moms,Mb,store=store)
 output_extramoments(Mb,nontarg_moms,store=store)
 pChetty = ChettyEventStudy(Mb,0.75,store=store)
+pRetain = maintaining_ownership_plots(Mb,store=store)
 #######################
 ## Post-Estimation Analaysis - Impact of Altruism on Homeownership
 #######################

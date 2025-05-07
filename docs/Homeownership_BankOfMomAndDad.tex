@@ -261,7 +261,9 @@ The exercise follows \cite{Chetty2007} closely. The outcome of interest is the c
 
 \begin{figure}
 	\caption{Event Study: Housing Consumption at Unemployment by Parental Wealth}\label{fig:housinggrowthrates}
-	\noindent\includegraphics[width=0.5\textwidth]{../tabfig/descr/PSID_housinggrowthpoor_both}\includegraphics[width=0.5\textwidth]{../tabfig/descr/PSID_housinggrowthrich_both}
+	\noindent%
+	\includegraphics[width=0.5\textwidth]{../tabfig/descr/PSID_housinggrowthpoor_both}%
+	\includegraphics[width=0.5\textwidth]{../tabfig/descr/PSID_housinggrowthrich_both}
 
 	{\begin{footnotesize} \textit{Notes:} Solid lines denote means, and bars denote the 95\% confidence interval. The sample consists of households aged 25-45 with exactly one unemployment spell and without changes in head and/or spouse in the four years before and after unemployment. \end{footnotesize}}
 \end{figure}
@@ -700,8 +702,6 @@ The earlier empirical results suggested that parental wealth helps offset the il
 	\centering
 	\resizebox{\textwidth}{!}{\begin{threeparttable}
 		\caption{Homeownership Policies on the role of Parental Wealth}\label{tab:policy}
-		
-ratio
 		\begin{tabular}{@{}llll@{}}
 			\input{../tabfig/postest/policy_mostrecent.tex}
 		\end{tabular}
@@ -771,7 +771,7 @@ Introducing altruistic transfers generates two offsetting effects. First, future
 	\center\singlespacing	
 	\begin{threeparttable}[tb]
 		\caption{Altruistic Transfers Decrease the MPC}
-		\input{../tabfig/postest/MPCs}
+		\input{../tabfig/postest/MPCs.tex}
 	\end{threeparttable}
 	{\begin{footnotesize}\begin{flushleft}\vspace{-0.1in}
 		\textit{Notes:} Sample includes all households aged 25-44 in the stationary distribution. Following \cite{Kaplan2014}, households are liquidity constrained if they have negative liquid wealth $(b_k)$ exceeding 16.5\% of annual earnings. The MPC is calculated from a \$5,000 positive shock.\end{flushleft}\end{footnotesize}}			

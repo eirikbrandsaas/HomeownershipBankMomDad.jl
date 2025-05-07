@@ -16,6 +16,9 @@ using Dates # Allows you append todays date to filenames
 using StableRNGs
 using PanelDataTools
 using BenchmarkTools
+using ShiftedArrays
+using GLM
+using CategoricalArrays
 
 ## Load files
 include("Julia/struct.jl")
