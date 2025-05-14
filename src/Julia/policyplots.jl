@@ -6,11 +6,11 @@ function plot_policyfuncs(Mb,Mn;store=false)
     bph = 400
     ibph = argmin(abs.(np.bp_grd.-bph))
 
-    bpl = 0
+    bpl = 100
     ibpl = argmin(abs.(np.bp_grd.-bpl))
 
     ihp = 1
-    ivk = 3
+    ivk = 2
     iok = 1
     is = 1
     iak = 1
