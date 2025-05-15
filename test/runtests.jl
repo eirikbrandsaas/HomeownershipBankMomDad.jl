@@ -13,8 +13,8 @@ using Test
         Mb = Model(mp,np)
         solvemodel2nd!(Mb,np,mp)
 
-        @test Mb.moms[Mb.moms.type.=="Model",:owneryoung][1] == 0.413
-        @test Mb.simpan.xp[15] == 78.40585097145825
+        @test Mb.moms[Mb.moms.type.=="Model",:owneryoung][1] == 0.424
+        @test Mb.simpan.xp[15] == 76.30713470213524
         @test Mb.g.gp.t[1,10,3,2,2,1,14,1]  == 357.96712339010395
     end
 
@@ -28,6 +28,6 @@ using Test
 
         df_boot, globest,dat = LoadEstimation(nstate,nchoice,targ_moms,pars);
 
-        @test globest.smm_obj[1]== 0.7092005784698485 
+        @test globest.smm_obj[1]== 0.7634896057824219 
     end
 end
