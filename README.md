@@ -11,9 +11,9 @@ This repo contains all material for the paper "Illiquid Homeownership and the Ba
     * Each table and figure is tracked with source control. This makes it very easy to see the impact of any changes to the code or data on results.
 3. Download the [Panel Study of Income Dynamics (PSID) packaged data](https://simba.isr.umich.edu/Zips/ZipMain.aspx). Note that you have to manually change the paths in the PSID-provided transfer supplement, see below.
     1. You will need 
-       1. `famYYYY.zip` from 1999-2017, 
+       1. `famYYYY.zip` from 1999-2021, 
        2. `wlthYYYY.zip` from 1999-2007,
-       3. `ind2019er.zip`,
+       3. `ind2021er.zip`,
        4. `pid19.zip` (Parental Identification) and,
        5. `RT13.zip` (2013 Family Roster and Transfers)
     2. Place the *zipped* folders into `data/PSID`

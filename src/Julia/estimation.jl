@@ -126,7 +126,7 @@ function shrink_searchspace(firstiter,lastiter,nstate,nchoice,par_lims)
     @printf("η : (%1.3f,%1.3f) vs (%1.3f,%1.3f). Size ratio of new over old %1.3f \n",par_lims_n.η[1][1],par_lims_n.η[1][2],par_lims.η[1][1],par_lims.η[1][2], ηr)
     @printf("ho: (%1.3f,%1.3f) vs (%1.3f,%1.3f). Size ratio of new over old %1.3f \n",par_lims_n.ho[1][1],par_lims_n.ho[1][2],par_lims.ho[1][1],par_lims.ho[1][2], hor)
     @printf("χ : (%1.3f,%1.3f) vs (%1.3f,%1.3f). Size ratio of new over old %1.3f \n",par_lims_n.χ[1][1],par_lims_n.χ[1][2],par_lims.χ[1][1],par_lims.χ[1][2],χr)
-    @printf("Total reduction in search area: %1.3f \n",ηr*hor*χr)
+    @printf("Total reduction in search area: %1.3f percent  \n",(1 - ηr*hor*χr)*100)
 
     return par_lims_n
 end

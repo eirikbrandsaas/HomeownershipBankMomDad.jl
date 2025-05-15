@@ -16,6 +16,9 @@ using Dates # Allows you append todays date to filenames
 using StableRNGs
 using PanelDataTools
 using BenchmarkTools
+using ShiftedArrays
+using GLM
+using CategoricalArrays
 
 ## Load files
 include("Julia/struct.jl")
@@ -33,5 +36,6 @@ include("Julia/quant_endoprice.jl")
 include("Julia/quant_blackwhite.jl")
 include("Julia/quant_preferadjustment.jl")
 include("Julia/quant_robustness.jl")
+include("Julia/quant_MPC.jl")
 
 include("Julia/postest_plots.jl")

@@ -20,10 +20,9 @@ gen Dlhousing = lhousing - ll.lhousing
 
 replace Dlhousing = 0 if wtrmove == 0 // Those who don't move have no change in housing consumption (same house!)
 
-keep if age >= 25 & age <= 44
 
 // Find percentile of parental wealth for households in age group
-_pctile wealth_prnt [aw = famwgt], p(75)
+_pctile wealth_prnt [aw = famwgt] if inrange(age,25,44), p(75)
 gen Twealthy_prnt = (wealth_prnt > `r(r1)') 
 replace Twealthy_prnt = . if wealth_prnt == .
 
@@ -41,25 +40,27 @@ gen _keep = (abs(yearrelunemp) <= 4) // Only keep +/- four years of unemployment
 bysort id_hd: egen famchange_unemp= total(cond(yearrelunemp == 0, famchange, .)) // Parental wealth at unemployment
 keep if famchange_unemp <= 2 // Only keep households that don't change family structure
 
-
 // If wealthy at unemployment
 bysort id_hd: egen wealthy_prnt= total(cond(yearrelunemp == 0, Twealthy_prnt, .)) // Parental wealth at unemployment
 drop Twealthy_prnt
 
-
-
+keep if age >= 25 & age <= 44
 
 save "data/PSID/eventstudy.dta", replace // Used to do event study with controls
 
 **********************************
 ** Without controls
 **********************************
-
+cap graph drop _all
 use "data/PSID/eventstudy.dta", replace // Used to do event study with controls
 keep if _keep == 1
 keep if Dlhousing != .
+keep if yearrelunemp != . 
+keep if wealthy_prnt != .
+count // observations
+count if yearrelunemp == 0 //
 
-collapse (mean) mean_Dlhousing = Dlhousing (sem) sem_Dlhousing=Dlhousing [aw = famwgt] , by(yearrelunemp wealthy_prnt)
+collapse (mean) mean_Dlhousing = Dlhousing (sem) sem_Dlhousing=Dlhousing (count) id_hd [aw = famwgt] , by(yearrelunemp wealthy_prnt)
 gen ub_Dlhousing= mean_Dlhousing + 1.96*sem_Dlhousing 
 gen lb_Dlhousing= mean_Dlhousing - 1.96*sem_Dlhousing 
 export delimited _all using "data/PSID/eventstudy.csv", replace // Creates a file with all the data that you can use in Julia
@@ -91,13 +92,16 @@ recode exp (5/1000 = 5)
 
 
 gen Treat= wealthy_prnt
-
+keep if abs(exp)<5
 replace exp = exp + 5 // So that the factor variable doesn't contain negative values
 xtile wealth_xtile = wealth [aw=famwgt], nq(5)
 xtile income_xtile = income [aw=famwgt], nq(5)
 
+replace income_xtile = log(income)
+replace famsize = log(famsize)
 winsor2 Dlhousing, replace c(1 99)
-regr Dlhousing i.coll i.hs i.owner i.married i.famchange i.white i.state i.age i.year i.wealth_xtile i.income_xtile i.exp##i.Treat [aw=famwgt] 
+
+regr Dlhousing i.hs i.coll i.married i.white c.famsize i.famchange i.year i.state c.age##c.age c.age_prnt##c.age_prnt i.wealth_xtile c.income_xtile i.exp##i.Treat, vce(cluster id_hd)
 
 mat coeff = e(b)
 mat ses =  vecdiag(diag(vecdiag(e(V))))
@@ -110,7 +114,7 @@ gen Control = .
 
 gen TreatSE = .
 gen ControlSE = .
-forv i = 1(2)11 {
+forv i = 3(2)11 {
 	replace Treat = coeff[1,colnumb(coeff,"`i'.exp#1.Treat")] + coeff[1,colnumb(coeff,"1.Treat")] if t == `i'
 	replace TreatSE = ses[1,colnumb(coeff,"`i'.exp#1.Treat")] if t == `i'
 	replace Control = coeff[1,colnumb(coeff,"`i'.exp")] if t == `i'
@@ -138,6 +142,5 @@ msym(i i i) lcolor(gray gray gray) lpattern(solid dash dash) lwidth(thick medthi
 yline(0,  lpattern(solid)) xlabel(-4(2)4) ylabel(-0.3(0.15)0.3)  xtitle("Years Relative to Unemployment") ytitle("Housing Growth Rate")  legend(off) title("Parents in Top 25%") legend(off) 
 graph display, xsize(6) ysize(3.5) scale(2.0) name(rich)
 graph export "tabfig/descr/PSID_housinggrowthrich_both_controls.pdf", replace
-
 
 graph combine poor rich

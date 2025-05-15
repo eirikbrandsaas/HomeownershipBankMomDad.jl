@@ -4,19 +4,19 @@ function varnames()
     :medwealthold =>"Median Wealth (55-74)",
     :medwealthfyoung =>"Median Family Wealth (25-44)",
     :wealthatpurchase => "Wealth at Purchase (25-44)",
-    :transfrateyoung => "Transfer Rate (55-74)",
+    :transfrateyoung => "Transfer Receipt Rate (25-44)",
     :h2wyoung =>"House Value / Wealth (25-44)",
     :r2incyoung =>"Rent / Income (25-44)",
     :wealthatpurchaseyoung => "Wealth at Purchase (25-44)",
     :first_ownyoung => "Age First Own (25-44)",
     :LTVatpurchaseyoung => "LTV at Purchase (25-44)",
-    :tp2wealthpyoung => "Transfers / Parental Wealth (55-74)",
+    :tp2wealthpyoung => "Transfers / Parental Wealth (55-74) (\\%)",
     :transferbuyersyoung => "Transfers Around Purchase (25-44)",
     :hand2mouthyoung  => "Hand to Mouth (25-44)",
     :mortg2incyoung => "Mortgage / Income (25-44)",
     :transfsizeyoung => "Transfer Size (55-74)",
-    :ownerall => "Owner (25-73)",
-    :ownerold => "Owner (55-73)",
+    :ownerall => "Owner (25-74)",
+    :ownerold => "Owner (55-74)",
     :price => "House Price",
     :α1 => "Supply Elasticity (\$\\alpha_1\$)",
     :α0 => "Supply El. Intercept",
@@ -36,6 +36,8 @@ function varnames()
     :owneryoung_ppoor => "Owner (25-44), Bottom 33\\%",
     :transfrateyoung_prich => "Transfers (25-44), Parent Top 50\\%",
     :transfrateyoung_ppoor => "Transfers (25-44), Parent Bot 50\\%",
+    :transfraterenteryoung => "Transfers (25-44), Renters",
+    :transfrateowneryoung => "Transfers (25-44), Owners",
     :smm_obj => "SMM Objective Function",
     )
 end
@@ -230,6 +232,7 @@ function PlotGlobalEstimation(dat,est,pars,targ_moms;store=false)
     ### Plots the effect of each parameter
     for (ipar,par) in enumerate(pars)
         ptmp = deepcopy(plot(p2[ipar,:]...,plots_obj[ipar],titlefontsize=9,layout=(2,3),size=(800,300).*0.8))
+        display(ptmp)
         if store == true
             Plots.pdf(ptmp,"tabfig/est/identification/"*_parnames_s[pars[ipar]])
         end
@@ -314,6 +317,11 @@ function output_extramoments(Mb::Model,mom_extra::Vector{Symbol},;store=false)
     
     dfe = Mb.moms[:,[mom_extra;:type]]
 
+    try
+        dfe.tp2wealthpyoung *= 100
+    catch
+    end
+
     out = DataFrame(Moment = names(dfe[!,mom_extra]),
             Data = Matrix(dfe[dfe.type .== "Data",mom_extra])[1,:],
             Model = Matrix(dfe[dfe.type .== "Model",mom_extra])[1,:]
@@ -328,6 +336,22 @@ function output_extramoments(Mb::Model,mom_extra::Vector{Symbol},;store=false)
     out_latex = replace(out_latex,"-Inf" => "0.07")
     out_latex = replace(out_latex,"ccc" => "lrr")
 
+    ## Code that prints some distributional moments to show that the model matches these patterns okay
+    wa_label = "Wealth percentiles, Age 35 (10,25,50,75,90)" 
+    wa_dat = string(round.(Int,collect(Mb.moms[Mb.moms.type.=="Data","wealth_age3536_p" .* string.([10, 25, 50, 75, 90]) .* "young"][1,:])))
+    wa_mod = string(round.(Int,collect(Mb.moms[Mb.moms.type.=="Model","wealth_age3536_p" .* string.([10, 25, 50, 75, 90]) .* "young"][1,:])))
+    wa_row  = wa_label * " & " * wa_dat * " & "* wa_mod * "  \\\\ "
+
+    oi_label = "Ownership, by income tertile, Age 35"
+    oi_dat = string(round.(collect(Mb.moms[Mb.moms.type.=="Data","owner_age3536_inc" .* string.([1,2,3]) .* "young"][1,:]);digits=2))
+    oi_mod = string(round.(collect(Mb.moms[Mb.moms.type.=="Model","owner_age3536_inc" .* string.([1,2,3]) .* "young"][1,:]);digits=2))
+    oi_row  = oi_label * " & " * oi_dat * " & "* oi_mod * "  \\\\ "
+
+    out_latex = replace(out_latex,"\\bottomrule" => wa_row * "\n\\bottomrule")
+    out_latex = replace(out_latex,"\\bottomrule" => oi_row * "\n\\bottomrule")
+    out_latex = replace(out_latex,"[" => "")
+    out_latex = replace(out_latex,"]" => "")
+    
     println(out_latex)
     append_info = @sprintf("m%i_d%i",Dates.month(Dates.today()),Dates.day(Dates.today()))
     filename = "tabfig/est/extramoments_"*append_info*".tex"

@@ -8,7 +8,7 @@ include("../HomeownershipBankMomDad.jl")
 ## Set "parameters"
 pars = [:η, :χ, :ho] # Estimated parameters
 targ_moms =  [:owneryoung, :r2incyoung, :wealthatpurchaseyoung,:transfrateyoung]
-nontarg_moms = [:medwealthyoung, :medwealthold, :medwealthpgradyoung, :first_ownyoung, :ownerall, :mortgyoung,:LTVatpurchaseyoung,:transferbuyersyoung,]
+nontarg_moms = [:medwealthyoung, :medwealthold, :medwealthpgradyoung, :first_ownyoung, :ownerall, :mortgyoung,:LTVatpurchaseyoung, :tp2wealthpyoung, :transferbuyersyoung,:transfraterenteryoung,:transfrateowneryoung]
 nstate = 65 # Grid points in state
 nchoice = 145 # Grid points in choice
 Nest = 1500 # How many iterations in each step of the estimation
@@ -20,21 +20,19 @@ store = true # true to store results to .pdf/.tex
 #######################
 ## Structural Estimation
 #######################
-
+par_lims = par_lims_ini()
 for shrinkstep = 0:Nshrinks # Shrink the search space iteralatively
-    if shrinkstep == 0 # Initialize search space
-        par_lims = par_lims_ini()
-    else # Shrink search space, based on the last Nest iterations
+    if shrinkstep > 0 # shrink search space
         ilo = 1 + Nest*(shrinkstep-1)
         ihi = Nest*shrinkstep
-        par_lims = shrink_searchspace(ilo,ihi,nstate,nchoice,par_lims);
+        global par_lims = shrink_searchspace(ilo,ihi,nstate,nchoice,par_lims);
     end
     GlobalSearch(par_lims, nstate,nchoice,targ_moms;nsim = (Nest*(shrinkstep+1)),start=(1+Nest*(shrinkstep)))
 end
 
 ## Plot estimation
 df_boot, globest,dat = LoadEstimation(nstate,nchoice,targ_moms,pars);
-PlotGlobalEstimation(dat,globest,pars,targ_moms;store=true)
+PlotGlobalEstimation(dat,globest,pars,targ_moms;store=store)
 
 #######################
 ## Model fit etc
@@ -55,12 +53,14 @@ end
 output_esttable(df_boot,pars,targ_moms,Mb,store=store)
 output_extramoments(Mb,nontarg_moms,store=store)
 pChetty = ChettyEventStudy(Mb,0.75,store=store)
+pRetain = maintaining_ownership_plots(Mb,store=store)
 #######################
 ## Post-Estimation Analaysis - Impact of Altruism on Homeownership
 #######################
 ## Contribution of Altruism to Homeownership
 Mn = altrcontrhousing(Mb.mp,Mb.np);
-output_noalt(Mb,Mn,targ_moms,nontarg_moms;store=store)
+nontarg_moms_notransf = [x for x in nontarg_moms if x ∉ [:tp2wealthpyoung, :transferbuyersyoung,:transfraterenteryoung,:transfrateowneryoung]] # No reason to report transfer moments in this table
+output_noalt(Mb,Mn,targ_moms,nontarg_moms_notransf;store=store)
 
 ## Policy function plts
 plot_policyfuncs(Mb,Mn,store=store)
@@ -129,6 +129,9 @@ Mb,mp,np = findMb2nd(nstate,nchoice)
 out = policyeffects(Mb)
 bypwealth_moms = [:owneryoung_prich, :owneryoung_pmiddle,:owneryoung_ppoor]
 output_policy(out,targ_moms,bypwealth_moms;store=store)
+
+## MPC analysis
+create_MPC_table(Mb,Mn,store)
 
 ## Adjustment costs
 Mb,mp,np = findMb2nd(nstate,nchoice)

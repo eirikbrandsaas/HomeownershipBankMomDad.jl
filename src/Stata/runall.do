@@ -3,7 +3,7 @@ macro drop _all
 
 // Instal required packages
 
-cap net install psidtools, from("http://fmwww.bc.edu/RePEc/bocode/p") // PSID tools
+cap net install psidtools, from("http://fmwww.bc.edu/RePEc/bocode/p") // PSID tools (make sure you're using a recent version to use the 2021 files)
 cap net install st0110_1, from("http://www.stata-journal.com/software/sj15-3")  // Freduse (Stata<14)
 cap net install blindschemes, from("http://fmwww.bc.edu/RePEc/bocode/b") // plotplainblind
 cap net install winsor2.pkg, from("http://fmwww.bc.edu/RePEc/bocode/w") // Winsor2
@@ -13,7 +13,7 @@ cap net install grc1leg.pkg, from("http://www.stata.com/users/vwiggins") // grc1
 set varabbrev off
 set more off
 set scheme plotplainblind, permanently
-global basepath "/mcr/res-m1eeb00/Projects/HomeownershipBankMomDad.jl"               // Path to root directory of the git repo.
+global basepath "/mcr/res-m1eeb00/Projects/delete/HomeownershipBankMomDad.jl"               // Path to root directory of the git repo.
 global PSIDpath "$basepath/data/PSID"
 
 global realvars "valhouse wealthwoequit wealth income valstocks homeequity transf2val houseexpend rent expend_healthcare expend_food expend_transport" // List of all variables that should be deflated
@@ -24,7 +24,6 @@ global baseunit "1000" // Divide by thousand, to get thousands of 2015 dollars"
 // switches/values
 global mingift   = .5 // Value for the minimum size of gifts that are given
 global firstyear = 1999
-global lastyear  = 2017
 global agestep 	 = 6
 global firstage  = 25
 global lastage   = 85
@@ -57,8 +56,10 @@ do src/Stata/PSID_panel.do // Sample selection and cleaning, merging with parent
 
 // Create tables, figures, and moments
 do src/Stata/descr_table.do
+do src/Stata/regr_newowners.do
+do src/Stata/regr_behind.do
+do src/Stata/regr_maintainownership.do
 do src/Stata/emp_eventstudy.do 
-do src/Stata/regr_hypotheses.do
 do src/Stata/PSID_calibration.do 
 do src/Stata/PSID_moments.do
 
