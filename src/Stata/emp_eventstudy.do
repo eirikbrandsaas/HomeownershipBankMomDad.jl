@@ -1,88 +1,173 @@
+graph drop _all
 
-cap graph drop _all
-use "$PSIDpath/panel_ind.dta" , clear
-keep if id_hd!=.
+forv f = 10(5)90 { //Loop over different threshold values
+	use "$PSIDpath/panel_ind.dta" , clear
+	keep if id_hd!=.
 
-xtset id_hd year
-// Create necessary variables (unemployment and housing consumption growth rates)
-gen unempl= ((emplstat == 3 ) & ll.emplstat == 1)  // We want the event of becoming unemployed from employment
-replace unempl = . if emplstat ==.
-replace unempl = . if ll.emplstat ==.
-
-
-
-gen housing = .
-replace housing = rent*12 if owner == 0 // Annualize monthly rent
-replace housing = valhouse*0.05 if owner == 1 // Convert to owners equivalent rent (5% of house value)
-
-gen lhousing = log(housing)
-gen Dlhousing = lhousing - ll.lhousing
-
-replace Dlhousing = 0 if wtrmove == 0 // Those who don't move have no change in housing consumption (same house!)
+	xtset id_hd year
+	// Create necessary variables (unemployment and housing consumption growth rates)
+	gen unempl= ((emplstat == 3 ) & ll.emplstat == 1)  // We want the event of becoming unemployed from employment
+	replace unempl = . if emplstat ==.
+	replace unempl = . if ll.emplstat ==.
 
 
-// Find percentile of parental wealth for households in age group
-_pctile wealth_prnt [aw = famwgt] if inrange(age,25,44), p(75)
-gen Twealthy_prnt = (wealth_prnt > `r(r1)') 
-replace Twealthy_prnt = . if wealth_prnt == .
+
+	gen housing = .
+	replace housing = rent*12 if owner == 0 // Annualize monthly rent
+	replace housing = valhouse*0.05 if owner == 1 // Convert to owners equivalent rent (5% of house value)
+
+	gen lhousing = log(housing)
+	gen Dlhousing = lhousing - ll.lhousing
+	sum Dlhousing
+	winsor2 Dlhousing, replace c(1 99)
+	sum Dlhousing
+	replace Dlhousing = 0 if wtrmove == 0 // Those who don't move have no change in housing consumption (same house!)
 
 
-// Only keep households with one unemployment spell
-bys id_hd: egen count_unemp = sum(unempl==1)
-keep if count_unemp <= 1 // Only keep households unemployed at most one time
+	// Find percentile of parental wealth for households in age group
+	_pctile wealth_prnt [aw = famwgt] if inrange(age,25,44), p(`f')
+	gen Twealthy_prnt = (wealth_prnt > `r(r1)') 
+	replace Twealthy_prnt = . if wealth_prnt == .
 
-// Only keep observations +/- four years of unemployment spell
-bys id_hd: egen yearofunemp = max(year*unempl)
-gen yearrelunemp =  year - yearofunemp 
-gen _keep = (abs(yearrelunemp) <= 4) // Only keep +/- four years of unemployment spell
 
-// Only keep households with "simple" family changes
-bysort id_hd: egen famchange_unemp= total(cond(yearrelunemp == 0, famchange, .)) // Parental wealth at unemployment
-keep if famchange_unemp <= 2 // Only keep households that don't change family structure
+	// Only keep households with one unemployment spell
+	bys id_hd: egen count_unemp = sum(unempl==1)
+	keep if count_unemp <= 1 // Only keep households unemployed at most one time
 
-// If wealthy at unemployment
-bysort id_hd: egen wealthy_prnt= total(cond(yearrelunemp == 0, Twealthy_prnt, .)) // Parental wealth at unemployment
-drop Twealthy_prnt
+	// Only keep observations +/- four years of unemployment spell
+	bys id_hd: egen yearofunemp = max(year*unempl)
+	gen yearrelunemp =  year - yearofunemp 
+	gen _keep = (abs(yearrelunemp) <= 4) // Only keep +/- four years of unemployment spell
 
-keep if age >= 25 & age <= 44
+	// Only keep households with "simple" family changes
+	bysort id_hd: egen famchange_unemp= total(cond(yearrelunemp == 0, famchange, .)) // Parental wealth at unemployment
+	keep if famchange_unemp <= 2 // Only keep households that don't change family structure
 
-save "data/PSID/eventstudy.dta", replace // Used to do event study with controls
+	// If wealthy at unemployment
+	bysort id_hd: egen wealthy_prnt= total(cond(yearrelunemp == 0, Twealthy_prnt, .)) // Parental wealth at unemployment
+	drop Twealthy_prnt
 
-**********************************
-** Without controls
-**********************************
-cap graph drop _all
-use "data/PSID/eventstudy.dta", replace // Used to do event study with controls
-keep if _keep == 1
-keep if Dlhousing != .
-keep if yearrelunemp != . 
-keep if wealthy_prnt != .
-count // observations
-count if yearrelunemp == 0 //
+	keep if age >= 25 & age <= 44
+	
+	if `f' == 75 {
+		save "data/PSID/eventstudy.dta", replace // Used to do event study with controls
+	}
 
-collapse (mean) mean_Dlhousing = Dlhousing (sem) sem_Dlhousing=Dlhousing (count) id_hd [aw = famwgt] , by(yearrelunemp wealthy_prnt)
-gen ub_Dlhousing= mean_Dlhousing + 1.96*sem_Dlhousing 
-gen lb_Dlhousing= mean_Dlhousing - 1.96*sem_Dlhousing 
+	**********************************
+	** Without controls
+	**********************************
+	cap graph drop _all
+	keep if _keep == 1
+	keep if Dlhousing != .
+	keep if yearrelunemp != . 
+	keep if wealthy_prnt != .
+	count // observations
+	count if yearrelunemp == 0 //
+
+	collapse (mean) mean_Dlhousing = Dlhousing (sem) sem_Dlhousing=Dlhousing (count) id_hd [aw = famwgt] , by(yearrelunemp wealthy_prnt)
+	gen ub_Dlhousing= mean_Dlhousing + 1.96*sem_Dlhousing 
+	gen lb_Dlhousing= mean_Dlhousing - 1.96*sem_Dlhousing 
+
+
+	tempfile tf`p'
+
+	gen f = `f'
+	save `tf`p''
+	local tempfiles `tempfiles' `tf`p''
+}
+
+clear
+foreach tf of local tempfiles {
+    append using `tf'
+}
+
+***************
+** Plot the main result (threshold at 75 percent)
+***************
+preserve
+keep if f == 75
 export delimited _all using "data/PSID/eventstudy.csv", replace // Creates a file with all the data that you can use in Julia
 
 twoway  (rcap ub_Dlhousing lb_Dlhousing yearrelunemp if wealthy_prnt==0, lcolor(gray) yline(0, lpattern(solid)) )  (line mean_Dlhousing yearrelunemp if wealthy_prnt==0, lpattern(solid) lcolor(black)  ///
-	xtitle("Years Relative to Unemployment") ytitle("Housing Growth Rate") ylabel(-0.15(0.1)0.25) legend(off) title("Parents in Bottom 75%")) 
+	xtitle("Years Relative to Unemployment") ytitle("Housing Growth Rate") ylabel(-0.10(0.1)0.25) legend(off) title("Parents in Bottom 75%")) 
 graph display, xsize(6) ysize(3.5) scale(2.0) name(poor)
-
 graph export "tabfig/descr/PSID_housinggrowthpoor_both.pdf", replace
 
 twoway  (rcap ub_Dlhousing lb_Dlhousing yearrelunemp  if wealthy_prnt==1, lcolor(gray)  yline(0, lpattern(solid)) )  (line mean_Dlhousing yearrelunemp  if wealthy_prnt==1, lpattern(solid) lcolor(black) ///
-	xtitle("Years Relative to Unemployment") ytitle("Housing Growth Rate") ylabel(-0.15(0.1)0.25) legend(off) title("Parents in Top 25%"))
+	xtitle("Years Relative to Unemployment") ytitle("Housing Growth Rate") ylabel(-0.10(0.1)0.25) legend(off) title("Parents in Top 25%"))
 graph display, xsize(6) ysize(3.5) scale(2.0) name(rich)
 graph export "tabfig/descr/PSID_housinggrowthrich_both.pdf", replace
 
 
 graph combine poor rich
+restore
+
+***************
+** Plot Robust to threshold values
+***************
+preserve
+levelsof f, local(flist)
+replace yearrelunemp = yearrelunemp + f/100  - 50/100
+local plots
+local n = 0
+foreach ff of local flist {
+    local ++n
+    * Map n to grayscale: start light (gs14) and go darker (gs0) as n increases
+    local shade = 14 - round((`n'-1) * (14 / (`: word count of `flist'' - 1)))
+
+    * Add CI and mean line for this f
+    local plots `plots' ///
+        (rcap ub_Dlhousing lb_Dlhousing yearrelunemp if wealthy_prnt==0 & f==`ff', lcolor(gs`shade')) ///
+	(scatter mean_Dlhousing yearrelunemp if wealthy_prnt==0 & f==`ff', msymbol(square) color(gs`shade'))
+}
+
+twoway `plots', ///
+    xtitle("Years Relative to Unemployment") ///
+    ytitle("Housing Growth Rate") ///
+    ylabel(-0.25(0.1)0.30) ///
+    legend(off) ///
+    yline(0, lpattern(solid))
+ 
+graph display, xsize(6) ysize(3.5) scale(2.0) name(poor_all)
+
+graph export "tabfig/descr/PSID_housinggrowthpoorall_both.pdf", replace
+
+// Rich
+levelsof f, local(flist)
+
+local plots
+local n = 0
+foreach ff of local flist {
+    local ++n
+    * Map n to grayscale: start light (gs14) and go darker (gs0) as n increases
+    local shade = 14 - round((`n'-1) * (14 / (`: word count of `flist'' - 1)))
+
+    * Add CI and mean line for this f
+    local plots `plots' ///
+        (rcap ub_Dlhousing lb_Dlhousing yearrelunemp if wealthy_prnt==1 & f==`ff', lcolor(gs`shade')) ///
+         (scatter mean_Dlhousing yearrelunemp if wealthy_prnt==1 & f==`ff', msymbol(square) color(gs`shade'))
+}
+
+* Plot all together
+twoway `plots', ///
+    xtitle("Years Relative to Unemployment") ///
+    ytitle("Housing Growth Rate") ///
+    ylabel(-0.25(0.1)0.30) ///
+    legend(off) ///
+    yline(0, lpattern(solid))
+    
+graph display, xsize(6) ysize(3.5) scale(2.0) name(rich_all)
+graph export "tabfig/descr/PSID_housinggrowthrichall_both.pdf", replace
+
+    
+graph combine poor_all rich_all
+restore
+
+
 
 ******************************************
 ** with controls
 ******************************************
-*/
 use "data/PSID/eventstudy.dta", clear
 cap graph drop _all
 gen exp = year - yearofunemp 
