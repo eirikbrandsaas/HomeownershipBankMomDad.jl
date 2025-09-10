@@ -97,7 +97,7 @@ Finally, the paper contributes to the literature on parental transfers and econo
 The paper proceeds as follows. In Section \ref{sec:data}, I describe the data sources and summary statistics, and I document that parental wealth is associated with better housing outcomes. Section \ref{sec:model} describes the quantitative model, and Section \ref{sec:estimation} discusses the structural estimation. Section \ref{sec:quant} performs the main quantitative exercise and robustness tests. Finally, Section \ref{sec:pol} studies how policies intended to increase homeownership also affect the role of parental wealth and housing illiquidity.
 
 \section{Data on Transfers, Family, and Housing}\label{sec:data}
-I first present time trends in parental transfers for down payments, before describing the estimation sample taken from the PSID. Finally, I use the estimation sample to show that parental wealth is positively associated with better housing outcomes, both before and after purchase.
+I first present time trends in parental transfers for down payments, before describing the estimation sample. Finally, I use the estimation sample to show that parental wealth is positively associated with better housing outcomes, both before and after purchase.
 
 \subsection{Parental Transfers for Down Payments Over Time}\label{sec:overtime}
 I use the Survey of Household Economics and Decisionmaking (SHED) and American Housing Survey (AHS) to show the time trends in parental housing transfers. Unlike the PSID, these surveys ask questions directly relating transfers to down payments.
@@ -134,9 +134,9 @@ Finally, why focus on inter-vivos transfers when most intrafamily wealth transfe
 
 
 \subsubsection{Descriptive Statistics: Who Receives Transfers?}
-I now discuss descriptive statistics from the 2013 PSID sample for households aged 25 to 44 with an observed parent household. Table \ref{tab:descrstats} contains the means of variables, by age, wealth, homeownership, and transfer receipt. Though limited to households with observed parents, the sample appears reasonably representative. Average income by age closely matches estimates from the SCF \cite[see e.g.,][]{kuhn20162013}, though average wealth is slightly lower.
+I now discuss descriptive statistics from the 2013 PSID sample for households aged 25 to 44 with an observed parent household. Table \ref{tab:descrstats} contains the means of variables, by age, wealth, homeownership, and transfer receipt. Though limited to households with observed parents, the sample appears representative. Average income by age closely matches estimates from the SCF \cite[see e.g.,][]{kuhn20162013}, though average wealth is slightly lower.
 
-There are several main takeaways from the subgroup analysis. In 2012, 21\% of young households received a transfer, and transfers averaged \$3,960. Receivers have significantly richer parents, have similar wealth and income as nonreceivers, and are less likely to own. Receivers are more likely to transition from renting to owning, especially in the age groups where households are most likely to buy. The key determinant of transfer receipt seems to be parental wealth.
+In 2012, 21\% of young households received a transfer, and transfers averaged \$3,960. Receivers have significantly richer parents, have similar wealth and income as nonreceivers, and are less likely to own. Receivers are more likely to transition from renting to owning, especially in the age groups where households are most likely to buy. The key determinant of transfer receipt seems to be parental wealth.
 
 The first two columns of the top panel compare households by transfer receipt. The mean transfer is relatively high at \$3,960, and 21\% of households received transfers in the last year. The largest difference is parental wealth: transferring parents are 2.5 times as wealthy as nontransferring parents. Perhaps surprisingly, receivers are slightly richer than nonreceivers (\$108,000 vs. \$78,500), are more likely to be college-educated and white, and are one year younger. Receivers are slightly less likely to be homeowners (39\% vs. 43\%), reflecting the age difference and the tendency for college attendance to delay homeownership.
 
@@ -280,7 +280,7 @@ Taking stock, parental transfers have become more important for young homeowners
 
 Throughout the empirical section, I do not treat transfer receipt or parental wealth as exogenous, and the estimates document associations rather than causal effects. For example, many transfers may be made precisely because the renter is buying a home. This motivates the structural model I describe in the next section, which provides a disciplined framework to interpret mechanisms and conduct counterfactuals.
 
-\section{A Quantitative Model of Parental Transfers and Homeownership}\label{sec:model}
+\section{A Model of Transfers and Homeownership}\label{sec:model}
 This section describes my life-cycle model of housing choices with overlapping generations, idiosyncratic earnings risk, and altruistic inter-vivos transfers from parents to their offspring. To answer how important parental transfers are for housing outcomes and how transfers interact with popular housing policies, I combine two models: altruism without commitment and housing.
 
 Altruism without commitment is a standard model of intergenerational family interactions (e.g., \cite{Altonji1997a,Barczyk2018}). Altruistic parents, deriving utility from their child's utility, influence their child's consumption and housing choices through nonnegative transfers. The lack of commitment aligns with empirical transfer patterns and generates strategic behavior, as both children and parents internalize the effect of their choices on each other's future choices. Although no commitment complicates computation, it is essential: under full commitment, transfer timing is indeterminate---unattractive due to down payment and borrowing constraints. The central theoretical prediction is, generally, that wealthy parents transfer to children with high marginal utility of wealth, typically poor or borrowing-constrained households \citep{Chu2020,Barczyk2020}.
@@ -472,13 +472,13 @@ For details on the PSID sample selection, see Section \ref{sec:PSID}. Income, we
 \subsection{First Stage: External Parameters}
 I report all externally calibrated parameters and their values in Table \ref{tab:calpar}.
 
-\textit{Period Length:} Each period corresponds to two years, matching the PSID interview frequency. I report all parameters in biennial form (e.g., $\beta$ measures how much households discount two years).
+\textit{Period Length:} Each period corresponds to two years, matching the PSID interview frequency. I report all parameters in biennial form (e.g., $\beta$ discounts two years).
 
 \textit{Income Process:} The income process consists of a deterministic life-cycle component $l_a$ for all ages and a persistent shock $y_a$ for children. 
 
 To calibrate the deterministic component, I first find the average income for each age by year and then average over all years. I then regress average income on a fourth-order polynomial of age. The fitted values give the deterministic component for households aged 25 to 65. I find retirement income by dividing the average income for households aged 67 to 83 by the predicted income at age 66 (Figure \ref{fig:y_a}). 
 
-To calibrate the stochastic income process $y_{i,a}$, I first set $N_y=3$ to create a three-state Markov chain. The sample is divided into age-specific income tertiles. Within each age, I set $v_{i,a}$ as the ratio of the median income for that tertile to the overall median income (Figure \ref{fig:y_ia}). The empirical age-dependent transition matrices provide the transition matrix (Figure \ref{fig:Piv}).
+To calibrate the stochastic income process $y_{i,a}$, I first set $N_y=3$ to create a three-state Markov chain. The sample is divided into age-specific income tertiles. Within each age, I set $v_{i,a}$ as the ratio of the median income for that tertile to the overall median income (Figure \ref{fig:y_ia}). The age-dependent transition matrices are taken from the data (Figure \ref{fig:Piv}).
 
 \textit{Housing Parameters:} I set the rental rate $q=0.10$ \citep{Davis2008}, housing depreciation $\delta=0.05$ \citep{Harding2007}, and sales cost $m_s=0.075$ and purchase cost $m_b=0.02$ \citep{Yang2009}. I set the price level to $p=\$232,918/h_o$ to match the average market value of owner-occupied houses for households aged 25 to 44 in my sample. The size $h_o$ is estimated internally.
 
@@ -506,7 +506,7 @@ To calibrate the stochastic income process $y_{i,a}$, I first set $N_y=3$ to cre
 % Paz-Pardo: 0.929 (but have stocks and risk aversion=4)
 
 \textit{Initial Conditions of the Young $y_{c,25},x_{c,25}\sim F(x_{c,53},y_{c,53})$:} 
-The initial distribution is set to match the intergenerational correlation in wealth and income. I estimate it nonparametrically for transparency. First, I limit the sample to households aged 24 to 26 with parents 16 to 40 years older. I then divide wealth and income into four and three quantiles, respectively, for both parents and children. The PDF $F(\cdot)$ is then given by the empirical probability of each parent-child combination. The wealth level of a quartile is defined by its median value (Fig. \ref{fig:inidistr})
+The initial distribution is set to match the intergenerational correlation in wealth and income, estimated nonparametrically for transparency. First, I limit the sample to households aged 24 to 26 with parents 16 to 40 years older. I then divide wealth and income into four and three quantiles, respectively, for both parents and children. The PDF $F(\cdot)$ is then given by the empirical probability of each parent-child combination. The wealth level of a quartile is its median value (Fig. \ref{fig:inidistr})
 
 \input{../tabfig/parameters.tex} 
 \begin{table}
@@ -665,7 +665,7 @@ I assume that housing supply ($H^S$) is log-linear in the house price:
 \label{eq:hsupply}
 \ln H^S = \alpha_0 + \alpha_1 \ln p,
 \end{equation}
-where $\alpha_1$ is the aggregate elasticity of supply to prices. I use a closed-form supply function because the model is too complex to introduce a construction sector. The rent-to-price ratio is unchanged, as in \cite{Kaplan2020}, where rental units are supplied by deep-pocketed landlords who convert rentals to owner-occupied units if the price deviates from the present value of rents. Letting $\alpha_1\to\infty$ yields a perfectly elastic supply function, leaving prices constant, as in the previous section. I first set the elasticity to 3, a typical estimated value for the United States \cite[see e.g.,][]{saiz2010geographic,aastveit2023changing}. Finally, I set the elasticity to 1 as a reasonable lower bound for the long-run aggregate elasticity.
+where $\alpha_1$ is the aggregate elasticity of supply to prices. I use a closed-form supply function because the model is too complex to introduce a construction sector. The rent-to-price ratio is unchanged, as in \cite{Kaplan2020}, where rental units are supplied by deep-pocketed landlords who convert them to owner-occupied units if the price deviates from the present value of rents. Letting $\alpha_1\to\infty$ yields a perfectly elastic supply function, leaving prices constant, as in the previous section. I experiment with setting the elasticity to 3, a typical estimated value for the United States \cite[see e.g.,][]{saiz2010geographic,aastveit2023changing}and to 1, a reasonable lower bound for the long-run aggregate elasticity.
 
 \begin{table}
 	\center 
@@ -690,14 +690,14 @@ I have three main results regarding parental transfers and children's homeowners
 \subsection{Policies and the Importance of Parental Transfers}
 Many countries pursue policies to raise homeownership, and concerns about affordability and delayed entry are central to current economic policy debates \citep[e.g.,][]{Mabille2020}. I evaluate how five policy levers affect the role of parental wealth in housing outcomes. For each policy, I modestly perturb the relevant parameter, re-solve the model, and simulate the new stationary distribution. The aim is not to assess general-equilibrium effects, but to study how popular policy levers interact with parental transfers. Results appear in Table~\ref{tab:policy}.
 
-\textit{Tighter LTVs:} LTV caps, a standard macroprudential tool, directly regulate down-payment requirements; as shown in Figure~\ref{fig:motivation}, reliance on down-payment assistance moves with changes in mortgage regulation. I tighten the LTV limit by 3 percentage points. Homeownership among the young falls by 7 percentage points (15\%), with larger declines for children of middle-wealth parents, flattening the parental wealth gradient. The mechanism is that these families rely on modest transfers to clear borrowing constraints; poorer households remain constrained, and richer ones are largely unaffected. Symmetrically, loosening borrowing constraints would raise homeownership and amplify the role of parental wealth. Indeed, \citet{wold2024housing} find that owners with poorer parents have lower LTV ratios at origination.
+\textit{Tighter LTVs:} LTV regulation is a standard macroprudential tool and as shown in Figure~\ref{fig:motivation} reliance on down-payment assistance moves with changes in mortgage regulation. I tighten the LTV limit by 3 percentage points. Homeownership among the young falls by 7 percentage points (15\%), with larger declines for children of middle-wealth parents, flattening the parental wealth gradient. The mechanism is that these families rely on modest transfers to clear borrowing constraints; poorer households remain constrained, and richer ones are largely unaffected. Symmetrically, loosening borrowing constraints would raise homeownership and amplify the role of parental wealth. Indeed, \citet{wold2024housing} find that owners with poorer parents have lower LTV ratios at origination.
 
-\textit{Lowering PMI:} Several government-backed mortgages (e.g., VA, USDA) do not require PMI; to mimic easing on this margin, I relax the PMI limit by 7 percentage points. Homeownership rises by 1 percentage point (2\%). As with the LTV rule, gains are larger for households with parents in the middle of the wealth distribution, further widening the parental-wealth gradient. Thus, relaxing PMI increases both overall homeownership and the importance of parental wealth.
+\textit{Lowering PMI:} Several government-backed mortgages (e.g., VA, USDA) do not require PMI; to mimic easing on this margin, I relax the PMI limit by 7 percentage points. Homeownership rises by 1 percentage point (2\%). As with the LTV, gains are larger for households with parents in the middle of the wealth distribution, further widening the parental-wealth gradient. Thus, relaxing PMI increases both overall homeownership and the importance of parental wealth.
 
-\textit{Lowering House Prices:} Although there is no single “price lever,” policy shapes prices through supply regulation, taxes, interest rates, and subsidies. I capture these channels in reduced form by lowering house prices by 2\%. Homeownership increases for all households, but more so among those with the richest parents, thereby increasing the role of parental wealth.
+\textit{Lowering House Prices:} While policy does not set house prices, prices are affected by supply regulation, taxes, interest rates, and subsidies. I capture these channels in reduced form by lowering house prices by 2\%. Homeownership increases for all households, but more so among those with the richest parents, thereby increasing the role of parental wealth.
 
 \textit{Reducing Purchase Costs:}
-Closing-cost programs and first-time-buyer relief---e.g., England’s 2017 stamp duty cut for first-time buyers---directly lower entry costs; to study this margin’s interaction with parental transfers, I lower the purchase cost ($m_b$) by 2 percentage points, equivalent to a grant of about \$6,000. While homeownership rises, the gains are concentrated among households with wealthy parents, amplifying the parental wealth gradient. Lowering purchase costs has little effect for renters with non-wealthy parents, who remain constrained by LTV limits and sales costs. In contrast, for households with wealthy parents, lower purchase costs reduce the effective price—the main remaining barrier to ownership. This suggests that grants or credits for first-time buyers primarily benefit households with richer parents.
+Closing-cost programs and first-time-buyer relief---e.g., England’s 2017 stamp duty cut for first-time buyers---directly lower entry costs. I lower the purchase cost ($m_b$) by 2 percentage points, equivalent to a grant of about \$6,000. While homeownership rises, the gains are concentrated among households with wealthy parents, amplifying the parental wealth gradient. Lowering purchase costs has little effect for renters with non-wealthy parents, who remain constrained by LTV limits and sales costs. In contrast, for households with wealthy parents, lower purchase costs reduce the effective price—the main remaining barrier to ownership. This suggests that grants or credits for first-time buyers primarily benefit households with richer parents.
  
 \textit{Reducing Sales Costs:} 
 Sales costs consist of government taxes and fees and broker commissions. Following the 2024 National Association of Realtors settlement, commissions are expected to decline; to study how sales costs interact with parental transfers, I lower the sales cost $m_s$ by 2 percentage points. Strikingly, the homeownership rate decreases by 3 percentage points (6\%). This reflects selection into ownership: homeownership rises slightly for most households but drops by 6 percentage points among those with moderately wealthy parents. For these households, lower sales costs weaken the commitment value of housing used to secure future transfers. In contrast, children of the poorest parents (who rarely receive transfers) and the wealthiest parents (who expect transfers regardless) are less affected.
@@ -800,7 +800,14 @@ Several simplifying assumptions keep the model tractable. The housing block coul
 \endgroup
 \newpage
 
-
+% \cleardoublepage  % This ensures you start on a new page
+% \thispagestyle{empty}  % This removes page number and headers/footers
+% \vspace*{\fill}  % This pushes the text to the vertical center of the page
+% \begin{center}
+% \Large\textbf{Online Appendix}  % This creates the text, centered and bold
+% \end{center}
+% \vspace*{\fill}  % This completes the vertical centering
+% \clearpage  % This ends the current page
 \appendix
 
 \setcounter{figure}{0}
@@ -809,9 +816,7 @@ Several simplifying assumptions keep the model tractable. The housing block coul
 \renewcommand{\thetable}{A\arabic{table}}
 
 \section{Transfers and the Rent-to-Own Transition}\label{app:rent_to_own}
-A large literature documents that parental transfers increase the probability that renters become homeowners (e.g., \citealp{wold2024housing}; \citealp{Blickle2019}; \citealp{benetton2022dynastic}; \citealp{Guiso2002}; \citealp{Engelhardt1998}). I replicate this result to highlight the importance of transfers for housing outcomes. 
-
-I estimate
+A large literature documents that parental transfers increase the probability that renters become homeowners (e.g., \citealp{wold2024housing}; \citealp{Blickle2019}; \citealp{benetton2022dynastic}; \citealp{Guiso2002}; \citealp{Engelhardt1998}). I replicate this result to highlight the importance of transfers for housing outcomes, by estimating
 \begin{equation}	\label{eq:transferrent}
 	\Pr\left(Own_{i,t+2}=1 \mid Own_{i,t}=0\right)
 	= \alpha + \beta\,Transfer_{i,t+2}
@@ -958,7 +963,7 @@ The results are reported in Table \ref{tab:robust}. We see that the introduction
 \begin{figure}
     \caption{Calibration of Parental Income Shocks}\label{fig:nu}
 	{\centering
-    \includegraphics[width=0.5\textwidth]{../tabfig/empirical/lifecycleproductivity_old_3}
+    \includegraphics[width=0.45\textwidth]{../tabfig/empirical/lifecycleproductivity_old_3}
     \par}    {\begin{footnotesize} \textit{Notes:}
         Dashed lines are the empirical medians, and solid lines are fitted second-order polynomials used in model calibration. The lines denote the value of $\nu_{i,a}$ in the first tertile (black), middle (gray), and top (blue) by age.
     \end{footnotesize}}
@@ -1034,8 +1039,8 @@ In the benchmark, I define ``high parental wealth’'' as above the 75th percent
 \begin{figure}
 	\caption{Event Study at Various Cutoffs: Housing Consumption}\label{fig:housinggrowthrates_threshold} 
 	\noindent%
-	\includegraphics[width=0.5\textwidth]{../tabfig/descr/PSID_housinggrowthpoorall_both}%
-	\includegraphics[width=0.5\textwidth]{../tabfig/descr/PSID_housinggrowthrichall_both}
+	\includegraphics[width=0.45\textwidth]{../tabfig/descr/PSID_housinggrowthpoorall_both}%
+	\includegraphics[width=0.45\textwidth]{../tabfig/descr/PSID_housinggrowthrichall_both}
 
 	{\begin{footnotesize} \textit{Notes:} Markers denote means, and bars denote the 95\% confidence interval. Lighter colors indicate lower thresholds for parents to be considered wealthy. The right panel plots households parents whose wealth is above the threshold.\end{footnotesize}}
 \end{figure}
@@ -1046,8 +1051,8 @@ The main event study does not control for household characteristics for three re
 I use the same estimation samples and variable definitions. I then run linear regressions where I interact years relative to unemployment with a dummy for having wealthy parents at unemployment. The set of controls includes dummies for children's wealth quintiles, a full set of age, year, and state dummies, and dummy variables for college, high school, marriage, race, log income and log family size. Standard errors are clustered at the household level. The results are plotted in Figure \ref{fig:housinggrowthrates_controls}. The main result is that households with wealthier parents do not significantly decrease housing consumption at unemployment, while those with poor parents, on average, decrease housing consumption by 8 percent ($p<0.05$). However, we cannot reject the hypothesis that the effect of unemployment is the same for both groups.
 \begin{figure}
 	\caption{Event Study with Controls: Housing Consumption}\label{fig:housinggrowthrates_controls}
-	\includegraphics[width=0.5\textwidth]{../tabfig/descr/PSID_housinggrowthpoor_both_controls}%
-	\includegraphics[width=0.5\textwidth]{../tabfig/descr/PSID_housinggrowthrich_both_controls}
+	\includegraphics[width=0.45\textwidth]{../tabfig/descr/PSID_housinggrowthpoor_both_controls}%
+	\includegraphics[width=0.45\textwidth]{../tabfig/descr/PSID_housinggrowthrich_both_controls}
 	
 	{\begin{footnotesize} \textit{Notes:} Solid lines denote means and dashed lines denote the 95\% confidence interval. Sample consists of households aged 25-45 with exactly one observed unemployment spell and without changes in head and/or spouse in the four years before and after unemployment. The reference (omitted) category is four years before unemployment.  The right panel plots households whose parent's wealth is above the threshold.  \end{footnotesize}}
 \end{figure}
