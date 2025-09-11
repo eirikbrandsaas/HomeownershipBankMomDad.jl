@@ -40,7 +40,7 @@
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\mc}{\mathcal}
 
-\title{{\LARGE Illiquid Homeownership and the \\ Bank of Mom and Dad}\thanks{Federal Reserve Board of Governors. E-mail: eirik.e.brandsaas@frb.gov. I have benefited from the comments of Dean Corbae, Erwan Quintin, Ananth Seshadri, Corina Mommaerts, Corina Boar, Manuel Amador, Hamish Low, Patrick Moran, Dionissi Aliprantis, David Sturrock, Mike Eriksen, Aradhya Sood, Margaret Jacobson, William Gamber, Claudia Sahm, John Sabelhaus, and Joel McMurry, as well as seminar participants Oxford Sa{\"i}d, Federal Reserve Board, Cal State Fullerton, Boston Fed, ECARES/Université libre de Bruxelles, Santa Clara, University of Lugano, NYU Furman, Norges Bank, BI Norwegian Business School, UW-Madison, and conference participants at NASEMS, AREUEA National, ReCapNet, Minneapolis Fed/OIGI, UEA EU, CFPB, CEF, SAET, Oxford NuCamp Macro Workshop, YES 2020 at UPenn, and Minnesota-Wisconsin Macro/International Workshop. Code and replication instructions are available at the \href{https://github.com/eirikbrandsaas/HomeownershipBankMomDad.jl}{author's  website and Github}.\newline \textit{Disclaimer: }The views expressed in this paper are solely the responsibility of the author and should not be interpreted as reflecting the views of the Board of Governors of the Federal Reserve System or of anyone else associated with the Federal Reserve System.}}
+\title{{\LARGE Illiquid Homeownership and the \\ Bank of Mom and Dad}\thanks{Federal Reserve Board of Governors. E-mail: eirik.e.brandsaas@frb.gov. I have benefited from the comments of Dean Corbae, Erwan Quintin, Ananth Seshadri, Corina Mommaerts, Corina Boar, Manuel Amador, Hamish Low, Patrick Moran, Dionissi Aliprantis, David Sturrock, Mike Eriksen, Aradhya Sood, Margaret Jacobson, William Gamber, Claudia Sahm, John Sabelhaus, Paul Lengermann, Raven Molloy, and Joel McMurry, as well as seminar participants Oxford Sa{\"i}d, Federal Reserve Board, Cal State Fullerton, Boston Fed, ECARES/Université libre de Bruxelles, Santa Clara, University of Lugano, NYU Furman, Norges Bank, BI Norwegian Business School, UW-Madison, and conference participants at NASEMS, AREUEA National, ReCapNet, Minneapolis Fed/OIGI, UEA EU, CFPB, CEF, SAET, Oxford NuCamp Macro Workshop, YES 2020 at UPenn, and Minnesota-Wisconsin Macro/International Workshop. Code and replication instructions are available at the \href{https://github.com/eirikbrandsaas/HomeownershipBankMomDad.jl}{author's  website and Github}.\newline \textit{Disclaimer: }The views expressed in this paper are solely the responsibility of the author and should not be interpreted as reflecting the views of the Board of Governors of the Federal Reserve System or of anyone else associated with the Federal Reserve System.}}
 \author{Eirik Eylands Brandsaas}
 \date{{\today }}
 
@@ -48,7 +48,7 @@
 
 \maketitle
 \begin{abstract}
-{\begin{spacing}{1.2}
+{\begin{spacing}{1.2}	
 Housing is the largest asset in U.S. household portfolios, and first-time homebuyers increasingly rely on parental transfers. This paper quantifies the contribution of parental transfers to the homeownership rate of young households. I build and estimate a life-cycle overlapping generations model with housing, where adult children and parents interact without commitment. I find that parental transfers account for 13 percentage points (27\%) of young households' homeownership. Transfers from wealthy parents not only help households overcome borrowing constraints, but also help sustain homeownership, mitigating the drawbacks of illiquidity. Surprisingly, policies lowering entry barriers to homeownership generally increase the reliance on parental wealth, whereas increased liquidity reduces it. Finally, I show that children of wealthy parents strategically use the illiquidity of housing as a commitment device to encourage transfers, resulting in a preference for illiquidity.
 
 % <=100 word abstract This paper quantifies how parental transfers shape young adults’ homeownership. I estimate a life-cycle OLG model with housing in which parents and children interact without commitment. Parental transfers account for 13 percentage points (27\%) of young households’ homeownership. Transfers from wealthy parents both relax borrowing constraints and sustain ownership by mitigating housing illiquidity. Policy experiments show that easing entry barriers increases reliance on parental wealth, whereas increasing housing liquidity reduces it. Finally, I show that children of wealthy parents strategically use the illiquidity of housing as a commitment device to encourage transfers, resulting in a preference for illiquidity.
@@ -136,7 +136,7 @@ Finally, why focus on inter-vivos transfers when most intrafamily wealth transfe
 \subsubsection{Descriptive Statistics: Who Receives Transfers?}
 I now discuss descriptive statistics from the 2013 PSID sample for households aged 25 to 44 with an observed parent household. Table \ref{tab:descrstats} contains the means of variables, by age, wealth, homeownership, and transfer receipt. Though limited to households with observed parents, the sample appears representative. Average income by age closely matches estimates from the SCF \cite[see e.g.,][]{kuhn20162013}, though average wealth is slightly lower.
 
-In 2012, 21\% of young households received a transfer, and transfers averaged \$3,960. Receivers have significantly richer parents, have similar wealth and income as nonreceivers, and are less likely to own. Receivers are more likely to transition from renting to owning, especially in the age groups where households are most likely to buy. The key determinant of transfer receipt seems to be parental wealth.
+In 2012, 21\% of young households received a transfer, and transfers averaged \$3,960. Receivers have parents about 2.5 times richer, have similar wealth and income as nonreceivers, and are less likely to own. Receivers are more likely to transition from renting to owning, especially in the age groups where households are most likely to buy. The key determinant of transfer receipt seems to be parental wealth.
 
 The first two columns of the top panel compare households by transfer receipt. The mean transfer is relatively high at \$3,960, and 21\% of households received transfers in the last year. The largest difference is parental wealth: transferring parents are 2.5 times as wealthy as nontransferring parents. Perhaps surprisingly, receivers are slightly richer than nonreceivers (\$108,000 vs. \$78,500), are more likely to be college-educated and white, and are one year younger. Receivers are slightly less likely to be homeowners (39\% vs. 43\%), reflecting the age difference and the tendency for college attendance to delay homeownership.
 
@@ -171,7 +171,7 @@ The first two columns of the top panel compare households by transfer receipt. T
 	\end{flushleft}\end{footnotesize}}		
 	\end{table}
 	
-Next, I break the sample down by ownership. Homeowners are both wealthier and have wealthier parents than renters. Renters and owners receive transfers at about the same rate and size. Receivers are more likely to switch from renting to owning: 21\% of receiving owners rented two years ago, compared to 14\% of nonreceiving owners.
+Next, I split the sample by ownership. Homeowners are wealthier and have wealthier parents than renters. Renters and owners receive transfers at about the same rate and size. Among current owners, 21\% of receivers rented two years earlier, compared with 14\% of nonreceivers, suggesting that transfers ease the transition into ownership.
 
 Next, I break the sample into three age groups from 25 to 44. We see that households' wealth, income, and homeownership rates increase with age. Notably, among 29-to-32-year-olds, homeownership is more common among transfer recipients (40\%) than nontransfer recipients (32\%). Furthermore, receivers are not only more likely to own, but also to be recent homeowners: 21\% of receiving owners are new homeowners versus 13\% of nonreceiving owners. 
 
@@ -222,7 +222,7 @@ While most research focuses on the transition into ownership, I now focus on the
 
 First, the left panel of Figure \ref{fig:owner_hazard} plots the share of owners aged 25 to 44 in year $t$ who remain owners in period $t+\Delta$. Among first-time owners, only 80\% have retained ownership four years later. For non-first-time owners, there is still a marked decrease, though it is more muted; after four years about 10\% of all owners will be renting.
 
-To understand which variables predicts retention of ownership, I estimate
+To understand which variables predict retention of ownership, I estimate
 \begin{equation}	\label{eq:regmaintain}
 	\Pr\left(Own_{i,t+\Delta}=1|Own_{i,t}=1\right)
 	= \beta\ln(NetWorth_{i,t}) + \zeta\ln(ParWealth_{i,t})
@@ -234,7 +234,7 @@ Two results stand out. First, parental wealth is at least as predictive as house
 
 
 \subsubsection{Households with Wealthier Parents Are Less Delinquent} 
-One potential roadblock to maintaining ownership is mortgage delinquency, as missed payments can lead to distressed or forced sales. I show that households with wealthier parents are less likely to fall behind on their mortgages, despite purchasing more expensive homes. The PSID has collected mortgage delinquency data since 2009; about 2\% of owners aged 25 to 44 report being behind.
+One roadblock to maintaining ownership is mortgage delinquency, as missed payments can lead to distressed or forced sales. I show that households with wealthier parents are less likely to fall behind on their mortgages, despite purchasing more expensive homes. The PSID has collected mortgage delinquency data since 2009; about 2\% of owners aged 25 to 44 report being behind.
 
 To examine what predicts mortgage delinquency, I estimate: 
 \begin{equation}\label{eq:regbehind}
@@ -242,7 +242,7 @@ To examine what predicts mortgage delinquency, I estimate:
 \end{equation}
 using the same control variables as in the previous regression. Table~\ref{tab:hypo} reports the estimated coefficients on parental wealth ($\zeta$); full results appear in Appendix Table~\ref{tab:hypo_long}.  
 
-I first limit the sample to first-time buyers to focus on distress among new owners. In a univariate regression, a 10\% increase in parental wealth is associated with a 0.07 percentage point decrease in the probability of being behind on mortgages two years later ($p<0.1$). With the full set of controls, the effect increases slightly, though it is no longer statistically significant. These magnitudes are economically meaningful since 1.6\% of first-time owners are behind on their mortgage. In Columns 3 to 5, I expand the analysis to include all owners who are currently not behind, increasing the sample sizes and allowing us to include household fixed effects. In these specifications, a 10\% increase in parental wealth is associated with a 0.09 percentage point decrease in delinquency risk in the univariate OLS regression ($p<0.001$), a 0.02 percentage point decrease in the multivariate OLS regression (not significant), and a 0.07 percentage point decrease in the fixed-effects regression ($p<0.1$).
+I first limit the sample to first-time buyers to focus on distress among new owners. In a univariate regression, a 10\% increase in parental wealth is associated with a 0.07 percentage point decrease in the probability of being behind on mortgages two years later ($p<0.1$). With the full set of controls, the effect increases slightly, though it is no longer statistically significant. These magnitudes are economically meaningful since 1.6\% of first-time owners are behind on their mortgage and parents of receivers are about 2.5 richer on average. In Columns 3 to 5, I expand the analysis to include all owners who are currently not behind, increasing the sample sizes and allowing us to include household fixed effects. In these specifications, a 10\% increase in parental wealth is associated with a 0.09 percentage point decrease in delinquency risk in the univariate OLS regression ($p<0.001$), a 0.02 percentage point decrease in the multivariate OLS regression (not significant), and a 0.07 percentage point decrease in the fixed-effects regression ($p<0.1$).
 
 \begin{table}
 	\centering
@@ -309,7 +309,7 @@ where $c$ is consumption, $h$ is housing, $\gamma$ is the coefficient of relativ
 \begin{equation}
 s(h) = \begin{cases}
 h & \text{ if renting}, \\
-\chi h & \text{ if owning}.
+\chi \times h & \text{ if owning}.
 \end{cases}
 \end{equation}
 The parameter $\chi$ measures the owner-occupied utility premium, reflecting any additional benefits derived from owner-occupation, such as stability or ownership rights.
