@@ -85,15 +85,16 @@ foreach tf of local tempfiles {
 ** Plot the main result (threshold at 75 percent)
 ***************
 preserve
+cap graph drop _all
 keep if f == 75
 export delimited _all using "data/PSID/eventstudy.csv", replace // Creates a file with all the data that you can use in Julia
 
-twoway  (rcap ub_Dlhousing lb_Dlhousing yearrelunemp if wealthy_prnt==0, lcolor(gray) yline(0, lpattern(solid)) )  (line mean_Dlhousing yearrelunemp if wealthy_prnt==0, lpattern(solid) lcolor(black)  ///
+twoway  (rcap ub_Dlhousing lb_Dlhousing yearrelunemp if wealthy_prnt==0, lcolor(gray) yline(0, lpattern(solid)) lwidth(medthick) )  (line mean_Dlhousing yearrelunemp if wealthy_prnt==0, lpattern(solid) lcolor(black)  ///
 	xtitle("Years Relative to Unemployment") ytitle("Housing Growth Rate") ylabel(-0.10(0.1)0.25) legend(off) title("Parents in Bottom 75%")) 
 graph display, xsize(6) ysize(3.5) scale(2.0) name(poor)
 graph export "tabfig/descr/PSID_housinggrowthpoor_both.pdf", replace
 
-twoway  (rcap ub_Dlhousing lb_Dlhousing yearrelunemp  if wealthy_prnt==1, lcolor(gray)  yline(0, lpattern(solid)) )  (line mean_Dlhousing yearrelunemp  if wealthy_prnt==1, lpattern(solid) lcolor(black) ///
+twoway  (rcap ub_Dlhousing lb_Dlhousing yearrelunemp  if wealthy_prnt==1, lcolor(gray)  yline(0, lpattern(solid)) lwidth(medthick)  )  (line mean_Dlhousing yearrelunemp  if wealthy_prnt==1, lpattern(solid) lcolor(black) ///
 	xtitle("Years Relative to Unemployment") ytitle("Housing Growth Rate") ylabel(-0.10(0.1)0.25) legend(off) title("Parents in Top 25%"))
 graph display, xsize(6) ysize(3.5) scale(2.0) name(rich)
 graph export "tabfig/descr/PSID_housinggrowthrich_both.pdf", replace
