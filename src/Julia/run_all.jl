@@ -170,7 +170,7 @@ open("tabfig/parameters.tex", "w") do f
     write(f,"\\newcommand{\\parmsperc}{$(round(Int,mp.ms[1]*100))}\n")
     write(f,"\\newcommand{\\parmb}{$(mp.mb[1])}\n")
     write(f,"\\newcommand{\\parmbperc}{$(round(Int,mp.mb[1]*100))}\n")
-    write(f,"\\newcommand{\\parprice}{$(round(mp.price;digits=2))\$\\times h_o\$}\n")
+    write(f,"\\newcommand{\\parprice}{$(round(mp.price;digits=2))}\n")
     write(f,"\\newcommand{\\parhr}{$(np.h_grd[1])}\n")    
 
     write(f,"\\newcommand{\\parNdyn}{$(np.Ndyn)}\n")    
