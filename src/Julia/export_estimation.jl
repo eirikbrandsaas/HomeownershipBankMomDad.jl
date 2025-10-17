@@ -177,7 +177,7 @@ function PlotGlobalEstimation(dat,est,pars,targ_moms;store=false)
     for (ipar,par) in enumerate(pars)
         for (imom,mom) in enumerate(targ_moms)
 
-            plot(dfq[!,par],[dfp[!,Symbol(par,"lo_",mom)] dfp[!,Symbol(par,"hi_",mom)]],color=:gray,linestyle=:dash)
+            plot(dfq[!,par],[dfp[!,Symbol(par,"lo_",mom)] dfp[!,Symbol(par,"hi_",mom)]],color=:gray,linestyle=:dash,xrot=30)
             plot!(dfq[!,par],[dfp[!,Symbol(par,"med_",mom)]],color=:black,)
             if mom != :smm_obj
                 hline!([dat[!,mom]],color="orange",style=:dot)
@@ -192,7 +192,7 @@ function PlotGlobalEstimation(dat,est,pars,targ_moms;store=false)
     for (ipar,par) in enumerate(pars)
         mom = :smm_obj
 
-            plot(dfq[!,par],[dfp[!,Symbol(par,"lo_",mom)] dfp[!,Symbol(par,"hi_",mom)]],color=:gray,linestyle=:dash)
+            plot(dfq[!,par],[dfp[!,Symbol(par,"lo_",mom)] dfp[!,Symbol(par,"hi_",mom)]],color=:gray,linestyle=:dash,xrot=30)
             plot!(dfq[!,par],[dfp[!,Symbol(par,"med_",mom)]],color=:black,)
             plot!(dfq[!,par],[dfp[!,Symbol(par,"mnm_",mom)]],color=:red,)
             ptemp  = plot!(legend=false,ylims=pylims[1,mom],title=_varnames[mom],yscale=:log)            
@@ -223,10 +223,10 @@ function PlotGlobalEstimation(dat,est,pars,targ_moms;store=false)
     Plots.pdf(plot(plots_obj...),"tabfig/est/identification/smmobj")
     ### Plots each moment for all parameter
     for (imom,mom) in enumerate(targ_moms)
-    ptmp = deepcopy(plot(p1[:,imom]...))
-    if store == true
-        Plots.pdf(ptmp,"tabfig/est/identification/"*String(mom))
-    end
+        ptmp = deepcopy(plot(p1[:,imom]...))
+        if store == true
+            Plots.pdf(ptmp,"tabfig/est/identification/"*String(mom))
+        end
     end
 
     ### Plots the effect of each parameter
